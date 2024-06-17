@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="远程测试">
+      <UniqueIdentifier>{5e442e09-61bb-4215-9716-c5c3da64cac1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -59,5 +62,10 @@
     <Image Include="res\EduAdministraionSys.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt">
+      <Filter>远程测试</Filter>
+    </Text>
   </ItemGroup>
 </Project>
