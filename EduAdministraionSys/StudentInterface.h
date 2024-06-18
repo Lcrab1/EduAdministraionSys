@@ -18,4 +18,3 @@ public:
 };
 
 
-StudentInterface StudentInterface::m_StudentInterface;

@@ -7,6 +7,7 @@
 #include "EduAdministraionSys.h"
 #include "EduAdministraionSysDlg.h"
 #include "afxdialogex.h"
+#include  "StudentDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -102,6 +103,18 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	// TODO: 在此添加额外的初始化代码
 	/*TestDatabase();*/
 
+
+	StudentDlg StuDlg;
+	StuDlg.DoModal();
+
+
+
+
+
+
+
+
+
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -154,7 +167,7 @@ HCURSOR CEduAdministraionSysDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-//XK:测试数据库连接
+////XK:测试数据库连接
 //void CEduAdministraionSysDlg::TestDatabase()
 //{
 //	MYSQL mysql; // 数 据 库 句 柄

@@ -121,9 +121,19 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="EduAdministraionSys.aps" />
+    <None Include="libmysql.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\EduAdministraionSys.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\校徽.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\校徽1.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
