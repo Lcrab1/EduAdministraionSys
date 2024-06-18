@@ -3,8 +3,8 @@
 //
 
 #pragma once
-
-
+#include"Database.h"
+#include<cstring>
 // CEduAdministraionSysDlg 对话框
 class CEduAdministraionSysDlg : public CDialogEx
 {
@@ -31,4 +31,8 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	//void TestDatabase();//XK:测试数据库的连接
+
 };

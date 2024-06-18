@@ -5,10 +5,7 @@
 class Database
 {
 private:
-	Database()
-	{
-
-	}
+	Database();
 private:
 	//XK：此处写成员变量
 
@@ -20,7 +17,3 @@ public:
 	//XK：此处写方法
 
 };
-
-
-Database Database::m_Database;   //XK：单例的初始化
-

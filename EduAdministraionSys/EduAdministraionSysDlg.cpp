@@ -100,6 +100,7 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
+	/*TestDatabase();*/
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -152,4 +153,24 @@ HCURSOR CEduAdministraionSysDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
+
+//XK:测试数据库连接
+//void CEduAdministraionSysDlg::TestDatabase()
+//{
+//	MYSQL mysql; // 数 据 库 句 柄
+//	MYSQL_RES* res; // 查 询 结 果 集
+//	MYSQL_ROW row; // 记 录 结 构 体
+//	// 初 始 化 数 据 库
+//	mysql_init(&mysql);
+//	// 设 置 字 符 编 码
+//	mysql_options(&mysql, MYSQL_SET_CHARSET_NAME, "gbk");
+//	if (mysql_real_connect(&mysql, "8.130.140.31", "user_test", "Lyf18995837471", "stuAdminSYS", 3306, NULL, 0) == NULL)
+//	{
+//		MessageBox(L"连接失败", L"失败");
+//	}
+//	else
+//	{
+//		MessageBox(L"连接成功", L"成功");
+//	}
+//}
 
