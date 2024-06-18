@@ -1,19 +1,21 @@
-#pragma once
+ï»¿#pragma once
 #include"Teacher.h"
 #include"Student.h"
 #include<memory>
-//HRS:µ¥ÀıÄ£Ê½Éè¼Æ£¬Ñ§Éú½Ó¿Ú
+//HRS:å•ä¾‹æ¨¡å¼è®¾è®¡ï¼Œå­¦ç”Ÿæ¥å£
 class StudentInterface
 {
-	StudentInterface();//HRS:Ë½ÓĞ»¯Ä¬ÈÏ¹¹Ôìº¯Êı
-	Student m_Student;//HRS:µ±Ç°Ñ§ÉúĞÅÏ¢
-	static StudentInterface m_StudentInterface;//HRS:µ¥ÀıÊµÀı
+	StudentInterface();//HRS:ç§æœ‰åŒ–é»˜è®¤æ„é€ å‡½æ•°
+	Student m_Student;//HRS:å½“å‰å­¦ç”Ÿä¿¡æ¯
+	static StudentInterface m_StudentInterface;//HRS:å•ä¾‹å®ä¾‹
 public:
-	static std::shared_ptr<StudentInterface> get();//HRS:»ñÈ¡ÊµÀı
+	static std::shared_ptr<StudentInterface> get();//HRS:è·å–å®ä¾‹
 
-	std::shared_ptr<Student> getStudent();//HRS:»ñÈ¡µ±Ç°Ñ§ÉúĞÅÏ¢
-	void displayStudent();//HRS:ÁĞ³öÑ§Éú»ù±¾ĞÅÏ¢
-	void searchSemester();//HRS:°´Ñ§ÆÚ²éÑ¯¿Î³Ì³É¼¨
-	void searchCourseName();//HRS:°´¿Î³ÌÃû²éÑ¯¿Î³Ì³É¼¨
+	std::shared_ptr<Student> getStudent();//HRS:è·å–å½“å‰å­¦ç”Ÿä¿¡æ¯
+	void displayStudent();//HRS:åˆ—å‡ºå­¦ç”ŸåŸºæœ¬ä¿¡æ¯
+	void searchSemester();//HRS:æŒ‰å­¦æœŸæŸ¥è¯¢è¯¾ç¨‹æˆç»©
+	void searchCourseName();//HRS:æŒ‰è¯¾ç¨‹åæŸ¥è¯¢è¯¾ç¨‹æˆç»©
 };
 
+
+StudentInterface StudentInterface::m_StudentInterface;

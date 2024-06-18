@@ -1,5 +1,9 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "StudentInterface.h"
+
+StudentInterface::StudentInterface()
+{
+}
 
 std::shared_ptr<StudentInterface> StudentInterface::get()
 {
@@ -22,3 +26,4 @@ void StudentInterface::searchSemester()
 void StudentInterface::searchCourseName()
 {
 }
+

@@ -1,19 +1,20 @@
-#pragma once
+ï»¿#pragma once
 #include"Teacher.h"
 #include"Student.h"
 #include<memory>
-//HRS:µ¥ÀıÄ£Ê½Éè¼Æ£¬½ÌÊ¦½Ó¿Ú
+//HRS:å•ä¾‹æ¨¡å¼è®¾è®¡ï¼Œæ•™å¸ˆæ¥å£
 class TeacherInterface
 {
-	TeacherInterface();//Ë½ÓĞ»¯Ä¬ÈÏ¹¹Ôìº¯Êı
-	Teacher m_Teacher;//µ±Ç°½ÌÊ¦ĞÅÏ¢
-	static TeacherInterface m_TeacherInterface;//µ¥ÀıÊµÀı
+	TeacherInterface();//ç§æœ‰åŒ–é»˜è®¤æ„é€ å‡½æ•°
+	Teacher m_Teacher;//å½“å‰æ•™å¸ˆä¿¡æ¯
+	static TeacherInterface m_TeacherInterface;//å•ä¾‹å®ä¾‹
 public:
-	static std::shared_ptr<TeacherInterface> get();//»ñÈ¡ÊµÀı
+	static std::shared_ptr<TeacherInterface> get();//è·å–å®ä¾‹
 
 	std::shared_ptr<Teacher> getTeacher();
-	void displayAllCources();//HRS:ÏÔÊ¾ËùÓĞ½ÌÊÚµÄ¿Î³Ì
-	void selectCourse();//HRS:Ñ¡Ôñ¿Î³Ì
-	void setCoursePoint();//HRS:ÉèÖÃ³É¼¨Õ¼±È
-	void submitGrade();//HRS:Ìá½»Ñ§Éú³É¼¨
+	void displayAllCources();//HRS:æ˜¾ç¤ºæ‰€æœ‰æ•™æˆçš„è¯¾ç¨‹
+	void selectCourse();//HRS:é€‰æ‹©è¯¾ç¨‹
+	void setCoursePoint();//HRS:è®¾ç½®æˆç»©å æ¯”
+	void submitGrade();//HRS:æäº¤å­¦ç”Ÿæˆç»©
 };
+

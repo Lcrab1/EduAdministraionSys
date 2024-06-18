@@ -1,3 +1,4 @@
+﻿#include"pch.h"
 #include "Teacher.h"
 
 std::string Teacher::getID()

@@ -1,5 +1,7 @@
 ﻿#pragma once
 //XK：Database接口的设计采用单例模式
+#include<mysql.h>
+#pragma comment(lib,"libmysql.dll")
 class Database
 {
 private:
