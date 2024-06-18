@@ -16,12 +16,27 @@
     <Filter Include="远程测试">
       <UniqueIdentifier>{5e442e09-61bb-4215-9716-c5c3da64cac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="主窗口%28登录界面%29">
+      <UniqueIdentifier>{37ea1643-89bb-4237-acf0-3dce1de252da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="数据库接口">
+      <UniqueIdentifier>{ef9b5a20-f650-4bca-aeff-eee57e875279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="学生类">
+      <UniqueIdentifier>{d3195c0b-d4ae-4b20-8c3b-16e67d242aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="学生界面">
+      <UniqueIdentifier>{fb9c3a42-54c8-44ca-b789-3af2cdc5a8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="教师类">
+      <UniqueIdentifier>{22801e03-da61-47f7-8618-a8c15044cd56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="教师窗口">
+      <UniqueIdentifier>{41896a42-7b39-474a-817d-bded5628ae5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="EduAdministraionSysDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -36,61 +51,64 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="StudentInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TeacherInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Course.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="EduAdministraionSysDlg.h">
+      <Filter>主窗口%28登录界面%29</Filter>
+    </ClInclude>
     <ClInclude Include="Database.h">
-      <Filter>头文件</Filter>
+      <Filter>数据库接口</Filter>
     </ClInclude>
     <ClInclude Include="Student.h">
-      <Filter>头文件</Filter>
+      <Filter>学生类</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentInterface.h">
+      <Filter>学生类</Filter>
     </ClInclude>
     <ClInclude Include="StudentDlg.h">
-      <Filter>头文件</Filter>
+      <Filter>学生界面</Filter>
     </ClInclude>
     <ClInclude Include="Teacher.h">
-      <Filter>头文件</Filter>
+      <Filter>教师类</Filter>
+    </ClInclude>
+    <ClInclude Include="TeacherInterface.h">
+      <Filter>教师类</Filter>
     </ClInclude>
     <ClInclude Include="TeacherDlg.h">
-      <Filter>头文件</Filter>
+      <Filter>教师窗口</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EduAdministraionSys.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="EduAdministraionSysDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="StudentInterface.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="TeacherInterface.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="EduAdministraionSysDlg.cpp">
+      <Filter>主窗口%28登录界面%29</Filter>
     </ClCompile>
     <ClCompile Include="Database.cpp">
-      <Filter>源文件</Filter>
+      <Filter>数据库接口</Filter>
     </ClCompile>
     <ClCompile Include="Student.cpp">
-      <Filter>源文件</Filter>
+      <Filter>学生类</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentInterface.cpp">
+      <Filter>学生类</Filter>
     </ClCompile>
     <ClCompile Include="StudentDlg.cpp">
-      <Filter>源文件</Filter>
+      <Filter>学生界面</Filter>
     </ClCompile>
     <ClCompile Include="Teacher.cpp">
-      <Filter>源文件</Filter>
+      <Filter>教师类</Filter>
+    </ClCompile>
+    <ClCompile Include="TeacherInterface.cpp">
+      <Filter>教师类</Filter>
     </ClCompile>
     <ClCompile Include="TeacherDlg.cpp">
-      <Filter>源文件</Filter>
+      <Filter>教师窗口</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
