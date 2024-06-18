@@ -1,6 +1,24 @@
 ﻿#pragma once
-//单例
+//XK：Database接口的设计采用单例模式
 class Database
 {
+private:
+	Database()
+	{
+
+	}
+private:
+	//XK：此处写成员变量
+
+
+public:
+	static Database m_Database;	//XK:单例成员
+
+public:
+	//XK：此处写方法
+
 };
+
+
+Database Database::m_Database;   //XK：单例的初始化
 
