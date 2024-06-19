@@ -20,4 +20,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CStatic m_TeacherTitleStatic;				//XK:教师窗口主题的文本框
+	CFont		m_TeacherTitleFont;				//XK:格式刷
+	virtual BOOL OnInitDialog();
 };
