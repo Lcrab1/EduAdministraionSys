@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
@@ -44,7 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
@@ -230,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\EduAdministraionSys.ico" />
+    <Image Include="res\invisibl.ico" />
+    <Image Include="res\xh2.bmp" />
+    <Image Include="res\可见性-不可见.ico" />
+    <Image Include="res\可见性-可见.ico" />
+    <Image Include="res\密码.ico" />
+    <Image Include="res\用户.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />

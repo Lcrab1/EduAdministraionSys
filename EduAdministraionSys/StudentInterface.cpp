@@ -1,6 +1,8 @@
 ﻿#include "pch.h"
 #include "StudentInterface.h"
 
+StudentInterface StudentInterface::m_StudentInterface;
+
 StudentInterface::StudentInterface()
 {
 }

@@ -126,6 +126,24 @@
     <Image Include="res\EduAdministraionSys.ico">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\xh2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\用户.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\密码.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\可见性-不可见.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\可见性-可见.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\invisibl.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt">
