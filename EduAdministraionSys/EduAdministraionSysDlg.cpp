@@ -7,6 +7,7 @@
 #include "EduAdministraionSys.h"
 #include "EduAdministraionSysDlg.h"
 #include "afxdialogex.h"
+#include "StudentDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -115,6 +116,13 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	// TODO: 在此添加额外的初始化代码
 	/*TestDatabase();*/
 	InitiateDataBase();
+
+
+	StudentDlg StuDlg;
+	StuDlg.DoModal();
+
+
+
 
 	//XK:设置登录界面标题样式
 	m_LoginTitleFont.CreatePointFont(500, _T("华文新魏"));  //设置登录界面标题的字体和大小

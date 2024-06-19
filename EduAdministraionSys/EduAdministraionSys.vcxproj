@@ -235,6 +235,7 @@
     <Image Include="res\可见性-不可见.ico" />
     <Image Include="res\可见性-可见.ico" />
     <Image Include="res\密码.ico" />
+    <Image Include="res\校徽TITLE.bmp" />
     <Image Include="res\用户.ico" />
   </ItemGroup>
   <ItemGroup>
