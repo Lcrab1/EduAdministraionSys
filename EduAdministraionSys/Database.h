@@ -13,17 +13,20 @@ class Database
 {
 private:
 	Database();
+	Database(const Database& database)=delete;
 private:
 	//XK：此处写成员变量
+	static Database m_Database;	//XK:单例成员
 	
 
 public:
-	static Database m_Database;	//XK:单例成员
 	MYSQL m_mysql;//HRS:数据库接口
 
 public:
 	//XK：此处写方法
-	void login(IN const CString& userName,IN const CString& password,OUT int& privilege);//HRS:登录用户账号
+	static Database& getDatabase();//HRS:获取实例
+
+	int login(IN const CString& userName,IN const CString& password);//HRS:登录用户账号
 	void searchStudent(const CString& studentID);//HRS:查询学生的个人信息
 	void searchStudentAllCourse(const CString& studentID);//HRS:查询学生某一学期所有的课程
 	void searchStudentCourseName(const CString& studentID,const CString& courseID);//HRS:按课程名查询课程成绩

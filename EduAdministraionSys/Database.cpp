@@ -5,10 +5,17 @@ Database Database::m_Database;
 
 Database::Database()
 {
+	
 }
 
-void Database::login(IN const CString& userName, IN const CString& password, OUT int& privilege)
+Database& Database::getDatabase()
 {
+	return m_Database;
+}
+
+int Database::login(IN const CString& userName, IN const CString& password)
+{
+	int privilege=0;
 	std::string userIDStr = CW2A(userName.GetString());
 	std::string userPasswordStr= CW2A(password.GetString());
 
@@ -29,6 +36,7 @@ void Database::login(IN const CString& userName, IN const CString& password, OUT
 			else if (**row == '2')privilege = TEACHER;
 		}
 	}
+	return privilege;
 }
 
 void Database::searchStudent(const CString& studentID)

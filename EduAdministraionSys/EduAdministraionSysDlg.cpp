@@ -219,10 +219,10 @@ HCURSOR CEduAdministraionSysDlg::OnQueryDragIcon()
 void CEduAdministraionSysDlg::InitiateDataBase()
 {
 	// 初 始 化 数 据 库
-	mysql_init(&Database::m_Database.m_mysql);
+	mysql_init(&Database::getDatabase().m_mysql);
 	// 设 置 字 符 编 码
-	mysql_options(&Database::m_Database.m_mysql, MYSQL_SET_CHARSET_NAME, "gbk");
-	if (mysql_real_connect(&Database::m_Database.m_mysql, "8.130.140.31", "user_test", "Lyf18995837471", "stuAdminSYS", 3306, NULL, 0) == NULL)
+	mysql_options(&Database::getDatabase(). m_mysql, MYSQL_SET_CHARSET_NAME, "gbk");
+	if (mysql_real_connect(&Database::getDatabase().m_mysql, "8.130.140.31", "user_test", "Lyf18995837471", "stuAdminSYS", 3306, NULL, 0) == NULL)
 	{
 		MessageBox(L"连接失败", L"失败");
 	}
@@ -399,7 +399,7 @@ void CEduAdministraionSysDlg::OnBnClickedLoginMfcbutton()
 	int privilege=0;
 	m_AccountEdit.GetWindowTextW(account);
 	m_PasswordEdit.GetWindowTextW(password);
-	Database::m_Database.login(account,password,privilege);
+	privilege = Database::getDatabase().login(account, password);
 	if (privilege == UNKNOW)MessageBox(L"账号或密码错误", L"登录失败");
 	else if (privilege == STUDENT)MessageBox(L"跳转到学生界面", L"学生账号");
 	else if(privilege==TEACHER)MessageBox(L"跳转到教师界面", L"教师账号");
