@@ -234,6 +234,12 @@
     <Image Include="res\EduAdministraionSys.ico" />
     <Image Include="res\校徽.bmp" />
     <Image Include="res\校徽1.bmp" />
+    <Image Include="res\invisibl.ico" />
+    <Image Include="res\xh2.bmp" />
+    <Image Include="res\可见性-不可见.ico" />
+    <Image Include="res\可见性-可见.ico" />
+    <Image Include="res\密码.ico" />
+    <Image Include="res\用户.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
