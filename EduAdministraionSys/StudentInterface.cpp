@@ -7,14 +7,14 @@ StudentInterface::StudentInterface()
 {
 }
 
-std::shared_ptr<StudentInterface> StudentInterface::get()
+StudentInterface& StudentInterface::get()
 {
-	return std::make_shared<StudentInterface>(m_StudentInterface);
+	return m_StudentInterface;
 }
 
-std::shared_ptr<Student> StudentInterface::getStudent()
+Student& StudentInterface::getStudent()
 {
-	return std::make_shared<Student>(m_Student);
+	return m_Student;
 }
 
 void StudentInterface::displayStudent()

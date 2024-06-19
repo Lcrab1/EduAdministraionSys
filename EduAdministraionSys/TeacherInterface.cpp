@@ -7,14 +7,14 @@ TeacherInterface::TeacherInterface()
 {
 }
 
-std::shared_ptr<TeacherInterface> TeacherInterface::get()
+TeacherInterface& TeacherInterface::get()
 {
-	return std::make_shared<TeacherInterface>(m_TeacherInterface);
+	return m_TeacherInterface;
 }
 
-std::shared_ptr<Teacher> TeacherInterface::getTeacher()
+Teacher& TeacherInterface::getTeacher()
 {
-	return std::make_shared<Teacher>(m_Teacher);
+	return m_Teacher;
 }
 
 void TeacherInterface::displayAllCources()
