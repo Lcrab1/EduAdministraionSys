@@ -32,6 +32,7 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
 
     ON_WM_CTLCOLOR()
+    ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
@@ -43,49 +44,50 @@ BOOL StudentDlg::OnInitDialog()
     CDialogEx::OnInitDialog();
 
 
-    // 初始化 List Control
+    // yxy:初始化 List Control
+    //注意List Control控件的使用方法：使用for循环按列set数据
     m_StuInfoList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
     {
         // 添加列
-        m_StuInfoList.InsertColumn(0, _T("属性"), LVCFMT_LEFT, 75);
-        m_StuInfoList.InsertColumn(1, _T("值"), LVCFMT_LEFT, 125);
-        m_StuInfoList.InsertColumn(2, _T("属性"), LVCFMT_LEFT, 75);
-        m_StuInfoList.InsertColumn(3, _T("值"), LVCFMT_LEFT, 125);
+        m_StuInfoList.InsertColumn(0, _T("信息"), LVCFMT_LEFT, 75);
+        m_StuInfoList.InsertColumn(1, _T(""), LVCFMT_LEFT, 125);
+        m_StuInfoList.InsertColumn(2, _T("信息"), LVCFMT_LEFT, 75);
+        m_StuInfoList.InsertColumn(3, _T(""), LVCFMT_LEFT, 125);
         // 添加数据行
         m_StuInfoList.InsertItem(0, _T("学号"));
-        m_StuInfoList.SetItemText(0, 1, _T("202290000"));
+        
         m_StuInfoList.SetItemText(0, 2, _T("姓名"));
-        m_StuInfoList.SetItemText(0, 3, _T("fuck u"));
+       
 
         m_StuInfoList.InsertItem(1, _T("英文名"));
-        m_StuInfoList.SetItemText(1, 1, _T("shabi"));
+       
         m_StuInfoList.SetItemText(1, 2, _T("民族"));
-        m_StuInfoList.SetItemText(1, 3, _T("汉"));
+     
 
         m_StuInfoList.InsertItem(2, _T("所在年级"));
-        m_StuInfoList.SetItemText(2, 1, _T("2022"));
-        m_StuInfoList.SetItemText(1, 2, _T("性别"));
-        m_StuInfoList.SetItemText(1, 3, _T("男"));
+
+        m_StuInfoList.SetItemText(2, 2, _T("性别"));
+   
 
         m_StuInfoList.InsertItem(3, _T("行政学院"));
-        m_StuInfoList.SetItemText(3, 1, _T("信息工程学院"));
-        m_StuInfoList.SetItemText(1, 2, _T("专业"));
-        m_StuInfoList.SetItemText(1, 3, _T("计算机科学与技术"));
+ 
+        m_StuInfoList.SetItemText(3, 2, _T("专业"));
+     
 
         m_StuInfoList.InsertItem(4, _T("学生类别"));
-        m_StuInfoList.SetItemText(4, 1, _T("行政班级"));
-        m_StuInfoList.SetItemText(1, 2, _T("学制"));
-        m_StuInfoList.SetItemText(1, 3, _T("预毕业时间"));
+    
+        m_StuInfoList.SetItemText(4, 2, _T("学制"));
+  
 
         m_StuInfoList.InsertItem(5, _T("生源地"));
-        m_StuInfoList.SetItemText(5, 1, _T("陕西省"));
+   
         m_StuInfoList.SetItemText(5, 2, _T("学习形式"));
-        m_StuInfoList.SetItemText(5, 3, _T("非全日制本科"));
+     
 
         m_StuInfoList.InsertItem(6, _T("电子邮箱"));
-        m_StuInfoList.SetItemText(6, 1, _T("123@chd.edu.cn"));
+   
         m_StuInfoList.SetItemText(6, 2, _T("联系电话"));
-        m_StuInfoList.SetItemText(6, 3, _T("123456"));
+ 
 
     }
 
@@ -111,47 +113,37 @@ BOOL StudentDlg::OnInitDialog()
 
 
 
-
+//修改主窗口控件颜色
 HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
     HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
 
-    //XK:修改文本框背景为白色
-    if (pWnd->GetDlgCtrlID() == IDC_LOGIN_TITLE_STATIC)// IDC_LOGIN_TITLE_STATIC为所选文本框ID    
+    //yxy:修改文本框背景为白色
+    if (pWnd->GetDlgCtrlID() == IDC_STATIC_TITLE)
     {
 
         //pDC->SetTextColor(RGB(255, 0, 0));//设置字体颜色
 
-        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
+        //pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
 
-        //pDC->SetBkMode(TRANSPARENT);//设置背景透明
+        pDC->SetBkMode(TRANSPARENT);//设置背景透明
 
         return (HBRUSH)(m_Brush.GetSafeHandle());
     }
 
-    //XK:修改用户icon背景为白色
-    if (pWnd->GetDlgCtrlID() == IDC_ACCOUNT_ICON)
+    //YXY:修改顶部信息条背景
+    if (pWnd->GetDlgCtrlID() == IDC_STATIC_TOPINFO)
     {
-        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
+        //pDC->SetTextColor(RGB(255, 0, 0));//设置字体颜色
+
+        //pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
+
+        pDC->SetBkMode(TRANSPARENT);//设置背景透明
+
         return (HBRUSH)(m_Brush.GetSafeHandle());
     }
 
-    //XK:修改密码icon背景为白色
-    if (pWnd->GetDlgCtrlID() == IDC_PASSWORD_ICON)
-    {
-        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
-        return (HBRUSH)(m_Brush.GetSafeHandle());
-    }
-
-    //XK:修改可见icon背景为白色
-    if (pWnd->GetDlgCtrlID() == IDC_VISIBLE_CHECK)
-    {
-        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
-        return (HBRUSH)(m_Brush.GetSafeHandle());
-    }
-
-
-    //XK:修改主对话框背景为白色
+    //YXY:修改主对话框背景为白色
     switch (nCtlColor)
     {
     case CTLCOLOR_DLG:
@@ -162,4 +154,29 @@ HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
     }
 
     return hbr;
+}
+
+
+
+void StudentDlg::OnPaint()
+{
+    //YXY:绘制顶部条幅
+    {
+        CPaintDC dc(this); // device context for painting
+
+            // 获取对话框的客户区矩形
+        CRect rect;
+        GetClientRect(&rect);
+
+        // 设置蓝色条幅的矩形区域
+        CRect bannerRect(rect.left, rect.top, rect.right, rect.top + 50); // 高度为50像素的蓝色条幅
+
+        // 设置蓝色画刷
+        CBrush blueBrush(RGB(0, 128, 255)); // 蓝色画刷
+
+        // 填充蓝色条幅区域
+        dc.FillRect(bannerRect, &blueBrush);
+    }
+
+
 }

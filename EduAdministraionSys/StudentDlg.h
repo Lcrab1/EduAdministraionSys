@@ -37,4 +37,5 @@ public:
 	CComboBox	m_ComboxScore;//yxy：下拉框控件变量
 	CBrush		m_Brush;
 
+	afx_msg void OnPaint();
 };

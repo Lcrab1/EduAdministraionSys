@@ -117,12 +117,8 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	/*TestDatabase();*/
 	InitiateDataBase();
 
-
-	StudentDlg StuDlg;
-	StuDlg.DoModal();
-
-
-
+	StudentDlg stu;
+	stu.DoModal();
 
 	//XK:设置登录界面标题样式
 	m_LoginTitleFont.CreatePointFont(500, _T("华文新魏"));  //设置登录界面标题的字体和大小
@@ -236,7 +232,7 @@ void CEduAdministraionSysDlg::InitiateDataBase()
 	}
 	else
 	{
-		MessageBox(L"连接成功", L"成功");
+		//MessageBox(L"连接成功", L"成功");
 	}
 }
 
@@ -408,7 +404,17 @@ void CEduAdministraionSysDlg::OnBnClickedLoginMfcbutton()
 	m_AccountEdit.GetWindowTextW(account);
 	m_PasswordEdit.GetWindowTextW(password);
 	privilege = Database::getDatabase().login(account, password);
-	if (privilege == UNKNOW)MessageBox(L"账号或密码错误", L"登录失败");
-	else if (privilege == STUDENT)MessageBox(L"跳转到学生界面", L"学生账号");
-	else if(privilege==TEACHER)MessageBox(L"跳转到教师界面", L"教师账号");
+	if (privilege == UNKNOW)
+	{
+		MessageBox(L"账号或密码错误", L"登录失败");
+	}
+	else if (privilege == STUDENT)
+	{ 
+		StudentDlg studentDlg;
+		studentDlg.DoModal();
+	}
+	else if (privilege == TEACHER)
+	{
+		MessageBox(L"跳转到教师界面", L"教师账号");
+	}
 }
