@@ -47,6 +47,7 @@ private:
 	CFont		m_LoginButtonFont;				//XK:登录按钮格式
 public:
 	//void TestDatabase();						//XK:测试数据库的连接
+	void InitiateDataBase();					//HRS:初始链接数据库
 	afx_msg void OnEnSetfocusAccountEdit();		//XK:账号输入框得到焦点
 	afx_msg void OnEnKillfocusAccountEdit();	//XK:账号输入框失去焦点
 	afx_msg void OnEnSetfocusPasswordEdit();	//XK:密码输入框得到焦点

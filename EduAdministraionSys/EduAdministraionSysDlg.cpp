@@ -114,6 +114,7 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 
 	// TODO: 在此添加额外的初始化代码
 	/*TestDatabase();*/
+	InitiateDataBase();
 
 	//XK:设置登录界面标题样式
 	m_LoginTitleFont.CreatePointFont(500, _T("华文新魏"));  //设置登录界面标题的字体和大小
@@ -214,6 +215,22 @@ HCURSOR CEduAdministraionSysDlg::OnQueryDragIcon()
 //		MessageBox(L"连接成功", L"成功");
 //	}
 //}
+
+void CEduAdministraionSysDlg::InitiateDataBase()
+{
+	// 初 始 化 数 据 库
+	mysql_init(&Database::m_Database.m_mysql);
+	// 设 置 字 符 编 码
+	mysql_options(&Database::m_Database.m_mysql, MYSQL_SET_CHARSET_NAME, "gbk");
+	if (mysql_real_connect(&Database::m_Database.m_mysql, "8.130.140.31", "user_test", "Lyf18995837471", "stuAdminSYS", 3306, NULL, 0) == NULL)
+	{
+		MessageBox(L"连接失败", L"失败");
+	}
+	else
+	{
+		MessageBox(L"连接成功", L"成功");
+	}
+}
 
 
 //XK:修改主窗口背景颜色的函数
@@ -377,4 +394,13 @@ void CEduAdministraionSysDlg::OnBnClickedVisibleCheck()
 void CEduAdministraionSysDlg::OnBnClickedLoginMfcbutton()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	CString account;
+	CString password;
+	int privilege=0;
+	m_AccountEdit.GetWindowTextW(account);
+	m_PasswordEdit.GetWindowTextW(password);
+	Database::m_Database.login(account,password,privilege);
+	if (privilege == UNKNOW)MessageBox(L"账号或密码错误", L"登录失败");
+	else if (privilege == STUDENT)MessageBox(L"跳转到学生界面", L"学生账号");
+	else if(privilege==TEACHER)MessageBox(L"跳转到教师界面", L"教师账号");
 }
