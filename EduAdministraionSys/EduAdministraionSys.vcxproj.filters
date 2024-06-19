@@ -147,6 +147,9 @@
     <Image Include="res\校徽TITLE.bmp">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\CHULogo.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt">

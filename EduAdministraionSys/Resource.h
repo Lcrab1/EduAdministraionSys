@@ -15,6 +15,8 @@
 #define IDI_INVISIBLE_ICON              137
 #define IDI_VISIBLE_ICON                138
 #define IDB_BITMAP_XIAOHUITITLE         141
+#define IDI_ICON1                       143
+#define IDI_XIAOHUI_ICON                143
 #define IDC_LOGIN_IN_XH_PIC             1001
 #define IDC_LOGIN_TITLE_STATIC          1002
 #define IDC_ACCOUNT_EDIT                1003
@@ -35,7 +37,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        142
+#define _APS_NEXT_RESOURCE_VALUE        144
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1019
 #define _APS_NEXT_SYMED_VALUE           101

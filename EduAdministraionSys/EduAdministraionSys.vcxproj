@@ -229,6 +229,7 @@
     <None Include="res\EduAdministraionSys.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\CHULogo.ico" />
     <Image Include="res\EduAdministraionSys.ico" />
     <Image Include="res\invisibl.ico" />
     <Image Include="res\xh2.bmp" />
