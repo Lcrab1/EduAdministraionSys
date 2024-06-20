@@ -78,6 +78,9 @@
     <ClInclude Include="TeacherDlg.h">
       <Filter>教师窗口</Filter>
     </ClInclude>
+    <ClInclude Include="TermScoreDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EduAdministraionSys.cpp">
@@ -109,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="TeacherDlg.cpp">
       <Filter>教师窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="TermScoreDlg.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

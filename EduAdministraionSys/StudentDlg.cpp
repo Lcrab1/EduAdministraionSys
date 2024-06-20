@@ -25,7 +25,8 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_LIST_STUINFO, m_StuInfoList);
-    DDX_Control(pDX, IDC_COMBO_SCORE, m_ComboxScore);
+
+    DDX_Control(pDX, IDC_TREE1, m_TreeCtrl);
 }
 
 
@@ -33,6 +34,7 @@ BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
 
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
+    ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &StudentDlg::OnTvnSelchangedTree1)
 END_MESSAGE_MAP()
 
 
@@ -101,7 +103,22 @@ BOOL StudentDlg::OnInitDialog()
         pStaticText->SetFont(&m_font1);
     }
 
-    m_ComboxScore.SetWindowText(_T("我的成绩"));
+    //yxy：添加树形控件数据
+    {
+        // 添加根节点
+        HTREEITEM hRoot = m_TreeCtrl.InsertItem(_T("成绩查询"));
+
+        // 添加子节点
+        HTREEITEM hChild1 = m_TreeCtrl.InsertItem(_T("查询课程成绩"), hRoot);
+        HTREEITEM hChild2 = m_TreeCtrl.InsertItem(_T("查询学期成绩"), hRoot);
+
+        // 展开根节点
+        m_TreeCtrl.Expand(hRoot, TVE_EXPAND);
+    }
+
+
+    m_TermScoreDlg = new CTermScoreDlg();
+    m_TermScoreDlg->Create(IDD_TERMSCORE_DIALOG, GetDlgItem(IDD_STUDENT_DIALOG));
 
 
 
@@ -179,4 +196,37 @@ void StudentDlg::OnPaint()
     }
 
 
+}
+
+
+void StudentDlg::OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult)
+{
+    LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+    
+    // 获取点击位置
+    CPoint pt;
+    GetCursorPos(&pt);
+    m_TreeCtrl.ScreenToClient(&pt);
+
+    // 获取点击的节点
+    UINT uFlag;
+    HTREEITEM hItem = m_TreeCtrl.HitTest(pt, &uFlag);
+
+    if (hItem != NULL && (uFlag & TVHT_ONITEM))
+    {
+        CString strItemText = m_TreeCtrl.GetItemText(hItem);
+
+        // 根据节点执行相应操作
+        if (strItemText == _T("查询课程成绩"))
+        {
+
+        }
+        else if (strItemText == _T("查询学期成绩"))
+        {
+            m_TermScoreDlg->ShowWindow(SW_SHOW);
+        }
+        // 可以添加更多节点的处理逻辑
+    }
+
+    *pResult = 0;
 }

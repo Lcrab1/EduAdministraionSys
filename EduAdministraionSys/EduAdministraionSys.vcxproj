@@ -203,6 +203,7 @@
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="TeacherDlg.h" />
     <ClInclude Include="TeacherInterface.h" />
+    <ClInclude Include="TermScoreDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Database.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="TeacherDlg.cpp" />
     <ClCompile Include="TeacherInterface.cpp" />
+    <ClCompile Include="TermScoreDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EduAdministraionSys.rc" />

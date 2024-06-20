@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "TermScoreDlg.h"
 
 // StudentDlg 对话框
 
@@ -23,19 +23,21 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-
-
+	afx_msg void OnPaint();
+	afx_msg void OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult);
 
 
 
 
 
 	/***********************************************/
-	CStatic		m_pcsch;//yxy：picturecontrol控件变量
-	CFont		m_font1;//yxy:标题的字体
-	CListCtrl	m_StuInfoList;//yxy：listcontrol控件变量
-	CComboBox	m_ComboxScore;//yxy：下拉框控件变量
-	CBrush		m_Brush;
+	CStatic			m_pcsch;//yxy：picturecontrol控件变量
+	CFont			m_font1;//yxy:标题的字体
+	CListCtrl		m_StuInfoList;//yxy：listcontrol控件变量
+	CBrush			m_Brush;
+	CTreeCtrl		m_TreeCtrl;
+	CTermScoreDlg*	m_TermScoreDlg;
 
-	afx_msg void OnPaint();
+
+
 };
