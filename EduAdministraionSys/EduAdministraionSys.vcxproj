@@ -194,6 +194,7 @@
     <ClInclude Include="EduAdministraionSys.h" />
     <ClInclude Include="EduAdministraionSysDlg.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="InfoChangeDlg.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Student.h" />
@@ -203,11 +204,13 @@
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="TeacherDlg.h" />
     <ClInclude Include="TeacherInterface.h" />
+    <ClInclude Include="TermScoreDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="EduAdministraionSys.cpp" />
     <ClCompile Include="EduAdministraionSysDlg.cpp" />
+    <ClCompile Include="InfoChangeDlg.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -220,6 +223,7 @@
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="TeacherDlg.cpp" />
     <ClCompile Include="TeacherInterface.cpp" />
+    <ClCompile Include="TermScoreDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EduAdministraionSys.rc" />

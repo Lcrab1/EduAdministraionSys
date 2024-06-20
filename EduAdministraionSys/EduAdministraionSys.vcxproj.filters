@@ -34,6 +34,9 @@
     <Filter Include="教师窗口">
       <UniqueIdentifier>{41896a42-7b39-474a-817d-bded5628ae5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="学生界面\查询学期成绩窗口">
+      <UniqueIdentifier>{194c2bd2-860b-40da-ab2c-e4d4a568456c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -78,6 +81,12 @@
     <ClInclude Include="TeacherDlg.h">
       <Filter>教师窗口</Filter>
     </ClInclude>
+    <ClInclude Include="TermScoreDlg.h">
+      <Filter>学生界面\查询学期成绩窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoChangeDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EduAdministraionSys.cpp">
@@ -109,6 +118,12 @@
     </ClCompile>
     <ClCompile Include="TeacherDlg.cpp">
       <Filter>教师窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="TermScoreDlg.cpp">
+      <Filter>学生界面\查询学期成绩窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoChangeDlg.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

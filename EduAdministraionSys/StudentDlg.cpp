@@ -25,7 +25,8 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_LIST_STUINFO, m_StuInfoList);
-    DDX_Control(pDX, IDC_COMBO_SCORE, m_ComboxScore);
+
+    DDX_Control(pDX, IDC_TREE_QUERY, m_TreeCtrl);
 }
 
 
@@ -33,6 +34,7 @@ BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
 
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
+    ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_QUERY, &StudentDlg::OnTvnSelchangedTreeQuery)
 END_MESSAGE_MAP()
 
 
@@ -49,9 +51,9 @@ BOOL StudentDlg::OnInitDialog()
     m_StuInfoList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
     {
         // 添加列
-        m_StuInfoList.InsertColumn(0, _T("信息"), LVCFMT_LEFT, 75);
+        m_StuInfoList.InsertColumn(0, _T("信息"), LVCFMT_LEFT, 90);
         m_StuInfoList.InsertColumn(1, _T(""), LVCFMT_LEFT, 125);
-        m_StuInfoList.InsertColumn(2, _T("信息"), LVCFMT_LEFT, 75);
+        m_StuInfoList.InsertColumn(2, _T("信息"), LVCFMT_LEFT, 90);
         m_StuInfoList.InsertColumn(3, _T(""), LVCFMT_LEFT, 125);
         // 添加数据行
         m_StuInfoList.InsertItem(0, _T("学号"));
@@ -94,17 +96,30 @@ BOOL StudentDlg::OnInitDialog()
     // 创建字体，120 表示 12 磅字体大小
     m_font1.CreatePointFont(180, _T("华文新魏"));
 
-    // 获取静态文本控件，并设置新字体
+    //yxy：获取静态文本控件，并设置新字体
     CStatic* pStaticText = (CStatic*)GetDlgItem(IDC_STATIC_TITLE);
     if (pStaticText != nullptr)
     {
         pStaticText->SetFont(&m_font1);
     }
 
-    m_ComboxScore.SetWindowText(_T("我的成绩"));
+
+    //yxy：添加树形控件数据
+    {
+    // 添加根节点
+    HTREEITEM hRoot = m_TreeCtrl.InsertItem(_T("成绩查询"));
+
+    // 添加子节点
+    HTREEITEM hChild1 = m_TreeCtrl.InsertItem(_T("查询课程成绩"), hRoot);
+    HTREEITEM hChild2 = m_TreeCtrl.InsertItem(_T("查询学期成绩"), hRoot);
+
+    // 展开根节点
+    m_TreeCtrl.Expand(hRoot, TVE_EXPAND);
+    }
 
 
-
+    m_TermScoreDlg = new CTermScoreDlg();
+    m_TermScoreDlg->Create(IDD_TERMSCORE_DIALOG, GetDlgItem(IDD_STUDENT_DIALOG));
 
     return TRUE;
 
@@ -113,7 +128,7 @@ BOOL StudentDlg::OnInitDialog()
 
 
 
-//修改主窗口控件颜色
+//yxy：修改主窗口控件颜色
 HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
     HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
@@ -124,9 +139,9 @@ HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
         //pDC->SetTextColor(RGB(255, 0, 0));//设置字体颜色
 
-        //pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
+        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
 
-        pDC->SetBkMode(TRANSPARENT);//设置背景透明
+        //pDC ->SetBkMode(TRANSPARENT);//设置背景透明
 
         return (HBRUSH)(m_Brush.GetSafeHandle());
     }
@@ -136,9 +151,9 @@ HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
     {
         //pDC->SetTextColor(RGB(255, 0, 0));//设置字体颜色
 
-        //pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
+        pDC->SetBkColor(RGB(255, 255, 255));//设置背景颜色
 
-        pDC->SetBkMode(TRANSPARENT);//设置背景透明
+        //pDC->SetBkMode(TRANSPARENT);//设置背景透明
 
         return (HBRUSH)(m_Brush.GetSafeHandle());
     }
@@ -161,22 +176,57 @@ HBRUSH StudentDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 void StudentDlg::OnPaint()
 {
     //YXY:绘制顶部条幅
+    //{
+    //    CPaintDC dc(this); // device context for painting
+
+    //        // 获取对话框的客户区矩形
+    //    CRect rect;
+    //    GetClientRect(&rect);
+
+    //    // 设置蓝色条幅的矩形区域
+    //    CRect bannerRect(rect.left, rect.top, rect.right, rect.top + 50); // 高度为50像素的蓝色条幅
+
+    //    // 设置蓝色画刷
+    //    CBrush blueBrush(RGB(0, 128, 255)); // 蓝色画刷
+
+    //    // 填充蓝色条幅区域
+    //    dc.FillRect(bannerRect, &blueBrush);
+    //}
+
+
+}
+
+
+
+void StudentDlg::OnTvnSelchangedTreeQuery(NMHDR* pNMHDR, LRESULT* pResult)
+{
+    LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+
+    // 获取点击位置
+    CPoint pt;
+    GetCursorPos(&pt);
+    m_TreeCtrl.ScreenToClient(&pt);
+
+    // 获取点击的节点
+    UINT uFlag;
+    HTREEITEM hItem = m_TreeCtrl.HitTest(pt, &uFlag);
+
+    if (hItem != NULL && (uFlag & TVHT_ONITEM))
     {
-        CPaintDC dc(this); // device context for painting
+        CString strItemText = m_TreeCtrl.GetItemText(hItem);
 
-            // 获取对话框的客户区矩形
-        CRect rect;
-        GetClientRect(&rect);
-
-        // 设置蓝色条幅的矩形区域
-        CRect bannerRect(rect.left, rect.top, rect.right, rect.top + 50); // 高度为50像素的蓝色条幅
-
-        // 设置蓝色画刷
-        CBrush blueBrush(RGB(0, 128, 255)); // 蓝色画刷
-
-        // 填充蓝色条幅区域
-        dc.FillRect(bannerRect, &blueBrush);
+        // 根据节点执行相应操作
+        if (strItemText == _T("查询课程成绩"))
+        {
+            
+        }
+        else if (strItemText == _T("查询学期成绩"))
+        {
+            m_TermScoreDlg->ShowWindow(SW_SHOW);
+        }
+        // 可以添加更多节点的处理逻辑
     }
 
 
+    *pResult = 0;
 }
