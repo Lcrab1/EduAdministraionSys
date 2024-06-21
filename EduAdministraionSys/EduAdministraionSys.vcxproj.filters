@@ -90,6 +90,9 @@
     <ClInclude Include="TermScoreDlg.h">
       <Filter>学生界面\学期成绩窗口</Filter>
     </ClInclude>
+    <ClInclude Include="CourseScoreDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EduAdministraionSys.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="TermScoreDlg.cpp">
       <Filter>学生界面\学期成绩窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="CourseScoreDlg.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

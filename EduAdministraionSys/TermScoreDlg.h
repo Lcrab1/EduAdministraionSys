@@ -20,13 +20,18 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 	afx_msg void OnCbnSelchangeComboYear();
 	void InitializeComboBoxes();
+	void InitializeScoreList();
 	DECLARE_MESSAGE_MAP()
-public:
-
-	CComboBox m_ComboYear;
-	CComboBox m_ComboTerm;
-
 	virtual BOOL OnInitDialog();
 	afx_msg void OnCbnSelchangeComboTerm();
-	afx_msg void OnLvnItemchangedTermscoreList(NMHDR* pNMHDR, LRESULT* pResult);
+
+
+public:
+
+	CComboBox m_ComboYear;//YXY：学年选择
+	CComboBox m_ComboTerm;//YXY：学期选择
+
+
+
+	CListCtrl m_ScoreList;
 };
