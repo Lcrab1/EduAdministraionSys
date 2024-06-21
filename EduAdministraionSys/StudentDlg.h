@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "TermScoreDlg.h"
-
+#include "EditInfoDlg.h"
 // StudentDlg 对话框
 
 class StudentDlg : public CDialogEx
@@ -37,7 +37,8 @@ public:
 	CBrush			m_Brush;
 	CTreeCtrl		m_TreeCtrl;
 	CTermScoreDlg*	m_TermScoreDlg;
+	CEditInfoDlg* m_EditInfoDlg;
 
 
-
+	afx_msg void OnBnClickedButtonInfochange();
 };

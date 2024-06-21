@@ -18,6 +18,15 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
-
+	afx_msg void OnCbnSelchangeComboYear();
+	void InitializeComboBoxes();
 	DECLARE_MESSAGE_MAP()
+public:
+
+	CComboBox m_ComboYear;
+	CComboBox m_ComboTerm;
+
+	virtual BOOL OnInitDialog();
+	afx_msg void OnCbnSelchangeComboTerm();
+	afx_msg void OnLvnItemchangedTermscoreList(NMHDR* pNMHDR, LRESULT* pResult);
 };

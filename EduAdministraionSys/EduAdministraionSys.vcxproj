@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="Course.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="EditInfoDlg.h" />
     <ClInclude Include="EduAdministraionSys.h" />
     <ClInclude Include="EduAdministraionSysDlg.h" />
     <ClInclude Include="framework.h" />
@@ -207,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Database.cpp" />
+    <ClCompile Include="EditInfoDlg.cpp" />
     <ClCompile Include="EduAdministraionSys.cpp" />
     <ClCompile Include="EduAdministraionSysDlg.cpp" />
     <ClCompile Include="pch.cpp">
@@ -231,6 +233,7 @@
     <None Include="res\EduAdministraionSys.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\calenderLogo.ico" />
     <Image Include="res\CHULogo.ico" />
     <Image Include="res\EduAdministraionSys.ico" />
     <Image Include="res\invisibl.ico" />

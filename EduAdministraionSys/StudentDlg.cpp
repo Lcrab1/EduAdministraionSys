@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
     ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &StudentDlg::OnTvnSelchangedTree1)
+    ON_BN_CLICKED(IDC_BUTTON_INFOCHANGE, &StudentDlg::OnBnClickedButtonInfochange)
 END_MESSAGE_MAP()
 
 
@@ -118,9 +119,10 @@ BOOL StudentDlg::OnInitDialog()
 
 
     m_TermScoreDlg = new CTermScoreDlg();
-    m_TermScoreDlg->Create(IDD_TERMSCORE_DIALOG, GetDlgItem(IDD_STUDENT_DIALOG));
+    m_TermScoreDlg->Create(IDD_TERMSCORE_DIALOG, GetDlgItem(IDC_LIST_STUINFO));
 
-
+    m_EditInfoDlg = new CEditInfoDlg();
+    m_EditInfoDlg->Create(IDD_EDITINFO_DIALOG, GetDlgItem(IDC_LIST_STUINFO));
 
 
     return TRUE;
@@ -229,4 +231,10 @@ void StudentDlg::OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult)
     }
 
     *pResult = 0;
+}
+
+
+void StudentDlg::OnBnClickedButtonInfochange()
+{
+    m_EditInfoDlg->ShowWindow(SW_SHOW);
 }

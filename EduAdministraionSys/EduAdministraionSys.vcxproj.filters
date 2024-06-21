@@ -34,6 +34,12 @@
     <Filter Include="教师窗口">
       <UniqueIdentifier>{41896a42-7b39-474a-817d-bded5628ae5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="学生界面\信息修改窗口">
+      <UniqueIdentifier>{b5e17caa-4299-4c75-a43c-4159fb1acbf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="学生界面\学期成绩窗口">
+      <UniqueIdentifier>{6a88dbc3-7ebd-498f-97c3-75b1c2e1a86e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -78,8 +84,11 @@
     <ClInclude Include="TeacherDlg.h">
       <Filter>教师窗口</Filter>
     </ClInclude>
+    <ClInclude Include="EditInfoDlg.h">
+      <Filter>学生界面\信息修改窗口</Filter>
+    </ClInclude>
     <ClInclude Include="TermScoreDlg.h">
-      <Filter>头文件</Filter>
+      <Filter>学生界面\学期成绩窗口</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,8 +122,11 @@
     <ClCompile Include="TeacherDlg.cpp">
       <Filter>教师窗口</Filter>
     </ClCompile>
+    <ClCompile Include="EditInfoDlg.cpp">
+      <Filter>学生界面\信息修改窗口</Filter>
+    </ClCompile>
     <ClCompile Include="TermScoreDlg.cpp">
-      <Filter>源文件</Filter>
+      <Filter>学生界面\学期成绩窗口</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,9 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\CHULogo.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\calenderLogo.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

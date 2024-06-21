@@ -18,6 +18,8 @@
 #define IDI_XIAOHUI_ICON                143
 #define IDD_CHANGEINFO_DIALOG           144
 #define IDD_TERMSCORE_DIALOG            146
+#define IDD_EDITINFO_DIALOG             148
+#define IDI_CALENDER_ICON               150
 #define IDC_LOGIN_IN_XH_PIC             1001
 #define IDC_LOGIN_TITLE_STATIC          1002
 #define IDC_ACCOUNT_EDIT                1003
@@ -34,14 +36,22 @@
 #define IDC_STATIC_TOPINFO              1018
 #define IDC_TEACHER_TITLE_STATIC        1021
 #define IDC_TREE1                       1022
+#define IDC_EDIT_ENGNAME                1023
+#define IDC_EDIT_CALL                   1024
+#define IDC_EDIT_EMAIL                  1025
+#define IDC_BUTTON_COMMIT               1026
+#define IDC_BUTTON_RESET                1027
+#define IDC_COMBO_YEAR                  1027
+#define IDC_COMBO_TERM                  1028
+#define IDC_TERMSCORE_LIST              1030
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        148
+#define _APS_NEXT_RESOURCE_VALUE        151
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1023
+#define _APS_NEXT_CONTROL_VALUE         1031
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
