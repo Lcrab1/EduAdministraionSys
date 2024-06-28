@@ -96,7 +96,7 @@ void CTermScoreDlg::InitializeScoreList()
 
     //添加数据的示例，直接crud
     m_ScoreList.InsertItem(0, _T("23-24-1"));
-    m_ScoreList.SetItemText(0, 2, _T("导管原理"));
+    m_ScoreList.SetItemText(0, 2, _T("23年秋季学期"));
 }
 
 

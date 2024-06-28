@@ -118,8 +118,7 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	/*TestDatabase();*/
 	InitiateDataBase();
 
-	StudentDlg stu;
-	stu.DoModal();
+
 	//TeacherDlg  teacher;
 	//teacher.DoModal();
 

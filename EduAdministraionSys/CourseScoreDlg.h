@@ -20,4 +20,14 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnCbnSelchangeCombo1();
+	virtual BOOL OnInitDialog();
+	void InitCourseComBox();
+	void InitCourseScoreList();
+
+
+
+	CComboBox m_Course;//YXY：下拉框选择课程的变量
+	CListCtrl m_CourseScoreList;//YXY：成绩表格对应的变量
 };

@@ -20,6 +20,8 @@
 #define IDD_EDITINFO_DIALOG             148
 #define IDI_CALENDER_ICON               150
 #define IDD_COURSESCORE_DIALOG          151
+#define IDD_TEACHCOURSE_DIALOG          153
+#define IDD_SCOREREGIST_DIALOG          155
 #define IDC_LOGIN_IN_XH_PIC             1001
 #define IDC_LOGIN_TITLE_STATIC          1002
 #define IDC_ACCOUNT_EDIT                1003
@@ -35,7 +37,7 @@
 #define IDC_STATIC_TITLE                1017
 #define IDC_STATIC_TOPINFO              1018
 #define IDC_TEACHER_TITLE_STATIC        1021
-#define IDC_TREE1                       1022
+#define IDC_TREE_FUNCBUTTON             1022
 #define IDC_EDIT_ENGNAME                1023
 #define IDC_EDIT_CALL                   1024
 #define IDC_EDIT_EMAIL                  1025
@@ -45,16 +47,20 @@
 #define IDC_COMBO_TERM                  1028
 #define IDC_TERMSCORE_LIST              1030
 #define IDC_COMBO1                      1032
-#define IDC_LIST1                       1033
 #define IDC_COURSESCORE_LIST            1033
+#define IDC_TEACHCOURSE_LIST            1034
+#define IDC_BUTTON_COURSE               1035
+#define IDC_COMBO_COURSE                1035
+#define IDC_BUTTON_SCORE                1036
+#define IDC_TEACHER_LIST_INFO           1037
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        153
+#define _APS_NEXT_RESOURCE_VALUE        157
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1038
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

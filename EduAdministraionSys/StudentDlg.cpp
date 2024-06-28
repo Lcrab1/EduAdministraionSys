@@ -26,7 +26,7 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
     CDialogEx::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_LIST_STUINFO, m_StuInfoList);
 
-    DDX_Control(pDX, IDC_TREE1, m_TreeCtrl);
+    DDX_Control(pDX, IDC_TREE_FUNCBUTTON, m_TreeCtrl);
 }
 
 
@@ -34,7 +34,7 @@ BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
 
     ON_WM_CTLCOLOR()
     //ON_WM_PAINT()
-    ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &StudentDlg::OnTvnSelchangedTree1)
+    ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_FUNCBUTTON, &StudentDlg::OnTvnSelchangedTree1)
     ON_BN_CLICKED(IDC_BUTTON_INFOCHANGE, &StudentDlg::OnBnClickedButtonInfochange)
 END_MESSAGE_MAP()
 

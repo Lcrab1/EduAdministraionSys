@@ -40,6 +40,15 @@
     <Filter Include="学生界面\学期成绩窗口">
       <UniqueIdentifier>{6a88dbc3-7ebd-498f-97c3-75b1c2e1a86e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="学生界面\课程成绩窗口">
+      <UniqueIdentifier>{e1f60bf7-f997-42d3-9488-00d667617add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="教师窗口\开课窗口">
+      <UniqueIdentifier>{d5e371e1-125e-4dce-9a03-d39174161a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="教师窗口\录入成绩窗口">
+      <UniqueIdentifier>{61b0833b-2c60-40ea-86a9-aba6c68d9080}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -91,7 +100,13 @@
       <Filter>学生界面\学期成绩窗口</Filter>
     </ClInclude>
     <ClInclude Include="CourseScoreDlg.h">
-      <Filter>头文件</Filter>
+      <Filter>学生界面\课程成绩窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="TeachCourseDialog.h">
+      <Filter>教师窗口\开课窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreRegistDialog.h">
+      <Filter>教师窗口\录入成绩窗口</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +147,13 @@
       <Filter>学生界面\学期成绩窗口</Filter>
     </ClCompile>
     <ClCompile Include="CourseScoreDlg.cpp">
-      <Filter>源文件</Filter>
+      <Filter>学生界面\课程成绩窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachCourseDialog.cpp">
+      <Filter>教师窗口\开课窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreRegistDialog.cpp">
+      <Filter>教师窗口\录入成绩窗口</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
