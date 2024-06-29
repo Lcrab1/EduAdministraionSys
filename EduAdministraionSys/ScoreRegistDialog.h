@@ -21,5 +21,13 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+
+	virtual BOOL OnInitDialog();
+	void InitInfoList();
+	void InitializeComboBoxes();
+
+
 	CComboBox m_CourseCombox;
+	CListCtrl m_ScoreRegistList;
+	afx_msg void OnCbnSelchangeComboCourse();
 };

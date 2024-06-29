@@ -49,10 +49,14 @@
 #define IDC_COMBO1                      1032
 #define IDC_COURSESCORE_LIST            1033
 #define IDC_TEACHCOURSE_LIST            1034
-#define IDC_BUTTON_COURSE               1035
 #define IDC_COMBO_COURSE                1035
-#define IDC_BUTTON_SCORE                1036
+#define IDC_BUTTON_TEACHCOURSE          1035
+#define IDC_BUTTON_SCOREREGIST          1036
 #define IDC_TEACHER_LIST_INFO           1037
+#define IDC_BUTTON_MAINWND2             1038
+#define IDC_COMBO_YEAR2                 1039
+#define IDC_COMBO_TERM2                 1040
+#define IDC_SCOREREGISTER_LIST          1041
 
 // Next default values for new objects
 // 
@@ -60,7 +64,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        157
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1038
+#define _APS_NEXT_CONTROL_VALUE         1042
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

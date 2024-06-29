@@ -27,9 +27,9 @@ public:
 	virtual BOOL OnInitDialog();
 	void			OnInitInfoTable();
 	void InitSonDialog();
-	afx_msg void OnBnClickedButtonMainwnd();
-	afx_msg void OnBnClickedButtonCourse();
-	afx_msg void OnBnClickedButtonScore();
+	afx_msg void OnBnClickedButtonTeachcourse();
+	afx_msg void OnBnClickedButtonScoreregist();
+	afx_msg void OnBnClickedButtonMainwnd2();
 
 
 
@@ -38,6 +38,9 @@ public:
 	CFont		m_TeacherTitleFont;				//XK:格式刷
 	CScoreRegistDialog* m_RegistDlg;			//YXY:录入成绩窗口
 	CTeachCourseDialog* m_CourseDlg;			//YXY:查询课程窗口
+<<<<<<< Updated upstream
 	CString			m_TeacherID;				//XK:保存教师ID 
+=======
+>>>>>>> Stashed changes
 
 };

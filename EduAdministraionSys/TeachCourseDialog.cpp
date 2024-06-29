@@ -24,15 +24,15 @@ CTeachCourseDialog::~CTeachCourseDialog()
 void CTeachCourseDialog::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_COMBO_YEAR, m_ComboYear);
-    DDX_Control(pDX, IDC_COMBO_TERM, m_ComboTerm);
+    DDX_Control(pDX, IDC_COMBO_YEAR2, m_ComboYear);
+    DDX_Control(pDX, IDC_COMBO_TERM2, m_ComboTerm);
     DDX_Control(pDX, IDC_TEACHCOURSE_LIST, m_CourseList);
 }
 
 
 BEGIN_MESSAGE_MAP(CTeachCourseDialog, CDialogEx)
-    ON_CBN_SELCHANGE(IDC_COMBO_YEAR, &CTeachCourseDialog::OnCbnSelchangeComboYear)
-    ON_CBN_SELCHANGE(IDC_COMBO_TERM, &CTeachCourseDialog::OnCbnSelchangeComboTerm)
+    ON_CBN_SELCHANGE(IDC_COMBO_YEAR2, &CTeachCourseDialog::OnCbnSelchangeComboYear)
+    ON_CBN_SELCHANGE(IDC_COMBO_TERM2, &CTeachCourseDialog::OnCbnSelchangeComboTerm)
 END_MESSAGE_MAP()
 
 
@@ -44,10 +44,11 @@ BOOL CTeachCourseDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  在此添加额外的初始化
+    InitializeComboBoxes();
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 异常: OCX 属性页应返回 FALSE
+    InitializeScoreList();
+
+	return TRUE;  
 }
 
 //YXY:初始化学期选择控件

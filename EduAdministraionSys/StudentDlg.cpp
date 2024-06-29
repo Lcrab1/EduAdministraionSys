@@ -237,10 +237,14 @@ void StudentDlg::OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult)
         if (strItemText == _T("查询课程成绩"))
         {
             m_CourseScoreDlg->ShowWindow(SW_SHOW);
+            m_EditInfoDlg->ShowWindow(SW_HIDE);
+            m_TermScoreDlg->ShowWindow(SW_HIDE);
         }
         else if (strItemText == _T("查询学期成绩"))
         {
             m_TermScoreDlg->ShowWindow(SW_SHOW);
+            m_CourseScoreDlg->ShowWindow(SW_HIDE);
+            m_EditInfoDlg->ShowWindow(SW_HIDE);
         }
         // 可以添加更多节点的处理逻辑
     }
@@ -252,4 +256,8 @@ void StudentDlg::OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult)
 void StudentDlg::OnBnClickedButtonInfochange()
 {
     m_EditInfoDlg->ShowWindow(SW_SHOW);
+
+    //m_InfoList.ShowWindow(SW_HIDE);
+    m_CourseScoreDlg->ShowWindow(SW_HIDE);
+    m_TermScoreDlg->ShowWindow(SW_HIDE);
 }

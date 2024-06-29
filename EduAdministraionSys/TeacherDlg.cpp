@@ -42,9 +42,9 @@ void TeacherDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(TeacherDlg, CDialogEx)
-    ON_BN_CLICKED(IDC_BUTTON_MAINWND, &TeacherDlg::OnBnClickedButtonMainwnd)
-    ON_BN_CLICKED(IDC_BUTTON_COURSE, &TeacherDlg::OnBnClickedButtonCourse)
-    ON_BN_CLICKED(IDC_BUTTON_SCORE, &TeacherDlg::OnBnClickedButtonScore)
+    ON_BN_CLICKED(IDC_BUTTON_TEACHCOURSE, &TeacherDlg::OnBnClickedButtonTeachcourse)
+    ON_BN_CLICKED(IDC_BUTTON_SCOREREGIST, &TeacherDlg::OnBnClickedButtonScoreregist)
+    ON_BN_CLICKED(IDC_BUTTON_MAINWND2, &TeacherDlg::OnBnClickedButtonMainwnd2)
 END_MESSAGE_MAP()
 
 
@@ -128,19 +128,28 @@ void TeacherDlg::InitSonDialog()
 
 }
 
-void TeacherDlg::OnBnClickedButtonMainwnd()
-{
 
+
+void TeacherDlg::OnBnClickedButtonMainwnd2()
+{
+    m_CourseDlg->ShowWindow(SW_HIDE);
+    m_InfoList.ShowWindow(SW_SHOW);
+    m_RegistDlg->ShowWindow(SW_HIDE);
 }
 
-
-void TeacherDlg::OnBnClickedButtonCourse()
+void TeacherDlg::OnBnClickedButtonTeachcourse()
 {
     m_CourseDlg->ShowWindow(SW_SHOW);
+    //m_InfoList.ShowWindow(SW_HIDE);
+    m_RegistDlg->ShowWindow(SW_HIDE);
 }
 
 
-void TeacherDlg::OnBnClickedButtonScore()
+void TeacherDlg::OnBnClickedButtonScoreregist()
 {
     m_RegistDlg->ShowWindow(SW_SHOW);
+    //m_InfoList.ShowWindow(SW_HIDE);
+    m_CourseDlg->ShowWindow(SW_HIDE);
 }
+
+
