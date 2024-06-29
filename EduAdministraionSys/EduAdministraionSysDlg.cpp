@@ -122,8 +122,8 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	//TeacherDlg teacher(test);
 	//teacher.DoModal();
 
-	/*StudentDlg student;
-	student.DoModal();*/
+	//StudentDlg student;
+	//student.DoModal();
 
 	//XK:设置登录界面标题样式
 	m_LoginTitleFont.CreatePointFont(500, _T("华文新魏"));  //设置登录界面标题的字体和大小

@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(StudentDlg, CDialogEx)
     //ON_WM_PAINT()
     ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_FUNCBUTTON, &StudentDlg::OnTvnSelchangedTree1)
     ON_BN_CLICKED(IDC_BUTTON_INFOCHANGE, &StudentDlg::OnBnClickedButtonInfochange)
+    ON_BN_CLICKED(IDC_BUTTON_MAINWND, &StudentDlg::OnBnClickedButtonMainwnd)
 END_MESSAGE_MAP()
 
 
@@ -256,6 +257,16 @@ void StudentDlg::OnTvnSelchangedTree1(NMHDR* pNMHDR, LRESULT* pResult)
 void StudentDlg::OnBnClickedButtonInfochange()
 {
     m_EditInfoDlg->ShowWindow(SW_SHOW);
+
+    //m_InfoList.ShowWindow(SW_HIDE);
+    m_CourseScoreDlg->ShowWindow(SW_HIDE);
+    m_TermScoreDlg->ShowWindow(SW_HIDE);
+}
+
+
+void StudentDlg::OnBnClickedButtonMainwnd()
+{
+    m_EditInfoDlg->ShowWindow(SW_HIDE);
 
     //m_InfoList.ShowWindow(SW_HIDE);
     m_CourseScoreDlg->ShowWindow(SW_HIDE);
