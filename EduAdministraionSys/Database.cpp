@@ -66,3 +66,39 @@ void Database::setGradeComposi(const CString& CourseID)
 void Database::recordGrade(const CString& studentGrade, const CString& courseID)
 {
 }
+
+void Database::searchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo)
+{
+	//获取教师ID
+	std::string id = CW2A(teacherID.GetString());
+	//在Teacher表中根据教师ID查找相关信息
+	std::string SQLstr = "SELECT Tno,Tname,TEnglishName,Tnation,Tschool,Tgender,Thiredate,TjobTitle,Temail,Ttelephone\
+						FROM TeacherInfo\
+						WHERE Tno = '" + id+"';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		if (result&&result->row_count) {
+			int num_fields = mysql_num_fields(result);
+			MYSQL_ROW row;
+			row = mysql_fetch_row(result);
+			int index = 0;
+			teacherInfo.no = row[index++];
+			teacherInfo.name = row[index++];
+			teacherInfo.englishName = row[index++];
+			teacherInfo.nation = row[index++];
+			teacherInfo.school = row[index++];
+			teacherInfo.gender = row[index++];
+			teacherInfo.hireDate = row[index++];
+			teacherInfo.jobTitle = row[index++];
+			teacherInfo.email = row[index++];
+			teacherInfo.telephone = row[index++];
+		}
+	}
+}

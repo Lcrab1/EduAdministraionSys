@@ -118,9 +118,12 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	/*TestDatabase();*/
 	InitiateDataBase();
 
-
-	//TeacherDlg  teacher;
+	//CString test("3");
+	//TeacherDlg teacher(test);
 	//teacher.DoModal();
+
+	/*StudentDlg student;
+	student.DoModal();*/
 
 	//XK:设置登录界面标题样式
 	m_LoginTitleFont.CreatePointFont(500, _T("华文新魏"));  //设置登录界面标题的字体和大小
@@ -417,6 +420,7 @@ void CEduAdministraionSysDlg::OnBnClickedLoginMfcbutton()
 	}
 	else if (privilege == TEACHER)
 	{
-		MessageBox(L"跳转到教师界面", L"教师账号");
+		TeacherDlg teacherDlg(account);
+		teacherDlg.DoModal();
 	}
 }

@@ -25,7 +25,6 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_LIST_STUINFO, m_StuInfoList);
-
     DDX_Control(pDX, IDC_TREE_FUNCBUTTON, m_TreeCtrl);
 }
 

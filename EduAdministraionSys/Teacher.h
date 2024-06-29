@@ -1,11 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include"Course.h"
-//HRS:´æ´¢½ÌÊ¦ĞÅÏ¢µÄÀà
+//HRS:å­˜å‚¨æ•™å¸ˆä¿¡æ¯çš„ç±»
 class Teacher
 {
-	std::string m_TeacherID;//HRS:½ÌÊ¦±àºÅ
-	std::string m_TeacherName;//HRS:½ÌÊ¦ĞÕÃû
+	std::string m_TeacherID;//HRS:æ•™å¸ˆç¼–å·
+	std::string m_TeacherName;//HRS:æ•™å¸ˆå§“å
 public:
-	std::string getID();//HRS:»ñÈ¡±àºÅ
-	std::string getName();//HRS:»ñÈ¡ĞÕÃû
+	std::string getID();//HRS:è·å–ç¼–å·
+	std::string getName();//HRS:è·å–å§“å
 };
+

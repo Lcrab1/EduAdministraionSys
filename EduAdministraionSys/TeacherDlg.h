@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "TeachCourseDialog.h"
 #include "ScoreRegistDialog.h"
+#include"Database.h"
 
 // TeacherDlg 对话框
 
@@ -9,7 +10,7 @@ class TeacherDlg : public CDialogEx
 	DECLARE_DYNAMIC(TeacherDlg)
 
 public:
-	TeacherDlg(CWnd* pParent = nullptr);   // 标准构造函数
+	TeacherDlg(const CString teacherID,CWnd* pParent = nullptr);   // 标准构造函数
 	virtual ~TeacherDlg();
 
 // 对话框数据
@@ -37,4 +38,6 @@ public:
 	CFont		m_TeacherTitleFont;				//XK:格式刷
 	CScoreRegistDialog* m_RegistDlg;			//YXY:录入成绩窗口
 	CTeachCourseDialog* m_CourseDlg;			//YXY:查询课程窗口
+	CString			m_TeacherID;				//XK:保存教师ID 
+
 };

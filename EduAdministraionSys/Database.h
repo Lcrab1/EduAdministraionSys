@@ -3,11 +3,24 @@
 #include<mysql.h>
 #include"StudentInterface.h"
 #include"TeacherInterface.h"
+#include"Teacher.h"
 #pragma comment(lib,"libmysql.dll")
-
 #define UNKNOW 0
 #define STUDENT 1
 #define TEACHER 2
+
+struct TeacherInfo {
+	CString no;
+	CString name;
+	CString englishName;
+	CString nation;
+	CString school;
+	CString gender;
+	CString hireDate;
+	CString jobTitle;
+	CString email;
+	CString telephone;
+};
 
 class Database
 {
@@ -34,4 +47,8 @@ public:
 	void searchSemesterCourse(const CString& semester);//HRS:查询某一学期的课程开设
 	void setGradeComposi(const CString& CourseID);//HRS:设置成绩的分数组成
 	void recordGrade(const CString& studentGrade,const CString& courseID);//HRS:录入学生的成绩
+
+
+	void searchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);
 };
+
