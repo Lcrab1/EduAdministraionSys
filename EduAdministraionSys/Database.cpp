@@ -1,5 +1,7 @@
 ﻿#include"pch.h"
 #include"Database.h"
+#include"StudentInterface.h"
+#include"TeacherInterface.h"
 
 Database Database::m_Database;
 
@@ -67,7 +69,7 @@ void Database::recordGrade(const CString& studentGrade, const CString& courseID)
 {
 }
 
-void Database::searchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo)
+void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo)
 {
 	//获取教师ID
 	std::string id = CW2A(teacherID.GetString());
@@ -102,3 +104,55 @@ void Database::searchTeacher(IN const CString& teacherID,OUT TeacherInfo& teache
 		}
 	}
 }
+
+void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher)
+{
+	//XK:（教师表）教师表的工号->(教学班)教学班的课程号->(课程表)课程名
+	std::string id = CW2A(teacherID.GetString());
+	//在Teacher表中根据教师ID查找相关信息
+	std::string SQLstr = "SELECT\
+							CourseInfo.Cno,\
+							CourseInfo.Cname,\
+							COUNT(RecordCourseInfo.Cno) AS CourseCount,\
+							CourseInfo.Ccredit,\
+							ArrangementClassInfo.Aclassroom,\
+							ArrangementClassInfo.Aweek,\
+							ArrangementClassInfo.Asemester\
+							FROM CourseInfo\
+							JOIN ArrangementClassInfo ON CourseInfo.Cno = ArrangementClassInfo.Cno\
+							JOIN RecordCourseInfo ON CourseInfo.Cno = RecordCourseInfo.Cno\
+							WHERE ArrangementClassInfo.Tno = '" + id + "'\
+							GROUP BY CourseInfo.Cno, CourseInfo.Cname, CourseInfo.Ccredit, ArrangementClassInfo.Aclassroom, ArrangementClassInfo.Aweek;";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		if (result && result->row_count) {
+			int num_fields = mysql_num_fields(result);
+			MYSQL_ROW row;
+			while((row=mysql_fetch_row(result)))
+			{
+				for (int i = 0; i < num_fields; i++)
+				{
+					int index = 0;
+					CString id(row[index++]);
+					CString name(row[index++]);
+					CString studentCount(row[index++]);
+					CString credit(row[index++]);
+					CString classRoom(row[index++]);
+					CString week(row[index++]);
+					CString year(row[index++]);
+					classOfTeacher.emplace_back(id, name, studentCount, credit, classRoom, week, year);
+				}
+			}
+		}
+	}
+
+}
+
+

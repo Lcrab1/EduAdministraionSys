@@ -1,6 +1,6 @@
 ﻿#pragma once
-
-
+#include"Database.h"
+#include"TeacherInterface.h"
 // CTeachCourseDialog 对话框
 
 class CTeachCourseDialog : public CDialogEx

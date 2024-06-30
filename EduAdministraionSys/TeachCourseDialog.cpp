@@ -6,7 +6,6 @@
 #include "TeachCourseDialog.h"
 #include "afxdialogex.h"
 
-
 // CTeachCourseDialog 对话框
 
 IMPLEMENT_DYNAMIC(CTeachCourseDialog, CDialogEx)
@@ -90,8 +89,17 @@ void CTeachCourseDialog::OnCbnSelchangeComboTerm()
         CString strYear;
         m_ComboYear.GetLBText(SelYear, strYear);
         // TODO: 根据选择的学年执行相应的操作
+        std::vector<ClassOfTeacher> classOfTeacher;
+       classOfTeacher = TeacherInterface::get().getClassOfTeacher();
+        //Teacher teacher;
+       // teacher = TeacherInterface::get().getTeacher();
+        for (int i = 0; i < classOfTeacher.size(); i++)
+        {
+            if (classOfTeacher[i].year == strYear)
+            {
 
-
+            }
+        }
 
         MessageBox(strYear, 0, 0);//测试
 
@@ -127,13 +135,12 @@ void CTeachCourseDialog::InitializeScoreList()
 {
     m_CourseList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
     // 添加列标题
-    m_CourseList.InsertColumn(0, _T("课程代号"), LVCFMT_LEFT, 70);
-    m_CourseList.InsertColumn(1, _T("课程名称"), LVCFMT_LEFT, 70);
-    m_CourseList.InsertColumn(2, _T("课程人数"), LVCFMT_LEFT, 70);
+    m_CourseList.InsertColumn(0, _T("课程代号"), LVCFMT_LEFT, 90);
+    m_CourseList.InsertColumn(1, _T("课程名称"), LVCFMT_LEFT, 150);
+    m_CourseList.InsertColumn(2, _T("课程人数"), LVCFMT_LEFT, 60);
     m_CourseList.InsertColumn(3, _T("学分"), LVCFMT_LEFT, 50);
-    m_CourseList.InsertColumn(4, _T("学时"), LVCFMT_LEFT, 70);
-    m_CourseList.InsertColumn(5, _T("上课时间"), LVCFMT_LEFT, 70);
-    m_CourseList.InsertColumn(6, _T("上课教室"), LVCFMT_LEFT, 70);
+    m_CourseList.InsertColumn(4, _T("教室"), LVCFMT_LEFT, 90);
+    m_CourseList.InsertColumn(5, _T("教学周"), LVCFMT_LEFT, 90);
 
     //添加数据的示例，直接crud
     m_CourseList.InsertItem(0, _T("xk110011"));

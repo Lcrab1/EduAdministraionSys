@@ -1,26 +1,46 @@
 ﻿#pragma once
 //XK：Database接口的设计采用单例模式
+#include<iostream>
 #include<mysql.h>
-#include"StudentInterface.h"
-#include"TeacherInterface.h"
+
 #include"Teacher.h"
+#include<vector>
 #pragma comment(lib,"libmysql.dll")
 #define UNKNOW 0
 #define STUDENT 1
 #define TEACHER 2
 
 struct TeacherInfo {
-	CString no;
-	CString name;
-	CString englishName;
-	CString nation;
-	CString school;
-	CString gender;
-	CString hireDate;
-	CString jobTitle;
-	CString email;
-	CString telephone;
+	CString no;				//XK:学号
+	CString name;			//XK:姓名
+	CString englishName;	//XK:英文名
+	CString nation;			//XK:民族
+	CString school;			//XK:行政管理学院
+	CString gender;			//XK:性别
+	CString hireDate;		//XK:入职年份
+	CString jobTitle;		//XK:职称
+	CString email;			//XK:电子邮箱
+	CString telephone;		//XK:
 };
+
+struct ClassOfTeacher
+{
+	CString id;				//XK:课程代号
+	CString name;			//XK:课程名称
+	CString studentCount;	//XK:课程人数
+	CString credit;			//XK:学分
+	CString classRoom;		//XK:教室
+	CString week;			//XK:教学周
+	CString year;			//XK:学年学期
+
+	ClassOfTeacher(const CString& id, const CString& name, const CString& studentCount,
+		const CString& credit, const CString& classRoom, const CString& week,
+		const CString& year)
+		: id(id), name(name), studentCount(studentCount), credit(credit),
+		classRoom(classRoom), week(week), year(year) {}
+};
+
+
 
 class Database
 {
@@ -49,6 +69,8 @@ public:
 	void recordGrade(const CString& studentGrade,const CString& courseID);//HRS:录入学生的成绩
 
 
-	void searchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);
+	void SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);	//XK：查询老师信息
+	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);
+
 };
 

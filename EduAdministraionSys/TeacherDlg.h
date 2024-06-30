@@ -38,7 +38,7 @@ public:
 	CFont		m_TeacherTitleFont;				//XK:格式刷
 	CScoreRegistDialog* m_RegistDlg;			//YXY:录入成绩窗口
 	CTeachCourseDialog* m_CourseDlg;			//YXY:查询课程窗口
-	CString			m_TeacherID;				//XK:保存教师ID 
+	CString			m_TeacherID;				//XK:教师ID 
 
 
 };

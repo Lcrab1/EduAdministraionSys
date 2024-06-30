@@ -70,7 +70,7 @@ BOOL TeacherDlg::OnInitDialog()
 void TeacherDlg::OnInitInfoTable()
 {
     TeacherInfo teacherInfo;
-    Database::getDatabase().searchTeacher(m_TeacherID, teacherInfo);
+    Database::getDatabase().SearchTeacher(m_TeacherID, teacherInfo);
     
     //测试
     /* teacherInfo.no = "1";
@@ -129,7 +129,7 @@ void TeacherDlg::InitSonDialog()
 }
 
 
-
+//XK:首页
 void TeacherDlg::OnBnClickedButtonMainwnd2()
 {
     m_CourseDlg->ShowWindow(SW_HIDE);
@@ -137,11 +137,18 @@ void TeacherDlg::OnBnClickedButtonMainwnd2()
     m_RegistDlg->ShowWindow(SW_HIDE);
 }
 
+//XK:我的开课
 void TeacherDlg::OnBnClickedButtonTeachcourse()
 {
     m_CourseDlg->ShowWindow(SW_SHOW);
     //m_InfoList.ShowWindow(SW_HIDE);
     m_RegistDlg->ShowWindow(SW_HIDE);
+    std::vector<ClassOfTeacher> classOfTeacher;
+    classOfTeacher = TeacherInterface::get().getClassOfTeacher();
+  //  classOfTeacher->reserve(10);
+    Database::getDatabase().GetClassOfTeacher(m_TeacherID, classOfTeacher);
+
+
 }
 
 
