@@ -83,30 +83,28 @@ void CTeachCourseDialog::OnCbnSelchangeComboYear()
 void CTeachCourseDialog::OnCbnSelchangeComboTerm()
 {
     // 处理学年选择变化
+
+    std::vector<ClassOfTeacher> classOfTeacher;
+    std::vector<ClassOfTeacher> classOfTeacherWithYear;
+    std::vector<ClassOfTeacher> classOfTeacherWithSemester;
+    classOfTeacher.reserve(30);
+    classOfTeacherWithYear.reserve(10);
+    classOfTeacherWithSemester.reserve(5);
+
     int SelYear = m_ComboYear.GetCurSel();
     if (SelYear != CB_ERR)
     {
         CString strYear;
         m_ComboYear.GetLBText(SelYear, strYear);
         // TODO: 根据选择的学年执行相应的操作
-        std::vector<ClassOfTeacher> classOfTeacher;
        classOfTeacher = TeacherInterface::get().getClassOfTeacher();
-        //Teacher teacher;
-       // teacher = TeacherInterface::get().getTeacher();
         for (int i = 0; i < classOfTeacher.size(); i++)
         {
             if (classOfTeacher[i].year == strYear)
             {
-
+                classOfTeacherWithYear.emplace_back(classOfTeacher[i]);
             }
         }
-
-        MessageBox(strYear, 0, 0);//测试
-
-
-
-
-
     }
 
 
@@ -117,14 +115,10 @@ void CTeachCourseDialog::OnCbnSelchangeComboTerm()
         CString strTerm;
         m_ComboTerm.GetLBText(SelTerm, strTerm);
         // TODO: 根据选择的学期执行相应的操作
+        for (int i = 0; i < classOfTeacherWithYear.size(); i++)
+        {
 
-
-
-
-
-
-
-
+        }
 
 
     }
