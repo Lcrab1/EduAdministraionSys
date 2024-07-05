@@ -1,17 +1,16 @@
 ﻿#include "EditableListCtrl.h"
 #include "Resource.h"
+#include"ScoreRegistDialog.h"
 
-CString str;
-int m_nRow;
-int m_nCol;
+
 
 BEGIN_MESSAGE_MAP(CEditableListCtrl, CListCtrl)
     ON_WM_LBUTTONDBLCLK()
     ON_EN_KILLFOCUS(IDC_EDIT_TRAVEL, OnEditKillFocus)
 END_MESSAGE_MAP()
 
-CEditableListCtrl::CEditableListCtrl()
-
+CEditableListCtrl::CEditableListCtrl(CWnd* pParent /*=nullptr*/)
+    :CListCtrl(), m_pParentWnd(pParent)
 {
 
 }
@@ -83,8 +82,15 @@ void CEditableListCtrl::ShowEdit(int nRow, int nCol)
 
 void CEditableListCtrl::OnEditKillFocus()
 {
-    CListCtrl* pListCtrl = (CListCtrl*)GetDlgItem(IDC_SCOREREGISTER_LIST);
     CString str;
     m_Edit.GetWindowText(str);
     SendMessage(UM_UPADATE_DATA);
+    m_Edit.SetWindowText(_T(""));
+    (*(CScoreRegistDialog*)m_pParentWnd).m_ScoreRegistList.SetItemText(m_nRow, m_nCol, str);
 }
+
+//void CEditableListCtrl::PreSubclassWindow()
+//{
+//    CListCtrl::PreSubclassWindow();
+//    m_pParentWnd = GetParent(); // 获取父窗口指针
+//}

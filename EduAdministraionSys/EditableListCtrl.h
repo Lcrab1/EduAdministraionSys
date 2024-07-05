@@ -14,18 +14,20 @@ extern int m_nCol;
 class CEditableListCtrl : public CListCtrl
 {
 public:
-    CEditableListCtrl();
+    CEditableListCtrl(CWnd* pParent /*=nullptr*/);
     virtual ~CEditableListCtrl();
 
 protected:
     afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
     afx_msg void OnEditKillFocus();
-
     DECLARE_MESSAGE_MAP()
+    void ShowEdit(int nRow, int nCol);
 
 public:
     CEdit m_Edit;
+    CWnd* m_pParentWnd;
+    CString str;
+    int m_nRow = -1;
+    int m_nCol = -1;
 
-    CWnd* m_Parent;
-    void ShowEdit(int nRow, int nCol);
 };

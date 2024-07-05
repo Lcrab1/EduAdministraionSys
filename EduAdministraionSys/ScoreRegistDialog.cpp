@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(CScoreRegistDialog, CDialogEx)
 
 CScoreRegistDialog::CScoreRegistDialog(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_SCOREREGIST_DIALOG, pParent)
+	: CDialogEx(IDD_SCOREREGIST_DIALOG, pParent), m_ScoreRegistList(this)
 {
 
 }
@@ -38,7 +38,6 @@ BEGIN_MESSAGE_MAP(CScoreRegistDialog, CDialogEx)
     ON_CBN_SELCHANGE(IDC_COMBO_TERM3, &CScoreRegistDialog::OnCbnSelchangeComboTerm3)
     ON_NOTIFY(LVN_ITEMCHANGED, IDC_SCOREREGISTER_LIST, &CScoreRegistDialog::OnLvnItemchangedScoreregisterList)
     ON_BN_CLICKED(IDC_BUTTON_COMPOSE, &CScoreRegistDialog::OnBnClickedButtonCompose)
-    ON_MESSAGE(UM_UPADATE_DATA, OnUpdateList)
 END_MESSAGE_MAP()
 
 
@@ -236,8 +235,3 @@ void CScoreRegistDialog::OnBnClickedButtonCompose()
     (*GetDlgItem(IDC_EDIT_SCOREFINAL)).GetWindowText(FinalCompo);
 }
 
-LRESULT CScoreRegistDialog::OnUpdateList(WPARAM wParam, LPARAM lParam)
-{
-    m_ScoreRegistList.SetItemText(m_nRow, m_nCol, str);
-    return 0;
-}

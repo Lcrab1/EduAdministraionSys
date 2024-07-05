@@ -2,8 +2,6 @@
 #include"EditableListCtrl.h"
 
 
-#define UM_UPADATE_DATA					WM_USER+1000
-
 // CScoreRegistDialog 对话框
 
 class CScoreRegistDialog : public CDialogEx
