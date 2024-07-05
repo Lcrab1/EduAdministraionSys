@@ -7,6 +7,19 @@
 #include "afxdialogex.h"
 
 
+/*
+ *
+ *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
+ * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
+ * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
+ * ░▓█▒  ░▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄        ██╔══██╗██║   ██║██║   ██║
+ * ░▒█░   ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄       ██████╔╝╚██████╔╝╚██████╔╝
+ *  ▒ ░   ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒       ╚═════╝  ╚═════╝  ╚═════╝
+ *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
+ *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
+ *           ░     ░ ░      ░  ░
+ */
+
 // TeacherDlg 对话框
 
 IMPLEMENT_DYNAMIC(TeacherDlg, CDialogEx)
@@ -72,7 +85,7 @@ void TeacherDlg::OnInitInfoTable()
     TeacherInfo teacherInfo;
     Database::getDatabase().SearchTeacher(m_TeacherID, teacherInfo);
     
-    //测试
+    //XK:测试
     /* teacherInfo.no = "1";
     teacherInfo.name = "hrs";
     teacherInfo.englishName = "ration";

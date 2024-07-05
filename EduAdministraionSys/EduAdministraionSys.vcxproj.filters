@@ -52,6 +52,12 @@
     <Filter Include="教师窗口\录入成绩窗口\编辑ListControl">
       <UniqueIdentifier>{281dda98-2220-44be-8267-fe0d5bbd93bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="教师窗口\教师主界面">
+      <UniqueIdentifier>{64319678-3ce8-479b-991e-6a3617f8deae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="学生界面\学生主界面">
+      <UniqueIdentifier>{c9c4717a-5e80-4610-954a-4cba0f779f34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -84,17 +90,11 @@
     <ClInclude Include="StudentInterface.h">
       <Filter>学生类</Filter>
     </ClInclude>
-    <ClInclude Include="StudentDlg.h">
-      <Filter>学生界面</Filter>
-    </ClInclude>
     <ClInclude Include="Teacher.h">
       <Filter>教师类</Filter>
     </ClInclude>
     <ClInclude Include="TeacherInterface.h">
       <Filter>教师类</Filter>
-    </ClInclude>
-    <ClInclude Include="TeacherDlg.h">
-      <Filter>教师窗口</Filter>
     </ClInclude>
     <ClInclude Include="EditInfoDlg.h">
       <Filter>学生界面\信息修改窗口</Filter>
@@ -113,6 +113,12 @@
     </ClInclude>
     <ClInclude Include="EditableListCtrl.h">
       <Filter>教师窗口\录入成绩窗口\编辑ListControl</Filter>
+    </ClInclude>
+    <ClInclude Include="TeacherDlg.h">
+      <Filter>教师窗口\教师主界面</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentDlg.h">
+      <Filter>学生界面\学生主界面</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,17 +140,11 @@
     <ClCompile Include="StudentInterface.cpp">
       <Filter>学生类</Filter>
     </ClCompile>
-    <ClCompile Include="StudentDlg.cpp">
-      <Filter>学生界面</Filter>
-    </ClCompile>
     <ClCompile Include="Teacher.cpp">
       <Filter>教师类</Filter>
     </ClCompile>
     <ClCompile Include="TeacherInterface.cpp">
       <Filter>教师类</Filter>
-    </ClCompile>
-    <ClCompile Include="TeacherDlg.cpp">
-      <Filter>教师窗口</Filter>
     </ClCompile>
     <ClCompile Include="EditInfoDlg.cpp">
       <Filter>学生界面\信息修改窗口</Filter>
@@ -163,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="EditableListCtrl.cpp">
       <Filter>教师窗口\录入成绩窗口\编辑ListControl</Filter>
+    </ClCompile>
+    <ClCompile Include="TeacherDlg.cpp">
+      <Filter>教师窗口\教师主界面</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentDlg.cpp">
+      <Filter>学生界面\学生主界面</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

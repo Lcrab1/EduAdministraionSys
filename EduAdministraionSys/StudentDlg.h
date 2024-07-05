@@ -2,8 +2,7 @@
 #include "TermScoreDlg.h"
 #include "EditInfoDlg.h"
 #include "CourseScoreDlg.h"
-#include"Database.h"
-
+#include"StudentInterface.h"
 // StudentDlg 对话框
 
 class StudentDlg : public CDialogEx

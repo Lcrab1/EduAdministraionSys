@@ -26,7 +26,7 @@ public:
 	virtual BOOL OnInitDialog();
 	void InitializeComboBoxes();
 	void InitializeCourseList();
-	void RefreshCourseList(IN const std::vector<ClassOfTeacher>& classOfTeacherWithSemester);
+	void RefreshCourseList(IN const std::vector<ClassOfTeacher>& classOfTeacher);
 
 
 	afx_msg void OnCbnSelchangeComboYear();

@@ -30,3 +30,9 @@ void StudentInterface::searchCourseName()
 {
 }
 
+std::vector<GradeOfStudent>& StudentInterface::GetGradeOfStudent()
+{
+	// TODO: 在此处插入 return 语句
+	return m_GradeOfStudent;
+}
+

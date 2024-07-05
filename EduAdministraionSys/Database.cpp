@@ -3,6 +3,42 @@
 #include"StudentInterface.h"
 #include"TeacherInterface.h"
 
+/***
+ *                                         ,s555SB@@&
+ *                                      :9H####@@@@@Xi
+ *                                     1@@@@@@@@@@@@@@8
+ *                                   ,8@@@@@@@@@B@@@@@@8
+ *                                  :B@@@@X3hi8Bs;B@@@@@Ah,
+ *             ,8i                  r@@@B:     1S ,M@@@@@@#8;
+ *            1AB35.i:               X@@8 .   SGhr ,A@@@@@@@@S
+ *            1@h31MX8                18Hhh3i .i3r ,A@@@@@@@@@5
+ *            ;@&i,58r5                 rGSS:     :B@@@@@@@@@@A
+ *             1#i  . 9i                 hX.  .: .5@@@@@@@@@@@1
+ *              sG1,  ,G53s.              9#Xi;hS5 3B@@@@@@@B1
+ *               .h8h.,A@@@MXSs,           #@H1:    3ssSSX@1
+ *               s ,@@@@@@@@@@@@Xhi,       r#@@X1s9M8    .GA981
+ *               ,. rS8H#@@@@@@@@@@#HG51;.  .h31i;9@r    .8@@@@BS;i;
+ *                .19AXXXAB@@@@@@@@@@@@@@#MHXG893hrX#XGGXM@@@@@@@@@@MS
+ *                s@@MM@@@hsX#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&,
+ *              :GB@#3G@@Brs ,1GM@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B,
+ *            .hM@@@#@@#MX 51  r;iSGAM@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@8
+ *          :3B@@@@@@@@@@@&9@h :Gs   .;sSXH@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:
+ *      s&HA#@@@@@@@@@@@@@@M89A;.8S.       ,r3@@@@@@@@@@@@@@@@@@@@@@@@@@@r
+ *   ,13B@@@@@@@@@@@@@@@@@@@5 5B3 ;.         ;@@@@@@@@@@@@@@@@@@@@@@@@@@@i
+ *  5#@@#&@@@@@@@@@@@@@@@@@@9  .39:          ;@@@@@@@@@@@@@@@@@@@@@@@@@@@;
+ *  9@@@X:MM@@@@@@@@@@@@@@@#;    ;31.         H@@@@@@@@@@@@@@@@@@@@@@@@@@:
+ *   SH#@B9.rM@@@@@@@@@@@@@B       :.         3@@@@@@@@@@@@@@@@@@@@@@@@@@5
+ *     ,:.   9@@@@@@@@@@@#HB5                 .M@@@@@@@@@@@@@@@@@@@@@@@@@B
+ *           ,ssirhSM@&1;i19911i,.             s@@@@@@@@@@@@@@@@@@@@@@@@@@S
+ *              ,,,rHAri1h1rh&@#353Sh:          8@@@@@@@@@@@@@@@@@@@@@@@@@#:
+ *            .A3hH@#5S553&@@#h   i:i9S          #@@@@@@@@@@@@@@@@@@@@@@@@@A.
+ *
+ *
+ *								谁让你看我代码的？
+ */
+
+
+
 Database Database::m_Database;
 
 Database::Database()
@@ -100,6 +136,7 @@ bool Database::searchSemesterCourse(IN const CString& semester, OUT std::vector<
 
 
 
+
 void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo)
 {
 	//获取教师ID
@@ -136,6 +173,7 @@ void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teache
 	}
 }
 
+
 void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher)
 {
 	classOfTeacher.clear();
@@ -170,8 +208,6 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 			MYSQL_ROW row;
 			while((row=mysql_fetch_row(result)))
 			{
-				for (int i = 0; i < result->row_count; i++)
-				{
 					int index = 0;
 					CString id(row[index++]);
 					CString name(row[index++]);
@@ -182,7 +218,48 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 					CString year(row[index++]);
 					CString semester(row[index++]);
 					classOfTeacher.emplace_back(id, name, studentCount, credit, classRoom, week, year, semester);
-				}
+			}
+		}
+	}
+
+}
+
+void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent)
+{
+	gradeOfStudent.clear();
+	//XK:(教学班)教学班的课程号+教师ID->(课程表)课程名
+	std::string id = CW2A(studentID.GetString());
+	//在Teacher表中根据教师ID查找相关信息
+	std::string SQLstr = "SELECT ArrangementClassInfo.Ayear, ArrangementClassInfo.Asemester, CourseInfo.Cname, CourseInfo.Ccredit,\
+						  RecordCourseInfo.RmidScore, RecordCourseInfo.RusualScore, RecordCourseInfo.RfinalScore, RecordCourseInfo.RtotalScore\
+						  FROM RecordCourseInfo\
+						  JOIN CourseInfo ON RecordCourseInfo.Cno = CourseInfo.Cno\
+					      JOIN ArrangementClassInfo ON CourseInfo.Cno = ArrangementClassInfo.Cno\
+						  WHERE RecordCourseInfo.Sno = '" + id +"';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		if (result && result->row_count) {
+			//int num_fields = mysql_num_fields(result);
+			MYSQL_ROW row;
+			while ((row = mysql_fetch_row(result)))
+			{
+					int index = 0;
+					CString year(row[index++]);
+					CString semester(row[index++]);
+					CString course(row[index++]);
+					CString credit(row[index++]);
+					CString midScore(row[index++]);
+					CString usualScore(row[index++]);
+					CString finalScore(row[index++]);
+					CString totalScore(row[index++]);
+					gradeOfStudent.emplace_back(year, semester, course, credit, midScore, usualScore, finalScore, totalScore);
 			}
 		}
 	}

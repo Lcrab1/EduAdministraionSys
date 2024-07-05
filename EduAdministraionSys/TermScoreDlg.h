@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include"StudentInterface.h"
 
 // CTermScoreDlg 对话框
 
@@ -24,6 +24,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	virtual BOOL OnInitDialog();
 	afx_msg void OnCbnSelchangeComboTerm();
+
+	void RefreshCourseList(IN const std::vector<GradeOfStudent>& gradeOfStudent);
 
 
 public:

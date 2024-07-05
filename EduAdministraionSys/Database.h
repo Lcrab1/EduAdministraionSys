@@ -87,6 +87,25 @@ struct CourseInfo
 	CString CourseCredit;
 };
 
+//学期成绩
+struct GradeOfStudent
+{
+	CString year;
+	CString semester;
+	CString course;
+	CString credit;
+	CString midScore;
+	CString usualScore;
+	CString finalScore;
+	CString totalScore;
+
+	GradeOfStudent(const CString& year, const CString& semester, const CString& course,const CString& credit,
+		const CString& midScore, const CString& usualScore, const CString& finalScore, const CString& totalScore)
+		:year(year),semester(semester),course(course),credit(credit),midScore(midScore),usualScore(usualScore),
+		finalScore(finalScore),totalScore(totalScore){}
+};
+
+
 class Database
 {
 private:
@@ -113,7 +132,11 @@ public:
 
 
 	void SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);	//XK：查询老师信息
-	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);
+	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);	//XK：得到老师开课信息
+	
+	//XK:学生方法
+	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
+
 
 	void GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
 

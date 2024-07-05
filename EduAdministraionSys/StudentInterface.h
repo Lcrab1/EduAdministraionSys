@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include"Teacher.h"
 #include"Student.h"
+#include"Database.h"
 #include<memory>
 #include<vector>
 
@@ -10,6 +11,8 @@ class StudentInterface
 	StudentInterface();//HRS:私有化默认构造函数
 	Student m_Student;//HRS:当前学生信息
 	static StudentInterface m_StudentInterface;//HRS:单例实例
+
+	std::vector<GradeOfStudent> m_GradeOfStudent;
 public:
 	static StudentInterface& get();//HRS:获取实例
 
@@ -17,6 +20,8 @@ public:
 	void displayStudent();//HRS:列出学生基本信息
 	void searchSemester();//HRS:按学期查询课程成绩
 	void searchCourseName();//HRS:按课程名查询课程成绩
+
+	std::vector<GradeOfStudent>& GetGradeOfStudent();
 };
 
 

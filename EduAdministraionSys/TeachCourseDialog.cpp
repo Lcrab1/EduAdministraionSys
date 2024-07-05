@@ -83,7 +83,7 @@ void CTeachCourseDialog::OnCbnSelchangeComboYear()
 void CTeachCourseDialog::OnCbnSelchangeComboTerm()
 {
 
-    // 处理学年选择变化
+    //XK:处理学年选择变化
     std::vector<ClassOfTeacher> classOfTeacher;
     std::vector<ClassOfTeacher> classOfTeacherWithYear;
     std::vector<ClassOfTeacher> classOfTeacherWithSemester;
@@ -110,7 +110,7 @@ void CTeachCourseDialog::OnCbnSelchangeComboTerm()
         RefreshCourseList(classOfTeacherWithYear);
     }
 
-    // 处理学期选择变化
+    //XK:处理学期选择变化
     int SelTerm = m_ComboTerm.GetCurSel();
     if (SelTerm != CB_ERR)
     {

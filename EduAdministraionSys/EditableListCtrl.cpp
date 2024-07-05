@@ -2,7 +2,9 @@
 #include "Resource.h"
 #include"ScoreRegistDialog.h"
 
-
+ CString str;
+ int m_nRow;
+ int m_nCol;
 
 BEGIN_MESSAGE_MAP(CEditableListCtrl, CListCtrl)
     ON_WM_LBUTTONDBLCLK()
