@@ -35,3 +35,15 @@ public:
 
 	CListCtrl m_ScoreList;
 };
+
+struct TermScore
+{
+	CString SemesterID;//学期ID
+	CString SemesterName;//学期名称
+	CString CourseName;//课程
+	CString Credit; //学分
+	CString MidExam;//期中成绩
+	CString DailyPerformance;//平时分
+	CString FinalExam;//期末成绩
+	CString GeneralScore;//总评成绩
+};
