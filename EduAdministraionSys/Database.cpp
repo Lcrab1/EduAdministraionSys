@@ -139,7 +139,7 @@ void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teache
 void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher)
 {
 	classOfTeacher.clear();
-	//XK:（教师表）教师表的工号->(教学班)教学班的课程号->(课程表)课程名
+	//XK:(教学班)教学班的课程号+教师ID->(课程表)课程名
 	std::string id = CW2A(teacherID.GetString());
 	//在Teacher表中根据教师ID查找相关信息
 	std::string SQLstr = "SELECT\

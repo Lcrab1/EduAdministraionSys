@@ -78,13 +78,14 @@ void CCourseScoreDlg::InitCourseScoreList()
 	m_CourseScoreList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 	// 添加列标题
 	m_CourseScoreList.InsertColumn(0, _T("课程名称"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(1, _T("学期名称"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(2, _T("学分"), LVCFMT_LEFT, 45);
-	m_CourseScoreList.InsertColumn(3, _T("期中成绩"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(4, _T("平时成绩"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(5, _T("期末成绩"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(6, _T("总评成绩"), LVCFMT_LEFT, 70);
-	m_CourseScoreList.InsertColumn(7, _T("修读类别"), LVCFMT_LEFT, 70);
+	m_CourseScoreList.InsertColumn(1, _T("学年"), LVCFMT_LEFT, 70);
+	m_CourseScoreList.InsertColumn(2, _T("学期"), LVCFMT_LEFT, 40);
+	m_CourseScoreList.InsertColumn(3, _T("学分"), LVCFMT_LEFT, 45);
+	m_CourseScoreList.InsertColumn(4, _T("期中成绩"), LVCFMT_LEFT, 60);
+	m_CourseScoreList.InsertColumn(5, _T("平时成绩"), LVCFMT_LEFT, 60);
+	m_CourseScoreList.InsertColumn(6, _T("期末成绩"), LVCFMT_LEFT, 60);
+	m_CourseScoreList.InsertColumn(7, _T("总评成绩"), LVCFMT_LEFT, 60);
+	m_CourseScoreList.InsertColumn(8, _T("修读类别"), LVCFMT_LEFT, 70);
 
 	//示例
 	m_CourseScoreList.SetItemText(0, 1, _T(""));
