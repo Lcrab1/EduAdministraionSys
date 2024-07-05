@@ -192,6 +192,7 @@
     <ClInclude Include="Course.h" />
     <ClInclude Include="CourseScoreDlg.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="EditableListCtrl.h" />
     <ClInclude Include="EditInfoDlg.h" />
     <ClInclude Include="EduAdministraionSys.h" />
     <ClInclude Include="EduAdministraionSysDlg.h" />
@@ -212,6 +213,10 @@
   <ItemGroup>
     <ClCompile Include="CourseScoreDlg.cpp" />
     <ClCompile Include="Database.cpp" />
+    <ClCompile Include="EditableListCtrl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="EditInfoDlg.cpp" />
     <ClCompile Include="EduAdministraionSys.cpp" />
     <ClCompile Include="EduAdministraionSysDlg.cpp" />

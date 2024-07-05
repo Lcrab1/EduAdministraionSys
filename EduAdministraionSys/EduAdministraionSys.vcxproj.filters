@@ -49,6 +49,9 @@
     <Filter Include="教师窗口\录入成绩窗口">
       <UniqueIdentifier>{61b0833b-2c60-40ea-86a9-aba6c68d9080}</UniqueIdentifier>
     </Filter>
+    <Filter Include="教师窗口\录入成绩窗口\编辑ListControl">
+      <UniqueIdentifier>{281dda98-2220-44be-8267-fe0d5bbd93bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EduAdministraionSys.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="ScoreRegistDialog.h">
       <Filter>教师窗口\录入成绩窗口</Filter>
     </ClInclude>
+    <ClInclude Include="EditableListCtrl.h">
+      <Filter>教师窗口\录入成绩窗口\编辑ListControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EduAdministraionSys.cpp">
@@ -154,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="ScoreRegistDialog.cpp">
       <Filter>教师窗口\录入成绩窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="EditableListCtrl.cpp">
+      <Filter>教师窗口\录入成绩窗口\编辑ListControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
