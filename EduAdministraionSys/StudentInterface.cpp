@@ -12,13 +12,14 @@ StudentInterface& StudentInterface::get()
 	return m_StudentInterface;
 }
 
-Student& StudentInterface::getStudent()
+void StudentInterface::getStudent()
 {
-	return m_Student;
+	
 }
 
 void StudentInterface::displayStudent()
 {
+
 }
 
 void StudentInterface::searchSemester()

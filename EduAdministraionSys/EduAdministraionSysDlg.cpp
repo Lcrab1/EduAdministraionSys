@@ -415,7 +415,7 @@ void CEduAdministraionSysDlg::OnBnClickedLoginMfcbutton()
 	}
 	else if (privilege == STUDENT)
 	{ 
-		StudentDlg studentDlg;
+		StudentDlg studentDlg(account);
 		studentDlg.DoModal();
 	}
 	else if (privilege == TEACHER)

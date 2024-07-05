@@ -41,33 +41,32 @@ int Database::login(IN const CString& userName, IN const CString& password)
 	return privilege;
 }
 
-void Database::searchStudent(const CString& studentID)
+bool Database::searchStudent(IN const CString& studentID, OUT StudentInfo& studentInfo)
 {
+	return true;
 }
 
-void Database::searchStudentAllCourse(const CString& studentID)
+bool Database::searchStudentAllCourse(IN const CString& studentID, IN const CString semester, OUT std::vector<CourseInfo>& course)
 {
+	return true;
 }
 
-void Database::searchStudentCourseName(const CString& studentID, const CString& courseID)
+bool Database::searchStudentCourseScore(IN const CString& studentID, IN const CString& courseID, OUT CString& score)
 {
+	return true;
 }
 
-void Database::searchTeacherCourse(const CString& teacherID)
+bool Database::searchTeacherCourse(IN const CString& teacherID, OUT CourseInfo& courseInfo)
 {
+	return true;
 }
 
-void Database::searchSemesterCourse(const CString& semester)
+bool Database::searchSemesterCourse(IN const CString& semester, OUT std::vector<CourseInfo>& course)
 {
+	return true;
 }
 
-void Database::setGradeComposi(const CString& CourseID)
-{
-}
 
-void Database::recordGrade(const CString& studentGrade, const CString& courseID)
-{
-}
 
 void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo)
 {

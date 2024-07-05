@@ -10,7 +10,7 @@ class StudentDlg : public CDialogEx
 	DECLARE_DYNAMIC(StudentDlg)
 
 public:
-	StudentDlg(CWnd* pParent = nullptr);   // 标准构造函数
+	StudentDlg(const CString& studentID,CWnd* pParent = nullptr);   // 标准构造函数
 	virtual ~StudentDlg();
 
 // 对话框数据
@@ -41,6 +41,7 @@ public:
 	CTermScoreDlg*		m_TermScoreDlg;
 	CEditInfoDlg*		m_EditInfoDlg;
 	CCourseScoreDlg*	m_CourseScoreDlg;
+	CString				m_StudentID;
 
 
 	afx_msg void OnBnClickedButtonInfochange();

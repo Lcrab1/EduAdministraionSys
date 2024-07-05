@@ -11,8 +11,7 @@
 
 IMPLEMENT_DYNAMIC(StudentDlg, CDialogEx)
 
-StudentDlg::StudentDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_STUDENT_DIALOG, pParent)
+StudentDlg::StudentDlg(const CString& studentID,CWnd* pParent /*=nullptr*/):CDialogEx(IDD_STUDENT_DIALOG, pParent)
 {
 
 }
