@@ -30,3 +30,4 @@ public:
 };
 
 extern CEduAdministraionSysApp theApp;
+

@@ -1,5 +1,8 @@
 ﻿#pragma once
+#include"EditableListCtrl.h"
 
+
+#define UM_UPADATE_DATA					WM_USER+1000
 
 // CScoreRegistDialog 对话框
 
@@ -25,9 +28,24 @@ public:
 	virtual BOOL OnInitDialog();
 	void InitInfoList();
 	void InitializeComboBoxes();
-
+	afx_msg void OnCbnSelchangeComboCourse();
+	void InitializeTermComboBoxes();
+	afx_msg void OnCbnSelchangeComboYear3();
+	afx_msg void OnCbnSelchangeComboTerm3();
+	afx_msg void OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESULT* pResult);
+	void UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal);
+	double CalculateTotalScore(double midterm, double usual, double final);
+	afx_msg void OnBnClickedButtonCompose();
+	afx_msg LRESULT OnUpdateList(WPARAM wParam, LPARAM lParam);
 
 	CComboBox m_CourseCombox;
-	CListCtrl m_ScoreRegistList;
-	afx_msg void OnCbnSelchangeComboCourse();
+	CEditableListCtrl  m_ScoreRegistList;
+	CComboBox m_ComboYear;
+	CComboBox m_ComboTerm;
+	CString MidtermCompo, UsualCompo, FinalCompo;
+
+	CEdit m_EditTravel;
+	
 };
+
+
