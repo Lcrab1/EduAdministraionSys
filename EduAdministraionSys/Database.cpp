@@ -43,6 +43,38 @@ int Database::login(IN const CString& userName, IN const CString& password)
 
 bool Database::searchStudent(IN const CString& studentID, OUT StudentInfo& studentInfo)
 {
+	std::string StudentIDStr = CW2A(studentID.GetString());
+
+	std::string SQLstr = "SELECT *\
+						  FROM studentInfo WHERE Sno='" + StudentIDStr;
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return false;
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		MYSQL_ROW row;
+		row = mysql_fetch_row(result);
+		studentInfo.ID = row[0];
+		studentInfo.Name = row[1];
+		studentInfo.EngName = row[2];
+		studentInfo.Nation = row[3];
+		studentInfo.Grade = row[4];
+		studentInfo.Gender = row[5];
+		studentInfo.Department = row[6];
+		studentInfo.Major = row[7];
+		studentInfo.Type = row[8];
+		studentInfo.Class = row[9];
+		studentInfo.Year = row[10];
+		studentInfo.Graduate = row[11];
+		studentInfo.Source = row[12];
+		studentInfo.StudyForm = row[13];
+		studentInfo.Email = row[14];
+		studentInfo.Telephone = row[15];
+	}
 	return true;
 }
 
