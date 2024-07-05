@@ -45,8 +45,9 @@ struct ClassOfTeacher
 //YXY：录入成绩表格
 struct ClassOfStudentScore
 {
-	CString studentID;       // 学号
-	CString studentName;     // 学生姓名
+	CString CourseName;			//选中的课程名
+	CString studentID;			// 学号
+	CString studentName;		// 学生姓名
 	CString dailyScore;        // 平时成绩
 	CString midtermScore;      // 期中成绩
 	CString finalScore;        // 期末成绩
@@ -54,8 +55,12 @@ struct ClassOfStudentScore
 	CString year;			
 	CString semester;		
 
-	// 默认构造函数
-	ClassOfStudentScore(){}
+	ClassOfStudentScore(const CString& courseName, const CString& id, const CString& name,
+		const CString& daily, const CString& midterm, const CString & final,
+		const CString& total, const CString& yr, const CString& sem)
+		: CourseName(courseName), studentID(id), studentName(name),
+		dailyScore(daily), midtermScore(midterm), finalScore(final),
+		totalScore(total), year(yr), semester(sem) {}
 
 };
 
@@ -138,7 +143,7 @@ public:
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
 
 
-	void GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
+	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
 
 };
 

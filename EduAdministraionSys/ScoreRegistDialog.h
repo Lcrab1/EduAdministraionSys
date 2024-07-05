@@ -37,7 +37,7 @@ public:
 	afx_msg void	OnBnClickedButtonCompose();
 	void			RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
 
-
+	void			RefreshCourseCombox(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
 
 	CComboBox m_CourseCombox;
 	CEditableListCtrl  m_ScoreRegistList;
@@ -46,6 +46,8 @@ public:
 	CString MidtermCompo, UsualCompo, FinalCompo;
 
 	CEdit m_EditTravel;
+
+	int NumOfStudent;
 	
 };
 

@@ -64,12 +64,12 @@ void CScoreRegistDialog::InitInfoList()
     m_ScoreRegistList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     // Insert columns
-    m_ScoreRegistList.InsertColumn(0, _T("学号"), LVCFMT_LEFT, 50);
+    m_ScoreRegistList.InsertColumn(0, _T("学号"), LVCFMT_LEFT, 75);
     m_ScoreRegistList.InsertColumn(1, _T("学生姓名"), LVCFMT_LEFT, 75);
-    m_ScoreRegistList.InsertColumn(2, _T("平时成绩"), LVCFMT_LEFT, 50);
-    m_ScoreRegistList.InsertColumn(3, _T("期中成绩"), LVCFMT_LEFT, 50);
-    m_ScoreRegistList.InsertColumn(4, _T("期末成绩"), LVCFMT_LEFT, 50);
-    m_ScoreRegistList.InsertColumn(5, _T("总评成绩"), LVCFMT_LEFT, 50);
+    m_ScoreRegistList.InsertColumn(2, _T("平时成绩"), LVCFMT_LEFT, 75);
+    m_ScoreRegistList.InsertColumn(3, _T("期中成绩"), LVCFMT_LEFT, 75);
+    m_ScoreRegistList.InsertColumn(4, _T("期末成绩"), LVCFMT_LEFT, 75);
+    m_ScoreRegistList.InsertColumn(5, _T("总评成绩"), LVCFMT_LEFT, 75);
 
 
     int nItem = m_ScoreRegistList.InsertItem(0, _T("123456"));
@@ -129,13 +129,37 @@ void CScoreRegistDialog::OnCbnSelchangeComboTerm3()
 void CScoreRegistDialog::OnCbnSelchangeComboCourse()
 {
 
+
+
+    //处理选择的课程名
+    int SelCourse = m_CourseCombox.GetCurSel();
+    if (SelCourse != CB_ERR)
+    {
+        CString CourseName;
+        m_CourseCombox.GetLBText(SelCourse, CourseName);
+        //使用CourseName查询信息
+        std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
+        classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
+        classOfStudentScore->reserve(10);
+        Database::getDatabase().GetClassOfSC(CourseName, *classOfStudentScore);
+
+        RefreshCourseCombox(*classOfStudentScore);
+    }
+
+
+
+
+
     //处理学年选择变化
     std::vector<ClassOfStudentScore> classOfStudentScore;
     std::vector<ClassOfStudentScore> classOfStudentScoreWithYear;
     std::vector<ClassOfStudentScore> classOfStudentScoreWithSemester;
-    classOfStudentScore.reserve(30);
-    classOfStudentScoreWithYear.reserve(10);
-    classOfStudentScoreWithSemester.reserve(5);
+    std::vector<ClassOfStudentScore> classOfStudentScoreWithCourseName;
+
+    classOfStudentScore.reserve(500);
+    classOfStudentScoreWithYear.reserve(200);
+    classOfStudentScoreWithSemester.reserve(100);
+    classOfStudentScoreWithCourseName.reserve(50);
     classOfStudentScore = TeacherInterface::get().getClassOfStudentScore();
 
     int SelYear = m_ComboYear.GetCurSel();
@@ -152,7 +176,7 @@ void CScoreRegistDialog::OnCbnSelchangeComboCourse()
             }
         }
         //刷新课程列表
-        RefreshCourseList(classOfStudentScoreWithYear);
+       // RefreshCourseList(classOfStudentScoreWithYear);
     }
 
     // 处理学期选择变化
@@ -170,33 +194,83 @@ void CScoreRegistDialog::OnCbnSelchangeComboCourse()
             }
         }
 
-        RefreshCourseList(classOfStudentScoreWithSemester);
+        //RefreshCourseList(classOfStudentScoreWithSemester);
     }
 
 
-    //处理选择的课程名
-    int SelCourse = m_CourseCombox.GetCurSel();
-    if (SelCourse != CB_ERR)
+    CString CourseName;
+    m_CourseCombox.GetLBText(SelCourse, CourseName);
+        for (int i = 0; i < classOfStudentScoreWithSemester.size(); i++)
+        {
+            if (classOfStudentScoreWithSemester[i].CourseName == CourseName)
+            {
+                classOfStudentScoreWithCourseName.emplace_back(classOfStudentScoreWithSemester[i]);
+            }
+        }
+        RefreshCourseList(classOfStudentScoreWithSemester);
+    
+}
+
+void CScoreRegistDialog::RefreshCourseCombox(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
+{
+    m_ScoreRegistList.DeleteAllItems();
+    const std::vector<ClassOfStudentScore>* SCInfo = &classOfStudentScore;
+    if (SCInfo->size() == 0)
     {
-        CString CourseName;
-        m_CourseCombox.GetLBText(SelCourse, CourseName);
-        //使用CourseName查询信息
+        return;
+    }
 
-
+    for (int i = 0; i < SCInfo->size(); i++)
+    {
+        m_CourseCombox.AddString((*SCInfo)[i].CourseName);
     }
 }
 
+
+void CScoreRegistDialog::RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
+{
+    m_ScoreRegistList.DeleteAllItems();
+        const std::vector<ClassOfStudentScore>* SCInfo = &classOfStudentScore;
+        if (SCInfo->size() == 0)
+        {
+            return;
+        }
+        int column = 0;
+        NumOfStudent = SCInfo->size();
+        for (int i = 0; i < NumOfStudent; i++)
+        {
+            m_ScoreRegistList.InsertItem(column, (*SCInfo)[i].studentID);
+            m_ScoreRegistList.SetItemText(column, 1, (*SCInfo)[i].studentName);
+            column++;
+        }
+
+}
+
+
+
+
+void CScoreRegistDialog::OnBnClickedButtonCompose()
+{
+    
+    (*GetDlgItem(IDC_EDIT_SCOREREGULAR)).GetWindowText(MidtermCompo);
+    (*GetDlgItem(IDC_EDIT_SCOREMID)).GetWindowText(UsualCompo);
+    (*GetDlgItem(IDC_EDIT_SCOREFINAL)).GetWindowText(FinalCompo);
+}
 
 
 void CScoreRegistDialog::OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESULT* pResult)
 {
     LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < NumOfStudent; i++)
     {
         CString strMidterm = m_ScoreRegistList.GetItemText(i, 2);
         CString strUsual = m_ScoreRegistList.GetItemText(i, 3);
         CString strFinal = m_ScoreRegistList.GetItemText(i, 4);
+        if (strMidterm.IsEmpty())
+        {
+            return;
+        }
         UpdateTotalScore(strMidterm,strUsual,strFinal);
     }
 
@@ -227,43 +301,7 @@ double CScoreRegistDialog::CalculateTotalScore(double midterm, double usual, dou
 }
 
 
-void CScoreRegistDialog::OnBnClickedButtonCompose()
-{
-    
-    (*GetDlgItem(IDC_EDIT_SCOREREGULAR)).GetWindowText(MidtermCompo);
-    (*GetDlgItem(IDC_EDIT_SCOREMID)).GetWindowText(UsualCompo);
-    (*GetDlgItem(IDC_EDIT_SCOREFINAL)).GetWindowText(FinalCompo);
-}
 
-void CScoreRegistDialog::RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
-{
-    m_ScoreRegistList.DeleteAllItems();
-        const std::vector<ClassOfStudentScore>* SCInfo = &classOfStudentScore;
-        if (SCInfo->size() == 0)
-        {
-            return;
-        }
-        int column = 0;
-        for (int i = 0; i < SCInfo->size(); i++)
-        {
-            m_ScoreRegistList.InsertItem(column, (*SCInfo)[i].studentID);
-            m_ScoreRegistList.SetItemText(column, 1, (*SCInfo)[i].studentName);
-            m_ScoreRegistList.SetItemText(column, 2, (*SCInfo)[i].dailyScore);
-            m_ScoreRegistList.SetItemText(column, 3, (*SCInfo)[i].midtermScore);
-            m_ScoreRegistList.SetItemText(column, 4, (*SCInfo)[i].finalScore);
-            m_ScoreRegistList.SetItemText(column, 5, (*SCInfo)[i].totalScore);
-            column++;
-        }
 
-}
 
-/*
-    CString studentID;       // 学号
-    CString studentName;     // 学生姓名
-    float dailyScore;        // 平时成绩
-    float midtermScore;      // 期中成绩
-    float finalScore;        // 期末成绩
-    float totalScore;        // 总评成绩
-    CString year;
-    CString semester;
-*/
+

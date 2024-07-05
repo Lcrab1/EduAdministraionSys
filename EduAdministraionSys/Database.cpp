@@ -266,26 +266,33 @@ void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<Gr
 
 }
 
-void Database::GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
+void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
 {
 	classOfStudentScore.clear();
 	//XK:(教学班)教学班的课程号+教师ID->(课程表)课程名
-	std::string id = CW2A(teacherID.GetString());
-	//在Teacher表中根据教师ID查找相关信息
+	std::string Teacherid = CW2A(TeacherID.GetString());
+	//根据课程名查找相关信息
 	std::string SQLstr = "SELECT\
-							CourseInfo.Cno,\
-							CourseInfo.Cname,\
-							COUNT(RecordCourseInfo.Cno) AS CourseCount,\
-							CourseInfo.Ccredit,\
-							ArrangementClassInfo.Aclassroom,\
-							ArrangementClassInfo.Aweek,\
-							ArrangementClassInfo.Ayear,\
-							ArrangementClassInfo.Asemester\
-							FROM CourseInfo\
-							JOIN ArrangementClassInfo ON CourseInfo.Cno = ArrangementClassInfo.Cno\
-							JOIN RecordCourseInfo ON CourseInfo.Cno = RecordCourseInfo.Cno\
-							WHERE ArrangementClassInfo.Tno = '" + id + "'\
-							GROUP BY CourseInfo.Cno, CourseInfo.Cname, CourseInfo.Ccredit, ArrangementClassInfo.Aclassroom, ArrangementClassInfo.Aweek;";
+		ArrangementClassInfo.Ayear,\
+		ArrangementClassInfo.Asemester,\
+		CourseInfo.Cname,\
+		RecordCourseInfo.Sno,\
+		StudentInfo.Sname\
+		FROM\
+		TeacherInfo\
+		JOIN\
+		ArrangementClassInfo ON TeacherInfo.Tno = ArrangementClassInfo.Tno\
+		JOIN\
+		CourseInfo ON ArrangementClassInfo.Cno = CourseInfo.Cno\
+		JOIN\
+		RecordCourseInfo ON CourseInfo.Cno = RecordCourseInfo.Cno\
+		JOIN\
+		StudentInfo ON RecordCourseInfo.Sno = StudentInfo.Sno\
+		WHERE\
+		TeacherInfo.Tno = '" + Teacherid + "'";
+
+
+
 	const char* sss = SQLstr.c_str();
 	if (mysql_query(&m_mysql, SQLstr.c_str()))
 	{
@@ -303,15 +310,14 @@ void Database::GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOf
 				for (int i = 0; i < result->row_count; i++)
 				{
 					int index = 0;
-					CString studentID(row[index++]);
-					CString studentName(row[index++]);
-					CString dailyScore(row[index++]);
-					CString midtermScore(row[index++]);
-					CString finalScore(row[index++]);
-					CString totalScore(row[index++]);
 					CString year(row[index++]);
 					CString semester(row[index++]);
-					classOfStudentScore.emplace_back(studentID, studentName, dailyScore, midtermScore, finalScore, totalScore, year, semester);
+					CString CourseName(row[index++]);
+					CString studentID(row[index++]);
+					CString studentName(row[index++]);
+
+					classOfStudentScore.emplace_back(CourseName, studentID, studentName,
+												_T("0"), _T("0"), _T("0"), _T("0"),year, semester);
 				}
 			}
 		}
