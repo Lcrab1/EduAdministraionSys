@@ -11,7 +11,8 @@
 
 IMPLEMENT_DYNAMIC(StudentDlg, CDialogEx)
 
-StudentDlg::StudentDlg(const CString& studentID,CWnd* pParent /*=nullptr*/):CDialogEx(IDD_STUDENT_DIALOG, pParent)
+StudentDlg::StudentDlg(const CString& studentID,CWnd* pParent /*=nullptr*/)
+    :CDialogEx(IDD_STUDENT_DIALOG, pParent),m_StudentID(studentID)
 {
 
 }
@@ -75,6 +76,27 @@ void StudentDlg::OnInitInfoTable()
 {
 
     m_StuInfoList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+    StudentInfo studentInfo;
+  /*  studentInfo.ID = "2022900101";
+    studentInfo.Name = "1";
+    studentInfo.EngName = "2";
+    studentInfo.Nation = "3";
+    studentInfo.Grade = "4";
+    studentInfo.Gender = "5";
+    studentInfo.Department = "6";
+    studentInfo.Major = "7";
+    studentInfo.Type = "8";
+    studentInfo.Class = "9";
+    studentInfo.Year = "10";
+    studentInfo.Graduate = "11";
+    studentInfo.Source = "12";
+    studentInfo.StudyForm = "13";
+    studentInfo.Email = "14";
+    studentInfo.Telephone = "15";*/
+    Database::getDatabase().searchStudent(m_StudentID, studentInfo);
+
+
     // 添加列标题
     m_StuInfoList.InsertColumn(0, _T("信息"), LVCFMT_LEFT, 75);
     m_StuInfoList.InsertColumn(1, _T(""), LVCFMT_LEFT, 125);
@@ -82,39 +104,40 @@ void StudentDlg::OnInitInfoTable()
     m_StuInfoList.InsertColumn(3, _T(""), LVCFMT_LEFT, 125);
     // 添加数据行
     m_StuInfoList.InsertItem(0, _T("学号"));
-
+    m_StuInfoList.SetItemText(0, 1, studentInfo.ID);
     m_StuInfoList.SetItemText(0, 2, _T("姓名"));
-
+    m_StuInfoList.SetItemText(0, 3, studentInfo.Name);
 
     m_StuInfoList.InsertItem(1, _T("英文名"));
-
+    m_StuInfoList.SetItemText(1, 1, studentInfo.EngName);
     m_StuInfoList.SetItemText(1, 2, _T("民族"));
-
+    m_StuInfoList.SetItemText(1, 3, studentInfo.Nation);
 
     m_StuInfoList.InsertItem(2, _T("所在年级"));
-
+    m_StuInfoList.SetItemText(2, 1, studentInfo.Grade);
     m_StuInfoList.SetItemText(2, 2, _T("性别"));
-
+    m_StuInfoList.SetItemText(2, 3, studentInfo.Gender);
 
     m_StuInfoList.InsertItem(3, _T("行政学院"));
-
+    m_StuInfoList.SetItemText(3, 1, studentInfo.Department);
     m_StuInfoList.SetItemText(3, 2, _T("专业"));
+    m_StuInfoList.SetItemText(3, 3, studentInfo.Major);
 
 
     m_StuInfoList.InsertItem(4, _T("学生类别"));
-
+    m_StuInfoList.SetItemText(4, 1, studentInfo.Type);
     m_StuInfoList.SetItemText(4, 2, _T("学制"));
-
+    m_StuInfoList.SetItemText(4, 3, studentInfo.Year);
 
     m_StuInfoList.InsertItem(5, _T("生源地"));
-
+    m_StuInfoList.SetItemText(5, 1, studentInfo.Source);
     m_StuInfoList.SetItemText(5, 2, _T("学习形式"));
-
+    m_StuInfoList.SetItemText(5, 3, studentInfo.StudyForm);
 
     m_StuInfoList.InsertItem(6, _T("电子邮箱"));
-
+    m_StuInfoList.SetItemText(6, 1, studentInfo.Email);
     m_StuInfoList.SetItemText(6, 2, _T("联系电话"));
-
+    m_StuInfoList.SetItemText(6, 3, studentInfo.Telephone);
 
 }
 
@@ -260,6 +283,8 @@ void StudentDlg::OnBnClickedButtonInfochange()
     //m_InfoList.ShowWindow(SW_HIDE);
     m_CourseScoreDlg->ShowWindow(SW_HIDE);
     m_TermScoreDlg->ShowWindow(SW_HIDE);
+
+
 }
 
 

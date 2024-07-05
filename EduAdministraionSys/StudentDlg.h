@@ -2,6 +2,7 @@
 #include "TermScoreDlg.h"
 #include "EditInfoDlg.h"
 #include "CourseScoreDlg.h"
+#include"Database.h"
 
 // StudentDlg 对话框
 

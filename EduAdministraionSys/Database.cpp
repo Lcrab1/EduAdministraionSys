@@ -46,7 +46,7 @@ bool Database::searchStudent(IN const CString& studentID, OUT StudentInfo& stude
 	std::string StudentIDStr = CW2A(studentID.GetString());
 
 	std::string SQLstr = "SELECT *\
-						  FROM studentInfo WHERE Sno='" + StudentIDStr;
+						  FROM studentInfo WHERE Sno='" + StudentIDStr +"';";
 	if (mysql_query(&m_mysql, SQLstr.c_str()))
 	{
 		CString error(mysql_error(&m_mysql));
