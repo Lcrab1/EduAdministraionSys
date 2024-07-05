@@ -86,11 +86,7 @@ void CEditableListCtrl::OnEditKillFocus()
     m_Edit.GetWindowText(str);
     SendMessage(UM_UPADATE_DATA);
     m_Edit.SetWindowText(_T(""));
-    (*(CScoreRegistDialog*)m_pParentWnd).m_ScoreRegistList.SetItemText(m_nRow, m_nCol, str);
+    SetItemText(m_nRow, m_nCol, str);
+    CString s1= GetItemText(m_nRow, m_nCol);
 }
 
-//void CEditableListCtrl::PreSubclassWindow()
-//{
-//    CListCtrl::PreSubclassWindow();
-//    m_pParentWnd = GetParent(); // 获取父窗口指针
-//}

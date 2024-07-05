@@ -189,4 +189,67 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 
 }
 
+void Database::GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
+{
+	classOfStudentScore.clear();
+	//XK:(教学班)教学班的课程号+教师ID->(课程表)课程名
+	std::string id = CW2A(teacherID.GetString());
+	//在Teacher表中根据教师ID查找相关信息
+	std::string SQLstr = "SELECT\
+							CourseInfo.Cno,\
+							CourseInfo.Cname,\
+							COUNT(RecordCourseInfo.Cno) AS CourseCount,\
+							CourseInfo.Ccredit,\
+							ArrangementClassInfo.Aclassroom,\
+							ArrangementClassInfo.Aweek,\
+							ArrangementClassInfo.Ayear,\
+							ArrangementClassInfo.Asemester\
+							FROM CourseInfo\
+							JOIN ArrangementClassInfo ON CourseInfo.Cno = ArrangementClassInfo.Cno\
+							JOIN RecordCourseInfo ON CourseInfo.Cno = RecordCourseInfo.Cno\
+							WHERE ArrangementClassInfo.Tno = '" + id + "'\
+							GROUP BY CourseInfo.Cno, CourseInfo.Cname, CourseInfo.Ccredit, ArrangementClassInfo.Aclassroom, ArrangementClassInfo.Aweek;";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		if (result && result->row_count) {
+			//int num_fields = mysql_num_fields(result);
+			MYSQL_ROW row;
+			while ((row = mysql_fetch_row(result)))
+			{
+				for (int i = 0; i < result->row_count; i++)
+				{
+					int index = 0;
+					CString studentID(row[index++]);
+					CString studentName(row[index++]);
+					CString dailyScore(row[index++]);
+					CString midtermScore(row[index++]);
+					CString finalScore(row[index++]);
+					CString totalScore(row[index++]);
+					CString year(row[index++]);
+					CString semester(row[index++]);
+					classOfStudentScore.emplace_back(studentID, studentName, dailyScore, midtermScore, finalScore, totalScore, year, semester);
+				}
+			}
+		}
+	}
+}
+
+/*
+	CString studentID;       // 学号
+	CString studentName;     // 学生姓名
+	CString dailyScore;        // 平时成绩
+	CString midtermScore;      // 期中成绩
+	CString finalScore;        // 期末成绩
+	CString totalScore;        // 总评成绩
+	CString year;
+	CString semester;
+*/
+
 

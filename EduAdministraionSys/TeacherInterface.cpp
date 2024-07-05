@@ -21,6 +21,11 @@ std::vector<ClassOfTeacher>& TeacherInterface::getClassOfTeacher()
 	// TODO: 在此处插入 return 语句
 }
 
+std::vector<ClassOfStudentScore>& TeacherInterface::getClassOfStudentScore()
+{
+	return m_ClassOfStudentScore;
+}
+
 Teacher& TeacherInterface::getTeacher()
 {
 	return m_Teacher;

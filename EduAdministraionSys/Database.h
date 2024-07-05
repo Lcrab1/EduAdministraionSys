@@ -42,6 +42,23 @@ struct ClassOfTeacher
 		classRoom(classRoom), week(week), year(year),semester(semester) {}
 };
 
+//YXY：录入成绩表格
+struct ClassOfStudentScore
+{
+	CString studentID;       // 学号
+	CString studentName;     // 学生姓名
+	CString dailyScore;        // 平时成绩
+	CString midtermScore;      // 期中成绩
+	CString finalScore;        // 期末成绩
+	CString totalScore;        // 总评成绩
+	CString year;			
+	CString semester;		
+
+	// 默认构造函数
+	ClassOfStudentScore(){}
+
+};
+
 
 struct StudentInfo
 {
@@ -97,6 +114,8 @@ public:
 
 	void SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);	//XK：查询老师信息
 	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);
+
+	void GetClassOfSC(IN const CString& teacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
 
 };
 

@@ -9,10 +9,12 @@ class TeacherInterface
 	Teacher m_Teacher;//当前教师信息
 	static TeacherInterface m_TeacherInterface;//单例实例
 	std::vector<ClassOfTeacher> m_ClassOfTeacher;
+	std::vector<ClassOfStudentScore> m_ClassOfStudentScore;
 public:
 	static TeacherInterface& get();//获取实例
 	Teacher& getTeacher();
 	std::vector<ClassOfTeacher>& getClassOfTeacher();
+	std::vector<ClassOfStudentScore>& getClassOfStudentScore();
 	void displayAllCources();//HRS:显示所有教授的课程
 	void selectCourse();//HRS:选择课程
 	void setCoursePoint();//HRS:设置成绩占比

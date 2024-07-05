@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include"EditableListCtrl.h"
-
+#include"Database.h"
+#include"TeacherInterface.h"
 
 // CScoreRegistDialog 对话框
 
@@ -24,17 +25,19 @@ protected:
 public:
 
 	virtual BOOL OnInitDialog();
-	void InitInfoList();
-	void InitializeComboBoxes();
+	void		 InitInfoList();
+	void		 InitializeComboBoxes();
 	afx_msg void OnCbnSelchangeComboCourse();
-	void InitializeTermComboBoxes();
+	void		 InitializeTermComboBoxes();
 	afx_msg void OnCbnSelchangeComboYear3();
 	afx_msg void OnCbnSelchangeComboTerm3();
 	afx_msg void OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESULT* pResult);
-	void UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal);
-	double CalculateTotalScore(double midterm, double usual, double final);
-	afx_msg void OnBnClickedButtonCompose();
-	afx_msg LRESULT OnUpdateList(WPARAM wParam, LPARAM lParam);
+	void			UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal);
+	double			CalculateTotalScore(double midterm, double usual, double final);
+	afx_msg void	OnBnClickedButtonCompose();
+	void			RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
+
+
 
 	CComboBox m_CourseCombox;
 	CEditableListCtrl  m_ScoreRegistList;

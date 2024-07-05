@@ -60,7 +60,7 @@ BOOL CScoreRegistDialog::OnInitDialog()
 //YXY： 初始化列表控件
 void CScoreRegistDialog::InitInfoList()
 {
-    // Set the extended style for full row selection and grid lines
+
     m_ScoreRegistList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     // Insert columns
@@ -71,13 +71,8 @@ void CScoreRegistDialog::InitInfoList()
     m_ScoreRegistList.InsertColumn(4, _T("期末成绩"), LVCFMT_LEFT, 50);
     m_ScoreRegistList.InsertColumn(5, _T("总评成绩"), LVCFMT_LEFT, 50);
 
-    // Optionally, add some sample data
-    // m_ScoreRegistList.InsertItem(0, _T("20180101"));
-    // m_ScoreRegistList.SetItemText(0, 1, _T("张三"));
-    // m_ScoreRegistList.SetItemText(0, 2, _T("85"));
-    // m_ScoreRegistList.SetItemText(0, 3, _T("80"));
-    // m_ScoreRegistList.SetItemText(0, 4, _T("90"));
-    // m_ScoreRegistList.SetItemText(0, 5, _T("85"));
+
+    int nItem = m_ScoreRegistList.InsertItem(0, _T("123456"));
 
 }
 
@@ -85,26 +80,11 @@ void CScoreRegistDialog::InitInfoList()
 //添加数据示例已给出
 void CScoreRegistDialog::InitializeComboBoxes()
 {
-
-    // 添加查到的课程
-    m_CourseCombox.AddString(_T(""));
-
+    m_CourseCombox.ShowWindow(SW_HIDE);
 }
 
 
-//YXY：选择指定课程后的操作
-void CScoreRegistDialog::OnCbnSelchangeComboCourse()
-{
-    int SelCourse = m_CourseCombox.GetCurSel();
-    if (SelCourse != CB_ERR)
-    {
-        CString CourseName;
-        m_CourseCombox.GetLBText(SelCourse, CourseName);
-        //使用CourseName查询信息
 
-
-    }
-}
 
 
 //YXY:初始化学期选择控件
@@ -135,36 +115,44 @@ void CScoreRegistDialog::OnCbnSelchangeComboYear3()
     // 展开组合框下拉列表
     ::SendMessage(hComboBox, CB_SHOWDROPDOWN, TRUE, 0);
 }
-
-
-
 void CScoreRegistDialog::OnCbnSelchangeComboTerm3()
 {
-    // 处理学年选择变化
-    //std::vector<ClassOfTeacher> classOfTeacher;
-    //std::vector<ClassOfTeacher> classOfTeacherWithYear;
-    //std::vector<ClassOfTeacher> classOfTeacherWithSemester;
-    //classOfTeacher.reserve(30);
-    //classOfTeacherWithYear.reserve(10);
-    //classOfTeacherWithSemester.reserve(5);
-    //classOfTeacher = TeacherInterface::get().getClassOfTeacher();
+    m_CourseCombox.ShowWindow(SW_SHOW);
+    HWND hComboBox = m_CourseCombox.GetSafeHwnd();
+
+    // 展开组合框下拉列表
+    ::SendMessage(hComboBox, CB_SHOWDROPDOWN, TRUE, 0);
+}
+
+
+//YXY：选择指定课程后的操作
+void CScoreRegistDialog::OnCbnSelchangeComboCourse()
+{
+
+    //处理学年选择变化
+    std::vector<ClassOfStudentScore> classOfStudentScore;
+    std::vector<ClassOfStudentScore> classOfStudentScoreWithYear;
+    std::vector<ClassOfStudentScore> classOfStudentScoreWithSemester;
+    classOfStudentScore.reserve(30);
+    classOfStudentScoreWithYear.reserve(10);
+    classOfStudentScoreWithSemester.reserve(5);
+    classOfStudentScore = TeacherInterface::get().getClassOfStudentScore();
 
     int SelYear = m_ComboYear.GetCurSel();
     if (SelYear != CB_ERR)
     {
         CString strYear;
         m_ComboYear.GetLBText(SelYear, strYear);
-        // TODO: 根据选择的学年执行相应的操作
 
-        //for (int i = 0; i < classOfTeacher.size(); i++)
-        //{
-        //    if (classOfTeacher[i].year == strYear)
-        //    {
-        //        classOfTeacherWithYear.emplace_back(classOfTeacher[i]);
-        //    }
-        //}
-        ////XK：刷新课程列表
-        //RefreshCourseList(classOfTeacherWithYear);
+        for (int i = 0; i < classOfStudentScore.size(); i++)
+        {
+            if (classOfStudentScore[i].year == strYear)
+            {
+                classOfStudentScoreWithYear.emplace_back(classOfStudentScore[i]);
+            }
+        }
+        //刷新课程列表
+        RefreshCourseList(classOfStudentScoreWithYear);
     }
 
     // 处理学期选择变化
@@ -173,16 +161,28 @@ void CScoreRegistDialog::OnCbnSelchangeComboTerm3()
     {
         CString strSemester;
         m_ComboTerm.GetLBText(SelTerm, strSemester);
-        // TODO: 根据选择的学期执行相应的操作
-        //for (int i = 0; i < classOfTeacherWithYear.size(); i++)
-        //{
-        //    if (classOfTeacherWithYear[i].semester == strSemester)
-        //    {
-        //        classOfTeacherWithSemester.emplace_back(classOfTeacherWithYear[i]);
-        //    }
-        //}
-        ////XK：刷新课程列表
-        //RefreshCourseList(classOfTeacherWithSemester);
+
+        for (int i = 0; i < classOfStudentScoreWithYear.size(); i++)
+        {
+            if (classOfStudentScoreWithYear[i].semester == strSemester)
+            {
+                classOfStudentScoreWithSemester.emplace_back(classOfStudentScoreWithYear[i]);
+            }
+        }
+
+        RefreshCourseList(classOfStudentScoreWithSemester);
+    }
+
+
+    //处理选择的课程名
+    int SelCourse = m_CourseCombox.GetCurSel();
+    if (SelCourse != CB_ERR)
+    {
+        CString CourseName;
+        m_CourseCombox.GetLBText(SelCourse, CourseName);
+        //使用CourseName查询信息
+
+
     }
 }
 
@@ -235,3 +235,35 @@ void CScoreRegistDialog::OnBnClickedButtonCompose()
     (*GetDlgItem(IDC_EDIT_SCOREFINAL)).GetWindowText(FinalCompo);
 }
 
+void CScoreRegistDialog::RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
+{
+    m_ScoreRegistList.DeleteAllItems();
+        const std::vector<ClassOfStudentScore>* SCInfo = &classOfStudentScore;
+        if (SCInfo->size() == 0)
+        {
+            return;
+        }
+        int column = 0;
+        for (int i = 0; i < SCInfo->size(); i++)
+        {
+            m_ScoreRegistList.InsertItem(column, (*SCInfo)[i].studentID);
+            m_ScoreRegistList.SetItemText(column, 1, (*SCInfo)[i].studentName);
+            m_ScoreRegistList.SetItemText(column, 2, (*SCInfo)[i].dailyScore);
+            m_ScoreRegistList.SetItemText(column, 3, (*SCInfo)[i].midtermScore);
+            m_ScoreRegistList.SetItemText(column, 4, (*SCInfo)[i].finalScore);
+            m_ScoreRegistList.SetItemText(column, 5, (*SCInfo)[i].totalScore);
+            column++;
+        }
+
+}
+
+/*
+    CString studentID;       // 学号
+    CString studentName;     // 学生姓名
+    float dailyScore;        // 平时成绩
+    float midtermScore;      // 期中成绩
+    float finalScore;        // 期末成绩
+    float totalScore;        // 总评成绩
+    CString year;
+    CString semester;
+*/

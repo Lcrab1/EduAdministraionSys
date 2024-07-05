@@ -151,12 +151,17 @@ void TeacherDlg::OnBnClickedButtonTeachcourse()
 
 }
 
-
+//YXY:录入成绩
 void TeacherDlg::OnBnClickedButtonScoreregist()
 {
     m_RegistDlg->ShowWindow(SW_SHOW);
     //m_InfoList.ShowWindow(SW_HIDE);
     m_CourseDlg->ShowWindow(SW_HIDE);
+
+    std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
+    classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
+    classOfStudentScore->reserve(10);
+    Database::getDatabase().GetClassOfTeacher(m_TeacherID, *classOfStudentScore);
 }
 
 
