@@ -21,7 +21,7 @@ int Database::login(IN const CString& userName, IN const CString& password)
 	std::string userIDStr = CW2A(userName.GetString());
 	std::string userPasswordStr= CW2A(password.GetString());
 
-	std::string SQLstr = "SELECT PRIVILEGE FROM LOGIN_TEST WHERE ID='" + userIDStr + "' AND PASSWD='" + userPasswordStr+"'";
+	std::string SQLstr = "SELECT privilege FROM admin_info WHERE account='" + userIDStr + "' AND password='" + userPasswordStr+"'";
 	const char* sss = SQLstr.c_str();
 	if (mysql_query(&m_mysql, SQLstr.c_str()))
 	{
