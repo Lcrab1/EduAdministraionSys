@@ -118,9 +118,9 @@ BOOL CEduAdministraionSysDlg::OnInitDialog()
 	/*TestDatabase();*/
 	InitiateDataBase();
 
-	CString test("3");
+	/*CString test("3");
 	TeacherDlg teacher(test);
-	teacher.DoModal();
+	teacher.DoModal();*/
 
 	//StudentDlg student;
 	//student.DoModal();

@@ -138,6 +138,7 @@ void Database::SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teache
 
 void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher)
 {
+	classOfTeacher.clear();
 	//XK:（教师表）教师表的工号->(教学班)教学班的课程号->(课程表)课程名
 	std::string id = CW2A(teacherID.GetString());
 	//在Teacher表中根据教师ID查找相关信息
@@ -165,11 +166,11 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 	{
 		MYSQL_RES* result = mysql_store_result(&m_mysql);
 		if (result && result->row_count) {
-			int num_fields = mysql_num_fields(result);
+			//int num_fields = mysql_num_fields(result);
 			MYSQL_ROW row;
 			while((row=mysql_fetch_row(result)))
 			{
-				for (int i = 0; i < num_fields; i++)
+				for (int i = 0; i < result->row_count; i++)
 				{
 					int index = 0;
 					CString id(row[index++]);
