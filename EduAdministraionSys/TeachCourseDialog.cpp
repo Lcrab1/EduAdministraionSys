@@ -45,7 +45,7 @@ BOOL CTeachCourseDialog::OnInitDialog()
 
     InitializeComboBoxes();
 
-    InitializeScoreList();
+    InitializeCourseList();
 
 	return TRUE;  
 }
@@ -82,14 +82,15 @@ void CTeachCourseDialog::OnCbnSelchangeComboYear()
 //YXY:学期控件
 void CTeachCourseDialog::OnCbnSelchangeComboTerm()
 {
-    // 处理学年选择变化
 
+    // 处理学年选择变化
     std::vector<ClassOfTeacher> classOfTeacher;
     std::vector<ClassOfTeacher> classOfTeacherWithYear;
     std::vector<ClassOfTeacher> classOfTeacherWithSemester;
     classOfTeacher.reserve(30);
     classOfTeacherWithYear.reserve(10);
     classOfTeacherWithSemester.reserve(5);
+    classOfTeacher = TeacherInterface::get().getClassOfTeacher();
 
     int SelYear = m_ComboYear.GetCurSel();
     if (SelYear != CB_ERR)
@@ -97,7 +98,7 @@ void CTeachCourseDialog::OnCbnSelchangeComboTerm()
         CString strYear;
         m_ComboYear.GetLBText(SelYear, strYear);
         // TODO: 根据选择的学年执行相应的操作
-       classOfTeacher = TeacherInterface::get().getClassOfTeacher();
+
         for (int i = 0; i < classOfTeacher.size(); i++)
         {
             if (classOfTeacher[i].year == strYear)
@@ -105,27 +106,34 @@ void CTeachCourseDialog::OnCbnSelchangeComboTerm()
                 classOfTeacherWithYear.emplace_back(classOfTeacher[i]);
             }
         }
+        //XK：刷新课程列表
+        RefreshCourseList(classOfTeacherWithYear);
     }
-
 
     // 处理学期选择变化
     int SelTerm = m_ComboTerm.GetCurSel();
     if (SelTerm != CB_ERR)
     {
-        CString strTerm;
-        m_ComboTerm.GetLBText(SelTerm, strTerm);
+        CString strSemester;
+        m_ComboTerm.GetLBText(SelTerm, strSemester);
         // TODO: 根据选择的学期执行相应的操作
         for (int i = 0; i < classOfTeacherWithYear.size(); i++)
         {
-
+            if (classOfTeacherWithYear[i].semester == strSemester)
+            {
+                classOfTeacherWithSemester.emplace_back(classOfTeacherWithYear[i]);
+            }
         }
-
-
+        //XK：刷新课程列表
+        RefreshCourseList(classOfTeacherWithSemester);
     }
+
+    
+
 }
 
 //YXY：初始化课程列表
-void CTeachCourseDialog::InitializeScoreList()
+void CTeachCourseDialog::InitializeCourseList()
 {
     m_CourseList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
     // 添加列标题
@@ -137,6 +145,27 @@ void CTeachCourseDialog::InitializeScoreList()
     m_CourseList.InsertColumn(5, _T("教学周"), LVCFMT_LEFT, 90);
 
     //添加数据的示例，直接crud
-    m_CourseList.InsertItem(0, _T("xk110011"));
-    m_CourseList.SetItemText(0, 2, _T("导管原理"));
+    //m_CourseList.InsertItem(0, _T("xk110011"));
+    //m_CourseList.SetItemText(0, 2, _T("导管原理"));
+}
+
+void CTeachCourseDialog::RefreshCourseList(IN const std::vector<ClassOfTeacher>& classOfTeacher)
+{
+    m_CourseList.DeleteAllItems();
+    const std::vector<ClassOfTeacher>* courseInfo = &classOfTeacher;
+    if (courseInfo->size()==0)
+    {
+        return;
+    }
+    int column = 0;
+    for (int i = 0; i < courseInfo->size(); i++)
+    {
+        m_CourseList.InsertItem(column, (*courseInfo)[i].id);
+        m_CourseList.SetItemText(column, 1, (*courseInfo)[i].name);
+        m_CourseList.SetItemText(column, 2, (*courseInfo)[i].studentCount);
+        m_CourseList.SetItemText(column, 3, (*courseInfo)[i].credit);
+        m_CourseList.SetItemText(column, 4, (*courseInfo)[i].classRoom);
+        m_CourseList.SetItemText(column, 5, (*courseInfo)[i].week);
+        column++;
+    }
 }

@@ -25,7 +25,10 @@ public:
 	/* YXY：控件处理、消息映射函数       */
 	virtual BOOL OnInitDialog();
 	void InitializeComboBoxes();
-	void InitializeScoreList();
+	void InitializeCourseList();
+	void RefreshCourseList(IN const std::vector<ClassOfTeacher>& classOfTeacherWithSemester);
+
+
 	afx_msg void OnCbnSelchangeComboYear();
 	afx_msg void OnCbnSelchangeComboTerm();
 

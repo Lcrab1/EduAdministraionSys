@@ -31,13 +31,15 @@ struct ClassOfTeacher
 	CString credit;			//XK:学分
 	CString classRoom;		//XK:教室
 	CString week;			//XK:教学周
-	CString year;			//XK:学年学期
+	CString year;			//XK:学年
+	CString semester;		//XK:学期
 
+	//XK:使用vector中的emplace_back来存储结构体时，需要为结构体设置构造函数
 	ClassOfTeacher(const CString& id, const CString& name, const CString& studentCount,
 		const CString& credit, const CString& classRoom, const CString& week,
-		const CString& year)
+		const CString& year,const CString&semester)
 		: id(id), name(name), studentCount(studentCount), credit(credit),
-		classRoom(classRoom), week(week), year(year) {}
+		classRoom(classRoom), week(week), year(year),semester(semester) {}
 };
 
 

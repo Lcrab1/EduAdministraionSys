@@ -143,10 +143,10 @@ void TeacherDlg::OnBnClickedButtonTeachcourse()
     m_CourseDlg->ShowWindow(SW_SHOW);
     //m_InfoList.ShowWindow(SW_HIDE);
     m_RegistDlg->ShowWindow(SW_HIDE);
-    std::vector<ClassOfTeacher> classOfTeacher;
-    classOfTeacher = TeacherInterface::get().getClassOfTeacher();
-  //  classOfTeacher->reserve(10);
-    Database::getDatabase().GetClassOfTeacher(m_TeacherID, classOfTeacher);
+    std::vector<ClassOfTeacher>* classOfTeacher=NULL;
+    classOfTeacher = &TeacherInterface::get().getClassOfTeacher();
+    classOfTeacher->reserve(10);
+    Database::getDatabase().GetClassOfTeacher(m_TeacherID, *classOfTeacher);
 
 
 }

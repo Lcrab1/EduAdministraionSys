@@ -117,6 +117,7 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 							CourseInfo.Ccredit,\
 							ArrangementClassInfo.Aclassroom,\
 							ArrangementClassInfo.Aweek,\
+							ArrangementClassInfo.Ayear,\
 							ArrangementClassInfo.Asemester\
 							FROM CourseInfo\
 							JOIN ArrangementClassInfo ON CourseInfo.Cno = ArrangementClassInfo.Cno\
@@ -147,7 +148,8 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 					CString classRoom(row[index++]);
 					CString week(row[index++]);
 					CString year(row[index++]);
-					classOfTeacher.emplace_back(id, name, studentCount, credit, classRoom, week, year);
+					CString semester(row[index++]);
+					classOfTeacher.emplace_back(id, name, studentCount, credit, classRoom, week, year, semester);
 				}
 			}
 		}
