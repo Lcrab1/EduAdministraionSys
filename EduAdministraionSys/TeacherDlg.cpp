@@ -48,9 +48,10 @@ TeacherDlg::~TeacherDlg()
 
 void TeacherDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_TEACHER_TITLE_STATIC, m_TeacherTitleStatic);
-	DDX_Control(pDX, IDC_TEACHER_LIST_INFO, m_InfoList);
+    CDialogEx::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_TEACHER_TITLE_STATIC, m_TeacherTitleStatic);
+    DDX_Control(pDX, IDC_TEACHER_LIST_INFO, m_InfoList);
+    DDX_Control(pDX, IDC_TEACHER_STATIC, m_TeacherInfoStatic);
 }
 
 
@@ -72,6 +73,12 @@ BOOL TeacherDlg::OnInitDialog()
 	m_TeacherTitleFont.CreatePointFont(250, _T("华文新魏"));  //设置登录界面标题的字体和大小
 	m_TeacherTitleStatic.SetFont(&m_TeacherTitleFont);
 
+    CString teacherBaiscInfo;
+    CString teacherName;
+    Database::getDatabase().GetTeacherName(m_TeacherID, teacherName);
+    teacherBaiscInfo = teacherName + CString("(") + m_TeacherID + CString(")") + CString("  教师");
+    m_TeacherInfoStatic.SetWindowText(teacherBaiscInfo);
+
     OnInitInfoTable();
 
     InitSonDialog();
@@ -84,18 +91,7 @@ void TeacherDlg::OnInitInfoTable()
 {
     TeacherInfo teacherInfo;
     Database::getDatabase().SearchTeacher(m_TeacherID, teacherInfo);
-    
-    //XK:测试
-    /* teacherInfo.no = "1";
-    teacherInfo.name = "hrs";
-    teacherInfo.englishName = "ration";
-    teacherInfo.nation = "汉";
-    teacherInfo.school = "信息工程学院";
-    teacherInfo.gender = "男";
-    teacherInfo.hireDate = "2022-9-1";
-    teacherInfo.jobTitle = "教授";
-    teacherInfo.email = "yuanshen@163.com";
-    teacherInfo.telephone = "123456";*/
+
 
     m_InfoList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
     // 添加列标题
@@ -128,6 +124,7 @@ void TeacherDlg::OnInitInfoTable()
     m_InfoList.SetItemText(4, 1, teacherInfo.email);
     m_InfoList.SetItemText(4, 2, _T("联系电话"));
     m_InfoList.SetItemText(4, 3, teacherInfo.telephone);
+   
 }
 
 //YXY：初始化功能子窗口
@@ -149,6 +146,8 @@ void TeacherDlg::OnBnClickedButtonMainwnd2()
     m_InfoList.ShowWindow(SW_SHOW);
     m_RegistDlg->ShowWindow(SW_HIDE);
 }
+
+
 
 //XK:我的开课
 void TeacherDlg::OnBnClickedButtonTeachcourse()

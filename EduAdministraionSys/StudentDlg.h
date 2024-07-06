@@ -47,4 +47,5 @@ public:
 	afx_msg void OnBnClickedButtonInfochange();
 	afx_msg void OnBnClickedButtonMainwnd();
 	void RefreshList();
+	CStatic m_StudentInfoStatic;
 };

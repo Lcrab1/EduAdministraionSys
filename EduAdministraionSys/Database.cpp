@@ -224,6 +224,42 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 
 }
 
+void Database::GetTeacherName(IN const CString& TeacherID, OUT CString& TeacherName)
+{
+	std::string id = CW2A(TeacherID.GetString());
+	std::string SQLstr = "SELECT TName\
+						  From TeacherInfo\
+						  WHERE Tno='" + id + "';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return;
+	}
+	MYSQL_RES* result = mysql_store_result(&m_mysql);
+	MYSQL_ROW row = mysql_fetch_row(result);
+	TeacherName = CString(row[0]);
+}
+
+void Database::GetStudentName(IN const CString& studentID, OUT CString& studentName)
+{
+	std::string id = CW2A(studentID.GetString());
+	std::string SQLstr = "SELECT SName\
+						  From StudentInfo\
+						  WHERE Sno='" + id + "';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return;
+	}
+	MYSQL_RES* result = mysql_store_result(&m_mysql);
+	MYSQL_ROW row = mysql_fetch_row(result);
+	studentName = CString(row[0]);
+}
+
 void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent)
 {
 	gradeOfStudent.clear();

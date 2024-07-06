@@ -32,7 +32,6 @@ public:
 	afx_msg void OnBnClickedButtonMainwnd2();
 
 
-
 	CListCtrl m_InfoList;
 	CStatic m_TeacherTitleStatic;				//XK:教师窗口主题的文本框
 	CFont		m_TeacherTitleFont;				//XK:格式刷
@@ -41,4 +40,5 @@ public:
 	CString			m_TeacherID;				//XK:教师ID 
 
 
+	CStatic m_TeacherInfoStatic;
 };

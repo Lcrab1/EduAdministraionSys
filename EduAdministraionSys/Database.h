@@ -142,7 +142,12 @@ public:
 
 	void SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);	//XK：查询老师信息
 	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);	//XK：得到老师开课信息
-	
+	//XK：得到教师姓名
+	void GetTeacherName(IN const CString& TeacherID, OUT CString& TeacherName);
+
+
+	//XK:得到学生姓名
+	void GetStudentName(IN const CString& studentID, OUT CString& studentName);
 	//XK:学生按获取课程成绩方法
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
 
@@ -150,7 +155,7 @@ public:
 	bool searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade);
 	//XK:学生修改个人信息方法
 	void ChangePersonalInfo(IN const CString& studentID,IN const CString& englishName, IN const CString& telephone, IN const CString& email);
-
+	
 	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
 
 

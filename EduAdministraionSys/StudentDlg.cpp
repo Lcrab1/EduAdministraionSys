@@ -44,6 +44,7 @@ void StudentDlg::DoDataExchange(CDataExchange* pDX)
     CDialogEx::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_LIST_STUINFO, m_StuInfoList);
     DDX_Control(pDX, IDC_TREE_FUNCBUTTON, m_TreeCtrl);
+    DDX_Control(pDX, IDC_STATIC_TOPINFO, m_StudentInfoStatic);
 }
 
 
@@ -76,6 +77,12 @@ BOOL StudentDlg::OnInitDialog()
     {
         pStaticText->SetFont(&m_font1);
     }
+
+    CString studentBaiscInfo;
+    CString studentName;
+    Database::getDatabase().GetStudentName(m_StudentID, studentName);
+    studentBaiscInfo = studentName + CString("(") + m_StudentID + CString(")") + CString("  学生");
+    m_StudentInfoStatic.SetWindowText(studentBaiscInfo);
 
     InitTreeButton();
 
