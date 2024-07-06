@@ -5,6 +5,16 @@
 
 // CScoreRegistDialog 对话框
 
+
+
+
+#define COLUMN_DAILY_SCORE 2
+#define COLUMN_MIDTERM_SCORE 3
+#define COLUMN_FINAL_SCORE 4
+#define COLUMN_TOTAL_SCORE 5
+
+
+
 class CScoreRegistDialog : public CDialogEx
 {
 	DECLARE_DYNAMIC(CScoreRegistDialog)
@@ -32,10 +42,10 @@ public:
 	afx_msg void OnCbnSelchangeComboYear3();
 	afx_msg void OnCbnSelchangeComboTerm3();
 	afx_msg void OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESULT* pResult);
-	void			UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal);
+	void			UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal,int i);
 	double			CalculateTotalScore(double midterm, double usual, double final);
 	afx_msg void	OnBnClickedButtonCompose();
-	void			RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
+	void			RefreshScoreList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
 
 	void			RefreshCourseCombox(IN const std::vector<ClassOfStudentScore>& classOfStudentScore);
 
@@ -54,7 +64,7 @@ public:
 	std::vector<ClassOfStudentScore> classOfStudentScoreWithSemester;
 	std::vector<ClassOfStudentScore> classOfStudentScoreWithCourseName;
 	
+	afx_msg void OnBnClickedButtonCommitscore();
 };
 
 extern int NumOfStudent;
-

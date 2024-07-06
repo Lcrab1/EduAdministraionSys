@@ -175,7 +175,6 @@ void TeacherDlg::OnBnClickedButtonScoreregist()
     classOfStudentScore->reserve(10);
 
     Database::getDatabase().GetClassOfSC(m_TeacherID, *classOfStudentScore);
-   // Database::getDatabase().GetClassOfTeacher(m_TeacherID, *classOfStudentScore);
 }
 
 

@@ -395,9 +395,11 @@ void Database::ChangePersonalInfo(IN const CString& studentID, IN const CString&
 		MessageBox(NULL, error, L"查询失败", NULL);
 	}
 
-
-
 }
+
+
+
+
 
 void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
 {
@@ -430,10 +432,6 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 		StudentInfo.Sno,\
 		StudentInfo.Sname; ";
 
-
-
-
-
 	const char* sss = SQLstr.c_str();
 	if (mysql_query(&m_mysql, SQLstr.c_str()))
 	{
@@ -460,6 +458,51 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 			}
 		}
 	}
+}
+
+void Database::CommitScore(OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
+{
+
+	int i = 0;
+
+	std::string dailyScore;
+		std::string midtermScore;
+		std::string finalScore;
+		std::string totalScore;
+		std::string studentID;
+		std::string courseName;
+
+		std::string SQLstr;
+	while (i <= classOfStudentScore.size()-1)
+	{
+		
+		dailyScore = CW2A(classOfStudentScore[i].dailyScore.GetString());
+		midtermScore = CW2A(classOfStudentScore[i].midtermScore.GetString());
+		finalScore = CW2A(classOfStudentScore[i].finalScore.GetString());
+		totalScore = CW2A(classOfStudentScore[i].totalScore.GetString());
+		studentID = CW2A(classOfStudentScore[i].studentID.GetString());
+		courseName = CW2A(classOfStudentScore[i].CourseName.GetString());
+		i++;
+		SQLstr = "UPDATE RecordCourseInfo "
+			"SET RusualScore = " + dailyScore +
+			", RmidScore = " + midtermScore +
+			", RfinalScore = " + finalScore +
+			", RtotalScore = " + totalScore +
+			" WHERE Sno = '" + studentID + "' AND Cno = ("
+			"SELECT Cno FROM CourseInfo WHERE Cname = '" + courseName + "');";
+
+		if (mysql_query(&m_mysql, SQLstr.c_str()))
+		{
+			CString error(mysql_error(&m_mysql));
+			MessageBox(NULL, error, L"情况异常！", NULL);
+			continue;
+		}
+		
+	}
+	if(i== classOfStudentScore.size())
+	MessageBox(NULL, 0, L"上传成功！", NULL);
+
+
 }
 
 

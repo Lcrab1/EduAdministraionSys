@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CScoreRegistDialog, CDialogEx)
     ON_CBN_SELCHANGE(IDC_COMBO_TERM3, &CScoreRegistDialog::OnCbnSelchangeComboTerm3)
     ON_NOTIFY(LVN_ITEMCHANGED, IDC_SCOREREGISTER_LIST, &CScoreRegistDialog::OnLvnItemchangedScoreregisterList)
     ON_BN_CLICKED(IDC_BUTTON_COMPOSE, &CScoreRegistDialog::OnBnClickedButtonCompose)
+    ON_BN_CLICKED(IDC_BUTTON_COMMITSCORE, &CScoreRegistDialog::OnBnClickedButtonCommitscore)
 END_MESSAGE_MAP()
 
 
@@ -204,7 +205,7 @@ void CScoreRegistDialog::OnCbnSelchangeComboCourse()
                 classOfStudentScoreWithCourseName.emplace_back(classOfStudentScoreWithSemester[i]);
             }
         }
-        RefreshCourseList(classOfStudentScoreWithSemester);
+        RefreshScoreList(classOfStudentScoreWithSemester);
     
 }
 
@@ -223,8 +224,29 @@ void CScoreRegistDialog::RefreshCourseCombox(IN const std::vector<ClassOfStudent
     }
 }
 
+void CScoreRegistDialog::OnBnClickedButtonCommitscore()
+{
+    int nItemCount = m_ScoreRegistList.GetItemCount();
 
-void CScoreRegistDialog::RefreshCourseList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
+    for (int i = 0; i < nItemCount; ++i)
+    {
+
+        CString dailyScore = m_ScoreRegistList.GetItemText(i, COLUMN_DAILY_SCORE);
+        CString midtermScore = m_ScoreRegistList.GetItemText(i, COLUMN_MIDTERM_SCORE);
+        CString finalScore = m_ScoreRegistList.GetItemText(i, COLUMN_FINAL_SCORE);
+        CString totalScore = m_ScoreRegistList.GetItemText(i, COLUMN_TOTAL_SCORE);
+
+        classOfStudentScoreWithCourseName[i].dailyScore = dailyScore;
+        classOfStudentScoreWithCourseName[i].midtermScore = midtermScore;
+        classOfStudentScoreWithCourseName[i].finalScore = finalScore;
+        classOfStudentScoreWithCourseName[i].totalScore = totalScore;
+        
+    }
+    Database::getDatabase().CommitScore(classOfStudentScoreWithCourseName);
+}
+
+
+void CScoreRegistDialog::RefreshScoreList(IN const std::vector<ClassOfStudentScore>& classOfStudentScore)
 {
     m_ScoreRegistList.DeleteAllItems();
         const std::vector<ClassOfStudentScore>* SCInfo = &classOfStudentScore;
@@ -252,6 +274,19 @@ void CScoreRegistDialog::OnBnClickedButtonCompose()
     (*GetDlgItem(IDC_EDIT_SCOREREGULAR)).GetWindowText(MidtermCompo);
     (*GetDlgItem(IDC_EDIT_SCOREMID)).GetWindowText(UsualCompo);
     (*GetDlgItem(IDC_EDIT_SCOREFINAL)).GetWindowText(FinalCompo);
+
+    int a = _ttoi(MidtermCompo);
+    int b = _ttoi(UsualCompo);
+    int c = _ttoi(FinalCompo);
+    if ((a + b + c) != 100)
+    {
+        MessageBox(_T("请检查输入的数字是否合法！"),_T("输入错误！"));
+    }
+    else
+    {
+        MessageBox(_T("保存成功！"));
+    }
+
 }
 
 
@@ -264,11 +299,11 @@ void CScoreRegistDialog::OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESUL
         CString strMidterm = m_ScoreRegistList.GetItemText(i, 2);
         CString strUsual = m_ScoreRegistList.GetItemText(i, 3);
         CString strFinal = m_ScoreRegistList.GetItemText(i, 4);
-        if (strMidterm.IsEmpty())
+        if (strFinal.IsEmpty())
         {
             return;
         }
-        UpdateTotalScore(strMidterm,strUsual,strFinal);
+        UpdateTotalScore(strMidterm,strUsual,strFinal,i);
     }
 
     *pResult = 0;
@@ -276,7 +311,7 @@ void CScoreRegistDialog::OnLvnItemchangedScoreregisterList(NMHDR* pNMHDR, LRESUL
 
 
 // 更新总成绩函数
-void CScoreRegistDialog::UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal)
+void CScoreRegistDialog::UpdateTotalScore(CString strMidterm, CString strUsual, CString strFinal,int i)
 {
 
     double midterm = _tstof(strMidterm);
@@ -284,21 +319,20 @@ void CScoreRegistDialog::UpdateTotalScore(CString strMidterm, CString strUsual, 
     double final = _tstof(strFinal);
 
     double total = CalculateTotalScore(midterm, usual, final);
+    if (total == 0)
+    {
+        return;
+    }
     CString strTotal;
     strTotal.Format(_T("%.2f"), total);
-    m_ScoreRegistList.SetItemText(m_ScoreRegistList.GetSelectionMark(), 5, strTotal); // 更新选中项的总成绩
+    m_ScoreRegistList.SetItemText(i, 5, strTotal); // 更新选中项的总成绩
 }
 
 double CScoreRegistDialog::CalculateTotalScore(double midterm, double usual, double final)
 {
-    DOUBLE c1 = _tstof(MidtermCompo);
-    DOUBLE c2 = _tstof(UsualCompo);
-    DOUBLE c3 = _tstof(FinalCompo);
+    DOUBLE c1 = (DOUBLE)_tstoi(MidtermCompo)/100;
+    DOUBLE c2 = (DOUBLE)_tstoi(UsualCompo)/100;
+    DOUBLE c3 = (DOUBLE)_tstoi(FinalCompo)/100;
     return midterm * c1 + usual * c2 + final * c3;
 }
-
-
-
-
-
 

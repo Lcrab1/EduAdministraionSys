@@ -171,9 +171,12 @@ public:
 
 	//XK:学生修改个人信息方法
 	void ChangePersonalInfo(IN const CString& studentID,IN const CString& englishName, IN const CString& telephone, IN const CString& email);
-	
-	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
 
+
+	//YXY：获取选课学生信息、录入成绩
+
+	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
+	void CommitScore(OUT std::vector<ClassOfStudentScore>& classOfStudentScore);
 
 };
 
