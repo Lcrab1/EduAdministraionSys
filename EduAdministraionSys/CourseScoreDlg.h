@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include"Database.h"
 
 // CCourseScoreDlg 对话框
 
@@ -8,7 +8,7 @@ class CCourseScoreDlg : public CDialogEx
 	DECLARE_DYNAMIC(CCourseScoreDlg)
 
 public:
-	CCourseScoreDlg(CWnd* pParent = nullptr);   // 标准构造函数
+	CCourseScoreDlg(const CString& StudentID,CWnd* pParent = nullptr);   // 标准构造函数
 	virtual ~CCourseScoreDlg();
 
 // 对话框数据
@@ -27,8 +27,10 @@ public:
 	void InitCourseScoreList();
 
 
-
 	CComboBox m_Course;//YXY：下拉框选择课程的变量
 	CListCtrl m_CourseScoreList;//YXY：成绩表格对应的变量
+
+	std::vector<CString> m_CourseInfo;	//XK：学生选择的所有课程
+	CString m_StudentID;
 };
 
