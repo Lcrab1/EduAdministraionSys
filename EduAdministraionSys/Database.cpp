@@ -348,7 +348,7 @@ bool Database::searchStudentCourseScore(IN const CString& studentID, IN const CS
 						FROM ArrangementClassInfo,courseInfo,RecordCourseInfo\
 						WHERE RecordCourseInfo.Sno='"+sIDStr + "' AND\
 						RecordCourseInfo.Cno IN\
-						(SLELECT Cno\
+						(SELECT Cno\
 						FROM courseInfo\
 						WHERE Cname='"+cnStr+"')\
 						AND ArrangementClassInfo.Cno=RecordCourseInfo.Cno\

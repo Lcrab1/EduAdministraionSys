@@ -115,7 +115,7 @@ void StudentDlg::InitSonDialog()
     m_EditInfoDlg = new CEditInfoDlg(m_StudentID);
     m_EditInfoDlg->Create(IDD_EDITINFO_DIALOG, GetDlgItem(IDC_LIST_STUINFO));
 
-    m_CourseScoreDlg = new CCourseScoreDlg();
+    m_CourseScoreDlg = new CCourseScoreDlg(m_StudentID);
     m_CourseScoreDlg->Create(IDD_COURSESCORE_DIALOG, GetDlgItem(IDC_LIST_STUINFO));
 }
 
