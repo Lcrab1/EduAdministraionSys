@@ -266,6 +266,29 @@ void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<Gr
 
 }
 
+void Database::ChangePersonalInfo(IN const CString& studentID, IN const CString& englishName, IN const CString& telephone, IN const CString& email)
+{
+	std::string idStr = CW2A(studentID.GetString());
+	std::string englishNameStr = CW2A(englishName.GetString());
+	std::string telephoneStr = CW2A(telephone.GetString());
+	std::string emailStr = CW2A(email.GetString());
+	
+	std::string SQLstr = "UPDATE StudentInfo\
+						  SET SEnglishName = '" + englishNameStr + "',\
+						  Stelephone = '" + telephoneStr + "',\
+						  Semail = '" + emailStr + "'\
+						WHERE Sno = '" + idStr + "';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+
+
+
+}
+
 void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
 {
 	classOfStudentScore.clear();
@@ -328,5 +351,62 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 		}
 	}
 }
+
+
+bool Database::searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade)
+{
+	std::string IDstr = CW2A(studentID.GetString());
+	std::string yearStr = CW2A(year.GetString());
+	std::string semesterStr = CW2A(semester.GetString());
+	std::string SQLstr = "\
+		SELECT courseInfo.Cname,\
+		courseInfo.Ccredit,\
+		RecordCourseInfo.RmidScore, \
+		RecordCourseInfo.RusualScore, \
+		RecordCourseInfo.RfinalScore, \
+		RecordCourseInfo.RtotalScore, \
+		FROM courseInfo,RecordCourseInfo\
+		WHERE RecordCourseInfo.Sno='" + IDstr + "' " +
+		"AND RecordCourseInfo.Cno IN\
+		(SELECT Cno\
+		FROM ArrangementClassInfo\
+		WHERE Ayear='" + yearStr + "' AND Asemester='" + semesterStr + "') \
+		AND courseInfo.Cno=RecordCourseInfo.Cno";
+
+
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return false;
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		MYSQL_ROW row;
+		while (row = mysql_fetch_row(result))
+		{
+			CString Cname(row[0]);
+			CString Ccredit(row[1]);
+			CString mid(row[2]);
+			CString usual(row[3]);
+			CString final(row[4]);
+			CString total(row[5]);
+			courseGrade.emplace_back(year, semester, Cname, Ccredit, mid, usual, final, total);
+		}
+	}
+	return true;
+}
+/*
+	CString studentID;       // 学号
+	CString studentName;     // 学生姓名
+	CString dailyScore;        // 平时成绩
+	CString midtermScore;      // 期中成绩
+	CString finalScore;        // 期末成绩
+	CString totalScore;        // 总评成绩
+	CString year;
+	CString semester;
+*/
+
 
 

@@ -63,7 +63,7 @@
 #define IDC_EDIT_SCOREFINAL             1044
 #define IDC_EDIT_SCOREMID               1045
 #define IDC_BUTTON_COMPOSE              1046
-#define IDC_EDIT_TRAVEL					1047
+#define IDC_EDIT_TRAVEL                 1047
 
 // Next default values for new objects
 // 
