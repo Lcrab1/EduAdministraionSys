@@ -164,6 +164,8 @@ public:
 	//XK:学生按获取课程成绩方法
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
 
+	//HRS:查找学生的所有课程
+	bool searchAllCourse(IN const CString& studentID, OUT std::vector<CString>& course);
 	//HRS:学生的单个课程成绩
 	bool searchStudentCourseScore(IN const CString& studentID, IN const CString& courseName, OUT CourseGrade& courseGrade);//HRS:按课程名查询课程成绩
 

@@ -302,6 +302,37 @@ void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<Gr
 
 }
 
+bool Database::searchAllCourse(IN const CString& studentID, OUT std::vector<CString>& course)
+{
+	course.clear();
+	std::string sIDStr = CW2A(studentID.GetString());
+	std::string SQLstr = "\
+						SELECT Cname\
+						FROM courseInfo\
+						WHERE Cno IN\
+						(SELECT Cno\
+						FROM RecordCourseInfo\
+						WHERE Sno='"+sIDStr+"')\
+						";
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return false;
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		MYSQL_ROW row;
+		while (row = mysql_fetch_row(result))
+		{
+			CString courseName(*row);
+			course.emplace_back(courseName);
+		}
+	}
+	return true;
+}
+
 bool Database::searchStudentCourseScore(IN const CString& studentID, IN const CString& courseName, OUT CourseGrade& courseGrade)
 {
 	std::string sIDStr = CW2A(studentID.GetString());
