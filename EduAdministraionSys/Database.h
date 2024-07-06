@@ -144,11 +144,13 @@ public:
 	
 	//XK:学生按获取课程成绩方法
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
+
+	//HRS:学生按学期获得课程成绩的方法
+	bool searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade);
 	//XK:学生修改个人信息方法
 	void ChangePersonalInfo(IN const CString& studentID,IN const CString& englishName, IN const CString& telephone, IN const CString& email);
 
 	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
-
 
 
 };

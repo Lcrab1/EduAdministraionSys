@@ -347,6 +347,50 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 	}
 }
 
+bool Database::searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade)
+{
+	std::string IDstr = CW2A(studentID.GetString());
+	std::string yearStr = CW2A(year.GetString());
+	std::string semesterStr = CW2A(semester.GetString());
+	std::string SQLstr = "\
+		SELECT courseInfo.Cname,\
+		courseInfo.Ccredit,\
+		RecordCourseInfo.RmidScore, \
+		RecordCourseInfo.RusualScore, \
+		RecordCourseInfo.RfinalScore, \
+		RecordCourseInfo.RtotalScore, \
+		FROM courseInfo,RecordCourseInfo\
+		WHERE RecordCourseInfo.Sno='" + IDstr + "' " +
+		"AND RecordCourseInfo.Cno IN\
+		(SELECT Cno\
+		FROM ArrangementClassInfo\
+		WHERE Ayear='" + yearStr + "' AND Asemester='" + semesterStr + "') \
+		AND courseInfo.Cno=RecordCourseInfo.Cno";
+
+
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return false;
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		MYSQL_ROW row;
+		while (row = mysql_fetch_row(result))
+		{
+			CString Cname(row[0]);
+			CString Ccredit(row[1]);
+			CString mid(row[2]);
+			CString usual(row[3]);
+			CString final(row[4]);
+			CString total(row[5]);
+			courseGrade.emplace_back(year, semester, Cname, Ccredit, mid, usual, final, total);
+		}
+	}
+	return true;
+}
 /*
 	CString studentID;       // 学号
 	CString studentName;     // 学生姓名
