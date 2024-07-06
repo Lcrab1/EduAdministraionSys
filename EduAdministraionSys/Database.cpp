@@ -266,6 +266,29 @@ void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<Gr
 
 }
 
+void Database::ChangePersonalInfo(IN const CString& studentID, IN const CString& englishName, IN const CString& telephone, IN const CString& email)
+{
+	std::string idStr = CW2A(studentID.GetString());
+	std::string englishNameStr = CW2A(englishName.GetString());
+	std::string telephoneStr = CW2A(telephone.GetString());
+	std::string emailStr = CW2A(email.GetString());
+	
+	std::string SQLstr = "UPDATE StudentInfo\
+						  SET SEnglishName = '" + englishNameStr + "',\
+						  Stelephone = '" + telephoneStr + "',\
+						  Semail = '" + emailStr + "'\
+						WHERE Sno = '" + idStr + "';";
+	const char* sss = SQLstr.c_str();
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+	}
+
+
+
+}
+
 void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOfStudentScore>& classOfStudentScore)
 {
 	classOfStudentScore.clear();

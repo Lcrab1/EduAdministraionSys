@@ -174,7 +174,9 @@ void TeacherDlg::OnBnClickedButtonScoreregist()
     std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
     classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
     classOfStudentScore->reserve(10);
+
     Database::getDatabase().GetClassOfSC(m_TeacherID, *classOfStudentScore);
+   // Database::getDatabase().GetClassOfTeacher(m_TeacherID, *classOfStudentScore);
 }
 
 

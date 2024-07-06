@@ -10,6 +10,7 @@
 #define STUDENT 1
 #define TEACHER 2
 
+//XK：教师信息表格
 struct TeacherInfo {
 	CString no;				//XK:学号
 	CString name;			//XK:姓名
@@ -23,6 +24,7 @@ struct TeacherInfo {
 	CString telephone;		//XK:
 };
 
+//XK:教师开售课程表格
 struct ClassOfTeacher
 {
 	CString id;				//XK:课程代号
@@ -92,7 +94,7 @@ struct CourseInfo
 	CString CourseCredit;
 };
 
-//学期成绩
+//XK:学期成绩
 struct GradeOfStudent
 {
 	CString year;
@@ -109,6 +111,7 @@ struct GradeOfStudent
 		:year(year),semester(semester),course(course),credit(credit),midScore(midScore),usualScore(usualScore),
 		finalScore(finalScore),totalScore(totalScore){}
 };
+
 
 
 class Database
@@ -139,11 +142,14 @@ public:
 	void SearchTeacher(IN const CString& teacherID,OUT TeacherInfo& teacherInfo);	//XK：查询老师信息
 	void GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<ClassOfTeacher>& classOfTeacher);	//XK：得到老师开课信息
 	
-	//XK:学生方法
+	//XK:学生按获取课程成绩方法
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
-
+	//XK:学生修改个人信息方法
+	void ChangePersonalInfo(IN const CString& studentID,IN const CString& englishName, IN const CString& telephone, IN const CString& email);
 
 	void GetClassOfSC(IN const CString& CourseName, OUT std::vector<ClassOfStudentScore>& classOfStudentScore);//YXY：查询学生选课信息
+
+
 
 };
 
