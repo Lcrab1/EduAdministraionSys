@@ -472,25 +472,38 @@ void Database::CommitScore(OUT std::vector<ClassOfStudentScore>& classOfStudentS
 		std::string studentID;
 		std::string courseName;
 
+
+		CString dailyScoreCString, midtermScoreCString, finalScoreCString, totalScoreCString;
+		dailyScoreCString.Format(_T("%d"), _ttoi(classOfStudentScore[i].dailyScore));
+		midtermScoreCString.Format(_T("%d"), _ttoi(classOfStudentScore[i].midtermScore));
+		finalScoreCString.Format(_T("%d"), _ttoi(classOfStudentScore[i].finalScore));
+		totalScoreCString.Format(_T("%d"), _ttoi(classOfStudentScore[i].totalScore));
+
+
+
 		std::string SQLstr;
 	while (i <= classOfStudentScore.size()-1)
 	{
-		
-		dailyScore = _ttoi(classOfStudentScore[i].dailyScore.GetString());
-		midtermScore = _ttoi(classOfStudentScore[i].midtermScore.GetString());
-		finalScore = _ttoi(classOfStudentScore[i].finalScore.GetString());
-		totalScore = _ttoi(classOfStudentScore[i].totalScore.GetString());
-		studentID = _ttoi(classOfStudentScore[i].studentID.GetString());
-		courseName = _ttoi(classOfStudentScore[i].CourseName.GetString());
+
+
+		dailyScore = CW2A(dailyScoreCString);
+		midtermScore = CW2A(midtermScoreCString);
+		finalScore = CW2A(finalScoreCString);
+		totalScore = CW2A(totalScoreCString);
+		studentID = CW2A(classOfStudentScore[i].studentID);
+		courseName = CW2A(classOfStudentScore[i].CourseName);
+
+
 		i++;
-		SQLstr = "UPDATE RecordCourseInfo \
-			SET RusualScore = '" + dailyScore +"'\
-			, RmidScore = '" + midtermScore +"'\
-			, RfinalScore = '" + finalScore + "'\
-			, RtotalScore = '" + totalScore +"'\
-			 WHERE Sno = '" + studentID + "' \
-			AND Cno = (\
-			SELECT Cno FROM CourseInfo WHERE Cname = '" + courseName + "');";
+		SQLstr = "UPDATE RecordCourseInfo SET "
+			"RusualScore = '" + dailyScore + "', "
+			"RmidScore = '" + midtermScore + "', "
+			"RfinalScore = '" + finalScore + "', "
+			"RtotalScore = '" + totalScore + "' "
+			"WHERE Sno = '" + studentID + "' "
+			"AND Cno = ("
+			"SELECT Cno FROM CourseInfo WHERE Cname = '" + courseName + "');";
+
 
 		if (mysql_query(&m_mysql, SQLstr.c_str()))
 		{
@@ -506,18 +519,6 @@ void Database::CommitScore(OUT std::vector<ClassOfStudentScore>& classOfStudentS
 
 }
 
-
-
-/*
-	CString studentID;       // 学号
-	CString studentName;     // 学生姓名
-	CString dailyScore;        // 平时成绩
-	CString midtermScore;      // 期中成绩
-	CString finalScore;        // 期末成绩
-	CString totalScore;        // 总评成绩
-	CString year;
-	CString semester;
-*/
 
 
 
