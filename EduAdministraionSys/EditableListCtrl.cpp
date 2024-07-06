@@ -2,18 +2,29 @@
 #include "Resource.h"
 #include"ScoreRegistDialog.h"
 
- CString str;
- int m_nRow;
- int m_nCol;
+
 
 BEGIN_MESSAGE_MAP(CEditableListCtrl, CListCtrl)
     ON_WM_LBUTTONDBLCLK()
     ON_EN_KILLFOCUS(IDC_EDIT_TRAVEL, OnEditKillFocus)
+
+    ON_NOTIFY_REFLECT(NM_RCLICK, &CEditableListCtrl::OnNMRClick)
 END_MESSAGE_MAP()
 
 CEditableListCtrl::CEditableListCtrl(CWnd* pParent /*=nullptr*/)
     :CListCtrl(), m_pParentWnd(pParent)
 {
+    //HANDLE ThreadHandle =
+    //    CreateThread
+    //    (
+    //        NULL,
+    //        0,
+    //        (LPTHREAD_START_ROUTINE)RefreshListThread,
+    //        this,
+    //        0,
+    //        0
+    //    );
+
 
 }
 
@@ -33,28 +44,7 @@ void CEditableListCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
     //{
     //    ShowEdit(nItem, hitTestInfo.iSubItem);
     //}
-    int NumofStudent = 4;
 
-    if (m_nCol!=-1)
-    {
-        if(m_nRow!= NumofStudent)
-        {
-            if (m_nCol != 4)
-            {
-                m_nCol++;
-            }
-            else
-            {
-                m_nRow++;
-                m_nCol = 2;
-            }
-            ShowEdit(m_nRow, m_nCol);
-        }
-    }
-    else
-    {
-        ShowEdit(0, 2);
-    }
 
     CListCtrl::OnLButtonDblClk(nFlags, point);
 }
@@ -86,9 +76,60 @@ void CEditableListCtrl::OnEditKillFocus()
 {
     CString str;
     m_Edit.GetWindowText(str);
-    SendMessage(UM_UPADATE_DATA);
     m_Edit.SetWindowText(_T(""));
+    m_Edit.ShowWindow(SW_HIDE);
     SetItemText(m_nRow, m_nCol, str);
-    CString s1= GetItemText(m_nRow, m_nCol);
 }
 
+void CEditableListCtrl::OnLvnItemClick(NMHDR* pNMHDR, LRESULT* pResult)
+{
+}
+
+
+
+void CEditableListCtrl::OnNMRClick(NMHDR* pNMHDR, LRESULT* pResult)
+{
+    LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+
+
+
+    if (m_nCol != -1)
+    {
+        if (m_nRow != NumOfStudent)
+        {
+            if (m_nCol != 4)
+            {
+                m_nCol++;
+            }
+            else
+            {
+                m_nRow++;
+                m_nCol = 2;
+            }
+            ShowEdit(m_nRow, m_nCol);
+        }
+    }
+    else
+    {
+        ShowEdit(0, 2);
+    }
+
+
+    *pResult = 0;
+}
+
+
+
+DWORD __stdcall RefreshListThread(LPVOID ParameterData)
+{
+    CEditableListCtrl* p1 = (CEditableListCtrl*)ParameterData;
+    //while (1)
+    //{
+    //p1->UpdateData(FALSE);
+    //(*p1).Invalidate();
+    //(*p1).UpdateWindow();
+    //Sleep(1000);
+    //}
+
+    return 0;
+}

@@ -54,13 +54,14 @@ struct ClassOfStudentScore
 	CString totalScore;        // 总评成绩
 	CString year;			
 	CString semester;		
+	CString NumofCourse;
 
 	ClassOfStudentScore(const CString& courseName, const CString& id, const CString& name,
 		const CString& daily, const CString& midterm, const CString & final,
-		const CString& total, const CString& yr, const CString& sem)
+		const CString& total, const CString& yr, const CString& sem,const CString& Num)
 		: CourseName(courseName), studentID(id), studentName(name),
 		dailyScore(daily), midtermScore(midterm), finalScore(final),
-		totalScore(total), year(yr), semester(sem) {}
+		totalScore(total), year(yr), semester(sem), NumofCourse(Num){}
 
 };
 

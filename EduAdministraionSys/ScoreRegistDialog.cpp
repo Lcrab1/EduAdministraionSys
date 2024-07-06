@@ -6,6 +6,7 @@
 #include "ScoreRegistDialog.h"
 #include "afxdialogex.h"
 
+int NumOfStudent;
 
 // CScoreRegistDialog 对话框
 
@@ -71,9 +72,6 @@ void CScoreRegistDialog::InitInfoList()
     m_ScoreRegistList.InsertColumn(4, _T("期末成绩"), LVCFMT_LEFT, 75);
     m_ScoreRegistList.InsertColumn(5, _T("总评成绩"), LVCFMT_LEFT, 75);
 
-
-    int nItem = m_ScoreRegistList.InsertItem(0, _T("123456"));
-
 }
 
 //YXY:初始化课程选择控件
@@ -122,39 +120,11 @@ void CScoreRegistDialog::OnCbnSelchangeComboTerm3()
 
     // 展开组合框下拉列表
     ::SendMessage(hComboBox, CB_SHOWDROPDOWN, TRUE, 0);
-}
-
-
-//YXY：选择指定课程后的操作
-void CScoreRegistDialog::OnCbnSelchangeComboCourse()
-{
-
-
-
-    //处理选择的课程名
-    int SelCourse = m_CourseCombox.GetCurSel();
-    if (SelCourse != CB_ERR)
-    {
-        CString CourseName;
-        m_CourseCombox.GetLBText(SelCourse, CourseName);
-        //使用CourseName查询信息
-        std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
-        classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
-        classOfStudentScore->reserve(10);
-        Database::getDatabase().GetClassOfSC(CourseName, *classOfStudentScore);
-
-        RefreshCourseCombox(*classOfStudentScore);
-    }
-
-
 
 
 
     //处理学年选择变化
-    std::vector<ClassOfStudentScore> classOfStudentScore;
-    std::vector<ClassOfStudentScore> classOfStudentScoreWithYear;
-    std::vector<ClassOfStudentScore> classOfStudentScoreWithSemester;
-    std::vector<ClassOfStudentScore> classOfStudentScoreWithCourseName;
+
 
     classOfStudentScore.reserve(500);
     classOfStudentScoreWithYear.reserve(200);
@@ -194,10 +164,37 @@ void CScoreRegistDialog::OnCbnSelchangeComboCourse()
             }
         }
 
-        //RefreshCourseList(classOfStudentScoreWithSemester);
+        RefreshCourseCombox(classOfStudentScoreWithSemester);
     }
 
 
+}
+
+
+//YXY：选择指定课程后的操作
+void CScoreRegistDialog::OnCbnSelchangeComboCourse()
+{
+
+
+
+    ////处理选择的课程名
+    //int SelCourse = m_CourseCombox.GetCurSel();
+    //if (SelCourse != CB_ERR)
+    //{
+    //    CString CourseName;
+    //    m_CourseCombox.GetLBText(SelCourse, CourseName);
+    //    //使用CourseName查询信息
+    //    std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
+    //    classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
+    //    classOfStudentScore->reserve(10);
+    //    Database::getDatabase().GetClassOfSC(CourseName, *classOfStudentScore);
+
+    //    RefreshCourseCombox(*classOfStudentScore);
+    //}
+
+
+
+    int SelCourse = m_CourseCombox.GetCurSel();
     CString CourseName;
     m_CourseCombox.GetLBText(SelCourse, CourseName);
         for (int i = 0; i < classOfStudentScoreWithSemester.size(); i++)
@@ -219,8 +216,8 @@ void CScoreRegistDialog::RefreshCourseCombox(IN const std::vector<ClassOfStudent
     {
         return;
     }
-
-    for (int i = 0; i < SCInfo->size(); i++)
+    int NumOfcourse = _ttoi((*SCInfo)[0].NumofCourse);
+    for (int i = 0; i < NumOfcourse; i++)
     {
         m_CourseCombox.AddString((*SCInfo)[i].CourseName);
     }

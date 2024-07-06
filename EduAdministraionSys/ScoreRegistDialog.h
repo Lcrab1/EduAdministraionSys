@@ -47,8 +47,14 @@ public:
 
 	CEdit m_EditTravel;
 
-	int NumOfStudent;
+
+
+	std::vector<ClassOfStudentScore> classOfStudentScore;
+	std::vector<ClassOfStudentScore> classOfStudentScoreWithYear;
+	std::vector<ClassOfStudentScore> classOfStudentScoreWithSemester;
+	std::vector<ClassOfStudentScore> classOfStudentScoreWithCourseName;
 	
 };
 
+extern int NumOfStudent;
 

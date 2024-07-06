@@ -272,16 +272,16 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 	//XK:(教学班)教学班的课程号+教师ID->(课程表)课程名
 	std::string Teacherid = CW2A(TeacherID.GetString());
 	//根据课程名查找相关信息
-	std::string SQLstr = "SELECT\
+	std::string SQLstr = "		\
+		SELECT\
 		ArrangementClassInfo.Ayear,\
 		ArrangementClassInfo.Asemester,\
-		CourseInfo.Cname,\
-		RecordCourseInfo.Sno,\
-		StudentInfo.Sname\
+		CourseInfo.Cname AS CourseName,\
+		StudentInfo.Sno AS StudentID,\
+		StudentInfo.Sname AS StudentName,\
+		COUNT(DISTINCT CourseInfo.Cname) AS CourseTypeCount\
 		FROM\
-		TeacherInfo\
-		JOIN\
-		ArrangementClassInfo ON TeacherInfo.Tno = ArrangementClassInfo.Tno\
+		ArrangementClassInfo\
 		JOIN\
 		CourseInfo ON ArrangementClassInfo.Cno = CourseInfo.Cno\
 		JOIN\
@@ -289,7 +289,15 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 		JOIN\
 		StudentInfo ON RecordCourseInfo.Sno = StudentInfo.Sno\
 		WHERE\
-		TeacherInfo.Tno = '" + Teacherid + "'";
+		ArrangementClassInfo.Tno = '" + Teacherid + "'\
+		GROUP BY\
+		ArrangementClassInfo.Ayear,\
+		ArrangementClassInfo.Asemester,\
+		CourseInfo.Cname,\
+		StudentInfo.Sno,\
+		StudentInfo.Sname; ";
+
+
 
 
 
@@ -307,32 +315,18 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 			MYSQL_ROW row;
 			while ((row = mysql_fetch_row(result)))
 			{
-				for (int i = 0; i < result->row_count; i++)
-				{
 					int index = 0;
 					CString year(row[index++]);
 					CString semester(row[index++]);
 					CString CourseName(row[index++]);
 					CString studentID(row[index++]);
 					CString studentName(row[index++]);
-
+					CString NumOfCourse(row[index++]);
 					classOfStudentScore.emplace_back(CourseName, studentID, studentName,
-												_T("0"), _T("0"), _T("0"), _T("0"),year, semester);
-				}
+												_T("0"), _T("0"), _T("0"), _T("0"),year, semester, NumOfCourse);
 			}
 		}
 	}
 }
-
-/*
-	CString studentID;       // 学号
-	CString studentName;     // 学生姓名
-	CString dailyScore;        // 平时成绩
-	CString midtermScore;      // 期中成绩
-	CString finalScore;        // 期末成绩
-	CString totalScore;        // 总评成绩
-	CString year;
-	CString semester;
-*/
 
 
