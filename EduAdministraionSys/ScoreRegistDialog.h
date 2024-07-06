@@ -65,6 +65,7 @@ public:
 	std::vector<ClassOfStudentScore> classOfStudentScoreWithCourseName;
 	
 	afx_msg void OnBnClickedButtonCommitscore();
+	afx_msg void OnBnClickedButtonCommitscore2();
 };
 
 extern int NumOfStudent;

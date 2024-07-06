@@ -476,20 +476,21 @@ void Database::CommitScore(OUT std::vector<ClassOfStudentScore>& classOfStudentS
 	while (i <= classOfStudentScore.size()-1)
 	{
 		
-		dailyScore = CW2A(classOfStudentScore[i].dailyScore.GetString());
-		midtermScore = CW2A(classOfStudentScore[i].midtermScore.GetString());
-		finalScore = CW2A(classOfStudentScore[i].finalScore.GetString());
-		totalScore = CW2A(classOfStudentScore[i].totalScore.GetString());
-		studentID = CW2A(classOfStudentScore[i].studentID.GetString());
-		courseName = CW2A(classOfStudentScore[i].CourseName.GetString());
+		dailyScore = _ttoi(classOfStudentScore[i].dailyScore.GetString());
+		midtermScore = _ttoi(classOfStudentScore[i].midtermScore.GetString());
+		finalScore = _ttoi(classOfStudentScore[i].finalScore.GetString());
+		totalScore = _ttoi(classOfStudentScore[i].totalScore.GetString());
+		studentID = _ttoi(classOfStudentScore[i].studentID.GetString());
+		courseName = _ttoi(classOfStudentScore[i].CourseName.GetString());
 		i++;
-		SQLstr = "UPDATE RecordCourseInfo "
-			"SET RusualScore = " + dailyScore +
-			", RmidScore = " + midtermScore +
-			", RfinalScore = " + finalScore +
-			", RtotalScore = " + totalScore +
-			" WHERE Sno = '" + studentID + "' AND Cno = ("
-			"SELECT Cno FROM CourseInfo WHERE Cname = '" + courseName + "');";
+		SQLstr = "UPDATE RecordCourseInfo \
+			SET RusualScore = '" + dailyScore +"'\
+			, RmidScore = '" + midtermScore +"'\
+			, RfinalScore = '" + finalScore + "'\
+			, RtotalScore = '" + totalScore +"'\
+			 WHERE Sno = '" + studentID + "' \
+			AND Cno = (\
+			SELECT Cno FROM CourseInfo WHERE Cname = '" + courseName + "');";
 
 		if (mysql_query(&m_mysql, SQLstr.c_str()))
 		{

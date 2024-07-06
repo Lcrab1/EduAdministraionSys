@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(CScoreRegistDialog, CDialogEx)
     ON_NOTIFY(LVN_ITEMCHANGED, IDC_SCOREREGISTER_LIST, &CScoreRegistDialog::OnLvnItemchangedScoreregisterList)
     ON_BN_CLICKED(IDC_BUTTON_COMPOSE, &CScoreRegistDialog::OnBnClickedButtonCompose)
     ON_BN_CLICKED(IDC_BUTTON_COMMITSCORE, &CScoreRegistDialog::OnBnClickedButtonCommitscore)
+    ON_BN_CLICKED(IDC_BUTTON_COMMITSCORE2, &CScoreRegistDialog::OnBnClickedButtonCommitscore2)
 END_MESSAGE_MAP()
 
 
@@ -175,25 +176,6 @@ void CScoreRegistDialog::OnCbnSelchangeComboTerm3()
 //YXY：选择指定课程后的操作
 void CScoreRegistDialog::OnCbnSelchangeComboCourse()
 {
-
-
-
-    ////处理选择的课程名
-    //int SelCourse = m_CourseCombox.GetCurSel();
-    //if (SelCourse != CB_ERR)
-    //{
-    //    CString CourseName;
-    //    m_CourseCombox.GetLBText(SelCourse, CourseName);
-    //    //使用CourseName查询信息
-    //    std::vector<ClassOfStudentScore>* classOfStudentScore = NULL;
-    //    classOfStudentScore = &TeacherInterface::get().getClassOfStudentScore();
-    //    classOfStudentScore->reserve(10);
-    //    Database::getDatabase().GetClassOfSC(CourseName, *classOfStudentScore);
-
-    //    RefreshCourseCombox(*classOfStudentScore);
-    //}
-
-
 
     int SelCourse = m_CourseCombox.GetCurSel();
     CString CourseName;
@@ -336,3 +318,25 @@ double CScoreRegistDialog::CalculateTotalScore(double midterm, double usual, dou
     return midterm * c1 + usual * c2 + final * c3;
 }
 
+
+
+void CScoreRegistDialog::OnBnClickedButtonCommitscore2()
+{
+    int nItemCount = m_ScoreRegistList.GetItemCount();
+
+    for (int i = 0; i < nItemCount; ++i)
+    {
+
+        CString dailyScore = m_ScoreRegistList.GetItemText(i, COLUMN_DAILY_SCORE);
+        CString midtermScore = m_ScoreRegistList.GetItemText(i, COLUMN_MIDTERM_SCORE);
+        CString finalScore = m_ScoreRegistList.GetItemText(i, COLUMN_FINAL_SCORE);
+        CString totalScore = m_ScoreRegistList.GetItemText(i, COLUMN_TOTAL_SCORE);
+
+        classOfStudentScoreWithCourseName[i].dailyScore = dailyScore;
+        classOfStudentScoreWithCourseName[i].midtermScore = midtermScore;
+        classOfStudentScoreWithCourseName[i].finalScore = finalScore;
+        classOfStudentScoreWithCourseName[i].totalScore = totalScore;
+
+    }
+    Database::getDatabase().CommitScore(classOfStudentScoreWithCourseName);
+}
