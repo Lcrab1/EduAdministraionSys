@@ -114,10 +114,7 @@ bool Database::searchStudent(IN const CString& studentID, OUT StudentInfo& stude
 	return true;
 }
 
-bool Database::searchStudentAllCourse(IN const CString& studentID, IN const CString semester, OUT std::vector<CourseInfo>& course)
-{
-	return true;
-}
+
 
 bool Database::searchStudentCourseScore(IN const CString& studentID, IN const CString& courseID, OUT CString& score)
 {
@@ -224,6 +221,9 @@ void Database::GetClassOfTeacher(IN const CString& teacherID, OUT std::vector<Cl
 
 }
 
+
+
+
 void Database::GetTeacherName(IN const CString& TeacherID, OUT CString& TeacherName)
 {
 	std::string id = CW2A(TeacherID.GetString());
@@ -300,6 +300,49 @@ void Database::GetGradeOfStudent(IN const CString& studentID, OUT std::vector<Gr
 		}
 	}
 
+}
+
+bool Database::searchStudentCourseScore(IN const CString& studentID, IN const CString& courseName, OUT CourseGrade& courseGrade)
+{
+	std::string sIDStr = CW2A(studentID.GetString());
+	std::string cnStr = CW2A(courseName.GetString());
+	std::string SQLstr = "\
+						SELECT ArrangementClassInfo.Ayear,\
+						ArrangementClassInfo.Asemester,\
+						courseInfo.Ccredit,\
+						RecordCourseInfo.RmidScore,\
+						RecordCourseInfo.RusualScore,\
+						RecordCourseInfo.RfinalScore,\
+						RecordCourseInfo.RtotalScore\
+						FROM ArrangementClassInfo,courseInfo,RecordCourseInfo\
+						WHERE RecordCourseInfo.Sno='"+sIDStr + "' AND\
+						RecordCourseInfo.Cno IN\
+						(SLELECT Cno\
+						FROM courseInfo\
+						WHERE Cname='"+cnStr+"')\
+						AND ArrangementClassInfo.Cno=RecordCourseInfo.Cno\
+						AND courseInfo.Cno=RecordCourseInfo.Cno";
+	if (mysql_query(&m_mysql, SQLstr.c_str()))
+	{
+		CString error(mysql_error(&m_mysql));
+		MessageBox(NULL, error, L"查询失败", NULL);
+		return false;
+	}
+	else
+	{
+		MYSQL_RES* result = mysql_store_result(&m_mysql);
+		MYSQL_ROW row;
+		row = mysql_fetch_row(result);
+		courseGrade.courseName = courseName;
+		courseGrade.year = row[0];
+		courseGrade.semester = row[1];
+		courseGrade.credit = row[2];
+		courseGrade.midScore = row[3];
+		courseGrade.usualScore = row[4];
+		courseGrade.finalScore = row[5];
+		courseGrade.totalScore = row[6];
+	}
+	return true;
 }
 
 void Database::ChangePersonalInfo(IN const CString& studentID, IN const CString& englishName, IN const CString& telephone, IN const CString& email)
@@ -389,50 +432,7 @@ void Database::GetClassOfSC(IN const CString& TeacherID, OUT std::vector<ClassOf
 }
 
 
-bool Database::searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade)
-{
-	std::string IDstr = CW2A(studentID.GetString());
-	std::string yearStr = CW2A(year.GetString());
-	std::string semesterStr = CW2A(semester.GetString());
-	std::string SQLstr = "\
-		SELECT courseInfo.Cname,\
-		courseInfo.Ccredit,\
-		RecordCourseInfo.RmidScore, \
-		RecordCourseInfo.RusualScore, \
-		RecordCourseInfo.RfinalScore, \
-		RecordCourseInfo.RtotalScore, \
-		FROM courseInfo,RecordCourseInfo\
-		WHERE RecordCourseInfo.Sno='" + IDstr + "' " +
-		"AND RecordCourseInfo.Cno IN\
-		(SELECT Cno\
-		FROM ArrangementClassInfo\
-		WHERE Ayear='" + yearStr + "' AND Asemester='" + semesterStr + "') \
-		AND courseInfo.Cno=RecordCourseInfo.Cno";
 
-
-	if (mysql_query(&m_mysql, SQLstr.c_str()))
-	{
-		CString error(mysql_error(&m_mysql));
-		MessageBox(NULL, error, L"查询失败", NULL);
-		return false;
-	}
-	else
-	{
-		MYSQL_RES* result = mysql_store_result(&m_mysql);
-		MYSQL_ROW row;
-		while (row = mysql_fetch_row(result))
-		{
-			CString Cname(row[0]);
-			CString Ccredit(row[1]);
-			CString mid(row[2]);
-			CString usual(row[3]);
-			CString final(row[4]);
-			CString total(row[5]);
-			courseGrade.emplace_back(year, semester, Cname, Ccredit, mid, usual, final, total);
-		}
-	}
-	return true;
-}
 /*
 	CString studentID;       // 学号
 	CString studentName;     // 学生姓名

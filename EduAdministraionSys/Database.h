@@ -95,6 +95,19 @@ struct CourseInfo
 	CString CourseCredit;
 };
 
+//HRS:课程成绩
+struct CourseGrade
+{
+	CString courseName;//课程名称
+	CString year;//学年
+	CString semester;//学期
+	CString credit;//学分
+	CString midScore;//期中成绩
+	CString usualScore;//平时成绩
+	CString finalScore;//期末成绩
+	CString totalScore;//总评成绩
+};
+
 //XK:学期成绩
 struct GradeOfStudent
 {
@@ -133,7 +146,7 @@ public:
 	static Database& getDatabase();//HRS:获取实例
 	int login(IN const CString& userName,IN const CString& password);//HRS:登录用户账号
 	bool searchStudent(IN const CString& studentID,OUT StudentInfo& studentInfo);//HRS:查询学生的个人信息
-	bool searchStudentAllCourse(IN const CString& studentID,IN const CString semester,OUT std::vector<CourseInfo>& course);//HRS:查询学生某一学期所有的课程
+	bool searchStudentAllCourse(IN const CString& studentID,IN const CString& semester,OUT std::vector<CourseInfo>& course);//HRS:查询学生某一学期所有的课程
 	bool searchStudentCourseScore(IN const CString& studentID,IN const CString& courseID,OUT CString& score);//HRS:按课程名查询课程成绩
 	bool searchTeacherCourse(IN const CString& teacherID,OUT CourseInfo& courseInfo);//HRS:查询老师所教授的课程
 	bool searchSemesterCourse(IN const CString& semester,OUT std::vector<CourseInfo>& course);//HRS:查询某一学期的课程开设
@@ -151,8 +164,9 @@ public:
 	//XK:学生按获取课程成绩方法
 	void GetGradeOfStudent(IN const CString& studentID, OUT std::vector<GradeOfStudent>& gradeOfStudent);
 
-	//HRS:学生按学期获得课程成绩的方法
-	bool searchStudentAllCourse(IN const CString& studentID, IN const CString& year, IN const CString& semester, OUT std::vector<GradeOfStudent>& courseGrade);
+	//HRS:学生的单个课程成绩
+	bool searchStudentCourseScore(IN const CString& studentID, IN const CString& courseName, OUT CourseGrade& courseGrade);//HRS:按课程名查询课程成绩
+
 	//XK:学生修改个人信息方法
 	void ChangePersonalInfo(IN const CString& studentID,IN const CString& englishName, IN const CString& telephone, IN const CString& email);
 	
